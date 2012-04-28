@@ -1,0 +1,15 @@
+/*
+Theme Name:     Twenty Eleven Child
+Theme URI:      http://example.com/
+Description:    Child theme for the Twenty Eleven theme 
+Author:         Your name here
+Author URI:     http://example.com/about/
+Template:       twentyeleven
+Version:        0.1.0
+*/
+
+@import url("../twentyeleven/style.css");
+
+#site-title a {
+    color: #009900;
+}

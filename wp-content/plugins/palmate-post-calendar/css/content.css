@@ -1,0 +1,25 @@
+
+img.palmateCalendar {
+	border: 1px dashed #888;
+	background: #f2f8ff url("../img/calendar.png") no-repeat scroll center center;
+	width: 99%;
+	height: 50px;
+}
+
+#btn_Palmate_EditCal,
+#btn_Palmate_DelCal {
+	border-color: #999;
+	background-color: #eee;
+	margin: 2px;
+	padding: 2px;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#btn_Palmate_EditCal:hover,
+#btn_Palmate_DelCal:hover {
+	border-color: #555;
+	background-color: #ccc;
+}
