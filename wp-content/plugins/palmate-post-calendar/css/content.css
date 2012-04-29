@@ -6,20 +6,23 @@ img.palmateCalendar {
 	height: 50px;
 }
 
-#btn_Palmate_EditCal,
-#btn_Palmate_DelCal {
-	border-color: #999;
-	background-color: #eee;
-	margin: 2px;
-	padding: 2px;
-	border-width: 1px;
-	border-style: solid;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+#edit-cal-dialog { }
+
+#edit-cal-dialog div {
+	padding: 5px 0; height: 20px;
 }
 
-#btn_Palmate_EditCal:hover,
-#btn_Palmate_DelCal:hover {
-	border-color: #555;
-	background-color: #ccc;
+#edit-cal-dialog label {
+	display: block;
+	float: left;
+	margin: 0 8px 0 0;
+	width: 80px;
+}
+
+#edit-cal-dialog select,
+#edit-cal-dialog input {
+	display: block;
+	float: right;
+	width: 100px;
+	padding: 3px 5px;
 }

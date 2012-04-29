@@ -29,7 +29,7 @@ class PalmatePostCalendar
 	}
 	
 	function filter_mce_plugin( $plugins ) {
-		$plugins['palmateCalendar'] = plugin_dir_url( __FILE__ ) . 'js/editor_plugin.js';
+		$plugins['palmateCalendar'] = plugin_dir_url( __FILE__ ) . 'editor_plugin.js';
 		return $plugins;
 	}
 }
