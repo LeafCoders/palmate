@@ -74,7 +74,7 @@
 
 		_toVisualEditor : function(co) {
 			var t = this;
-			return co.replace( /\[cal([^\]]*)\]/g, function( a, settings ) {
+			return co.replace( /\[palmate-calendar([^\]]*)\]/g, function( a, settings ) {
 				return t._getVisualTag( settings );
 			});
 		},
@@ -97,8 +97,7 @@
 		},
 
 		_getHTMLTag : function( settings ) {
-			return '[cal ' + settings + ']';
-//			return '<p>[cal ' + settings + ']</p>';
+			return '[palmate-calendar ' + settings + ']';
 		},
 
 		_openEditDialog : function() {
@@ -122,10 +121,9 @@
 		
 		getInfo : function() {
 			return {
-				longname : 'Palmate Calendar Settings',
+				longname : 'Palmate Post Calendar Editor Plugin',
 				author : 'LeafCoders',
-				authorurl : 'http://github.com/LeafCoders',
-				infourl : '',
+				authorurl : 'http://github.com/LeafCoders/palmate',
 				version : "0.1"
 			};
 		}

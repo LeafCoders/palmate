@@ -6,8 +6,11 @@ var PalmateEditCalendarDialog = {
 		var style = tinyMCEPopup.getWindowArg('style');
 		var tags = tinyMCEPopup.getWindowArg('tags');
 
-		document.getElementById('calendar-style').value = style;
-		document.getElementById('calendar-tags').value = tags;
+		if (style.length > 0 && tags.length > 0 ) {
+			document.getElementById('calendar-style').value = style;
+			document.getElementById('calendar-tags').value = tags;
+			document.getElementById('insert').value = tinyMCEPopup.editor.getLang('update');
+		}
 	},
 
 	insert : function() {
