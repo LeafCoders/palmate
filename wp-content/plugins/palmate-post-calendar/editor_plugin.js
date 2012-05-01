@@ -75,7 +75,6 @@
 		_toVisualEditor : function(co) {
 			var t = this;
 			return co.replace( /\[cal([^\]]*)\]/g, function( a, settings ) {
-				settings = tinymce.trim(tinymce.DOM.encode(settings));
 				return t._getVisualTag( settings );
 			});
 		},
@@ -93,11 +92,13 @@
 		},
 
 		_getVisualTag : function( settings ) {
+			settings = tinymce.trim(tinymce.DOM.encode(settings));
 			return '<img src="' + this.url + '/img/t.gif" class="palmateCalendar mceItem" title="' + settings + '" />';
 		},
 
 		_getHTMLTag : function( settings ) {
-			return '<p>[cal ' + settings + ']</p>';
+			return '[cal ' + settings + ']';
+//			return '<p>[cal ' + settings + ']</p>';
 		},
 
 		_openEditDialog : function() {
@@ -116,7 +117,6 @@
 
 		_changeCalendar : function( settings ) {
 			var t = this, ed = tinyMCE.activeEditor;
-			settings = tinymce.DOM.encode( settings );
 			ed.execCommand('mceReplaceContent', false, t._getVisualTag( settings ));
 		},
 		
