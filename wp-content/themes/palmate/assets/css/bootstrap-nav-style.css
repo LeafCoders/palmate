@@ -1,0 +1,195 @@
+/*!
+ * Bootstrap v2.1.0
+ *
+ * Copyright 2012 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+
+.navbar-palmate {
+  color: #999999;
+  margin: 0px;
+  padding: 0px;
+}
+
+.navbar-palmate .navbar-inner {
+  min-height: 10px;
+  border: 0px;
+  padding: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.065);
+  -moz-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.065);
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.065);
+
+  background-color: transparent;
+  background-image: none;
+}
+
+.navbar-palmate .brand,
+.navbar-palmate .nav > li > a {
+  text-transform: uppercase;
+  float: none;
+  padding: 5px 7px;
+  color: #999999;
+//  background-color: #8FC400;
+  text-decoration: none;
+  margin: 0px 0px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
+.dropdown-menu {
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+}
+
+.navbar-palmate .brand:hover,
+.navbar-palmate .nav > li > a:hover {
+  color: #ffffff;
+}
+.navbar-palmate .nav > li > a:focus,
+.navbar-palmate .nav > li > a:hover {
+  background-color: transparent;
+  color: #ffffff;
+}
+.navbar-palmate .nav .active > a,
+.navbar-palmate .nav .active > a:hover,
+.navbar-palmate .nav .active > a:focus {
+  color: #ffffff;
+//  background-color: #111111;
+  background-color: #8fc800;
+}
+.navbar-palmate .navbar-link {
+  color: #999999;
+}
+.navbar-palmate .navbar-link:hover {
+  color: #ffffff;
+}
+.navbar-palmate .divider-vertical {
+  border-left-color: #111111;
+  border-right-color: #222222;
+}
+.navbar-palmate .nav li.dropdown.open > .dropdown-toggle,
+.navbar-palmate .nav li.dropdown.active > .dropdown-toggle,
+.navbar-palmate .nav li.dropdown.open.active > .dropdown-toggle {
+//  background-color: #111111;
+  background-color: #8fc800;
+  color: #ffffff;
+}
+.navbar-palmate .nav li.dropdown > .dropdown-toggle .caret {
+  border-top-color: #999999;
+  border-bottom-color: #999999;
+}
+.navbar-palmate .nav li.dropdown.open > .dropdown-toggle .caret,
+.navbar-palmate .nav li.dropdown.active > .dropdown-toggle .caret,
+.navbar-palmate .nav li.dropdown.open.active > .dropdown-toggle .caret {
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+.navbar-palmate .navbar-search .search-query {
+  color: #ffffff;
+  background-color: #515151;
+  border-color: #111111;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15);
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.navbar-palmate .navbar-search .search-query:-moz-placeholder {
+  color: #cccccc;
+}
+.navbar-palmate .navbar-search .search-query:-ms-input-placeholder {
+  color: #cccccc;
+}
+.navbar-palmate .navbar-search .search-query::-webkit-input-placeholder {
+  color: #cccccc;
+}
+.navbar-palmate .navbar-search .search-query:focus,
+.navbar-palmate .navbar-search .search-query.focused {
+  padding: 5px 15px;
+  color: #333333;
+  text-shadow: 0 1px 0 #ffffff;
+  background-color: #ffffff;
+  border: 0;
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+  outline: 0;
+}
+.navbar-palmate .btn-navbar {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #0e0e0e;
+  background-image: -moz-linear-gradient(top, #151515, #040404);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#151515), to(#040404));
+  background-image: -webkit-linear-gradient(top, #151515, #040404);
+  background-image: -o-linear-gradient(top, #151515, #040404);
+  background-image: linear-gradient(to bottom, #151515, #040404);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff151515', endColorstr='#ff040404', GradientType=0);
+  border-color: #040404 #040404 #000000;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #040404;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.navbar-palmate .btn-navbar:hover,
+.navbar-palmate .btn-navbar:active,
+.navbar-palmate .btn-navbar.active,
+.navbar-palmate .btn-navbar.disabled,
+.navbar-palmate .btn-navbar[disabled] {
+  color: #ffffff;
+  background-color: #040404;
+  *background-color: #000000;
+}
+.navbar-palmate .btn-navbar:active,
+.navbar-palmate .btn-navbar.active {
+  background-color: #000000 \9;
+}
+
+.navbar-palmate .dropdown-menu li > a:hover,
+.navbar-palmate .dropdown-menu li > a:focus,
+.navbar-palmate .dropdown-submenu:hover > a {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #8fc800;
+  background-color: #71A500;
+  background-image: -moz-linear-gradient(top, #8fc800, #71A500);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8fc800), to(#71A500));
+  background-image: -webkit-linear-gradient(top, #8fc800, #71A500);
+  background-image: -o-linear-gradient(top, #8fc800, #71A500);
+  background-image: linear-gradient(to bottom, #8fc800, #71A500);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff71A500', GradientType=0);
+}
+.navbar-palmate .dropdown-menu .active > a,
+.navbar-palmate .dropdown-menu .active > a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  outline: 0;
+  background-color: #8fc800;
+  background-color: #71A500;
+  background-image: -moz-linear-gradient(top, #8fc800, #71A500);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8fc800), to(#71A500));
+  background-image: -webkit-linear-gradient(top, #8fc800, #71A500);
+  background-image: -o-linear-gradient(top, #8fc800, #71A500);
+  background-image: linear-gradient(to bottom, #8fc800, #71A500);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff71A500', GradientType=0);
+}
