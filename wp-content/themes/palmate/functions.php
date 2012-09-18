@@ -17,6 +17,7 @@ require_once locate_template('/lib/scripts.php');         // Scripts and stylesh
 require_once locate_template('/lib/post-types.php');      // Custom post types
 require_once locate_template('/lib/metaboxes.php');       // Custom metaboxes
 require_once locate_template('/lib/custom.php');          // Custom functions
+require_once locate_template('/lib/infobox.php');         // Info box custom post type
 
 function roots_setup() {
 
