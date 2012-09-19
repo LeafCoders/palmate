@@ -111,7 +111,7 @@ add_action( 'init', 'register_cpt_sermon' );
 /**
  * A cleaner walker for wp_nav_menu() customized for Palmate
  */
-class Palmate_Nav_Walker extends Roots_Nav_Walker {
+class Palmate_Nav_Walker extends Walker_Nav_Menu {
   
   private $first_in_level = FALSE;
   
@@ -130,85 +130,36 @@ class Palmate_Nav_Walker extends Roots_Nav_Walker {
   }
 
   function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
-    global $wp_query;
-    $indent = ($depth) ? str_repeat("\t", $depth) : '';
-    $use_dropdown = $args->has_children && $depth < 1;
-    $is_header = $depth == 1;
-    $is_group = $depth >= 2;
+    $item_html = '';
+    parent::start_el($item_html, $item, $depth, $args);
 
-    $slug = sanitize_title($item->title);
-    $id = 'menu-' . $slug;
-
-    $class_names = $value = '';
-    $li_attributes = '';
-    $classes = empty($item->classes) ? array() : (array) $item->classes;
-
-    if ($use_dropdown) {
-      $classes = array_filter($classes, array(&$this, 'check_current'));
-      $classes[]      = 'dropdown';
-      $li_attributes .= ' data-dropdown="dropdown"';
-    }
-    else {
-      // Remove all classes and espacially the 'active' class
-      unset($classes);
+    if ($item->is_dropdown && ($depth === 0)) {
+      $item_html = str_replace('<a', '<a class="dropdown-toggle" data-toggle="dropdown" data-target="#"', $item_html);
+    } elseif ($depth === 1) {
+      $item_html = str_replace('<a', '<a class="nav-header-palmate" ', $item_html);
+    } elseif ($depth === 2) {
+      $item_html = str_replace('<a', '<a class="nav-group-palmate" ', $item_html);
     }
 
-    if ($custom_classes = get_post_meta($item->ID, '_menu_item_classes', true)) {
-      foreach ($custom_classes as $custom_class) {
-        $classes[] = $custom_class;
-      }
-    }
-
-    $class_names = join(' ', apply_filters(array('nav_menu_css_class'), array_filter($classes), $item, $args));
-    $class_names = $class_names ? ' class="' . $id . ' ' . esc_attr($class_names) . '"' : ' class="' . $id . '"';
-
-    // Add divider before a header
-    if ($is_header) {
-      if ($this->first_in_level) {
-        $this->first_in_level = FALSE;
-      }
-      else {
-        $output .= $indent . '<li class="divider"></li>';
-      }
-    }
-    $output .= $indent . '<li' . $class_names . '>';
-
-    $attributes  = ! empty($item->attr_title) ? ' title="'  . esc_attr($item->attr_title) .'"' : '';
-    $attributes .= ! empty($item->target)     ? ' target="' . esc_attr($item->target    ) .'"' : '';
-    $attributes .= ! empty($item->xfn)        ? ' rel="'    . esc_attr($item->xfn       ) .'"' : '';
-    $attributes .= ! empty($item->url)        ? ' href="'   . esc_attr($item->url       ) .'"' : '';
-    if ($use_dropdown) {
-      $attributes .= ' class="dropdown-toggle" data-toggle="dropdown" data-target="#"';
-    }
-    else if ($is_header) {
-      $attributes .= ' class="nav-header-palmate"';
-    }
-    else if ($is_group) {
-      $attributes .= ' class="nav-group-palmate"';
-    }
-
-    $item_output  = $args->before;
-    $item_output .= '<a'. $attributes .'>';
-    $item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
-//    $item_output .= $use_dropdown ? ' <b class="caret"></b>' : '';
-    $item_output .= '</a>';
-    $item_output .= $args->after;
-
-    $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+    $output .= $item_html;
   }
-}
+  
+  function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) {
+    // Only allow dropdown menu at depth 0
+    $element->is_dropdown = !empty($children_elements[$element->ID]) && ($depth === 0);
 
-/**
- * Replace various active menu class names with "active"
- */
-function roots_wp_nav_menu_objects($items, $args) {
-	foreach ( (array) $items as $key => $menu_item ) {
-    $menu_item->classes = preg_replace('/(current(-menu-|[-_]page[-_])(item|parent|ancestor))/', 'active', (array)$menu_item->classes);
-    $menu_item->classes = array_unique($menu_item->classes);
+    if ($element->is_dropdown) {
+      $element->classes[] = 'dropdown';
+    }
+    // Remove 'active' class from sub menues
+    if ($depth > 0) {
+      unset($element->classes);
+    }
+
+    parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
   }
-  return $items;
+  
 }
-add_filter('wp_nav_menu_objects', 'roots_wp_nav_menu_objects');
 
 /**
  * Activate Palmate nav walker
