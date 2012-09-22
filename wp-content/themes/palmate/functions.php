@@ -18,6 +18,7 @@ require_once locate_template('/lib/post-types.php');      // Custom post types
 require_once locate_template('/lib/metaboxes.php');       // Custom metaboxes
 require_once locate_template('/lib/custom.php');          // Custom functions
 require_once locate_template('/lib/infobox.php');         // Info box custom post type
+require_once locate_template('/lib/calendar.php');        // Calendar request and output
 
 function roots_setup() {
 
