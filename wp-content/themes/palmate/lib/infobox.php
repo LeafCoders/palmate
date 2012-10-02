@@ -121,73 +121,187 @@ function register_cpt_infobox() {
 add_action( 'init', 'register_cpt_infobox' );
 
 
+function generateInfoboxes( $generator ) {
+    $args = array(
+      'post_type' => 'infobox',
+      'post_status' => 'publish',
+      'posts_per_page' => -1,
+      'caller_get_posts'=> 1
+    );
+    $query = new WP_Query($args);
+
+    if ( $query->have_posts() ) {
+      $counter = 0;
+      $generator->elementBefore();
+      while ( $query->have_posts() ) {
+        $query->the_post();
+        if ( $generator->verifyEndDate() ) {
+          $generator->elementInfobox( $counter );
+          $counter++;
+        }
+      }
+      $generator->elementAfter( $counter );
+    }
+    // Restore global post data stomped by the_post()
+    wp_reset_query();
+   
+    return $generator->output();
+}
+
+class PalmateInfobox
+{
+  protected $html = '';
+
+  function elementBefore() {
+    $this->html = '<ul>';
+  }
+
+  function elementInfobox( $counter ) {
+    $this->html .= '<li>infobox</li>';
+  }
+
+  function elementAfter( $counter ) {
+    $this->html .= '</ul>';
+  }
+  
+  function output() {
+    return $this->html;
+  }
+
+  function verifyEndDate() {
+    $endDate = get_field( 'infobox_enddate' );
+    $secondsBetween = strtotime( $endDate ) - time();
+    if ( $secondsBetween < 0 ) {
+      // Move to trash if end date has been passed
+      wp_update_post(array('ID' => get_the_ID(), 'post_status' => 'trash'));
+      return false;
+    }
+    return true;
+  }
+
+  function infoboxHtml( $class ) {
+    $link = get_field( 'infobox_link' );
+    if ( empty( $link ) ) {
+      $link = get_permalink(get_the_ID());
+    }
+
+    $imgUrl = get_field( 'infobox_image' );
+    $textOverlay = '';
+    if ( empty( $imgUrl ) ) {
+      $imgUrl = '../assets/img/infobox.png';
+      $textOverlay = '<h2>' . the_title('','',false) . '</h2>';
+    }
+
+    $html =  '<a class="' . $class . '" href="' . $link . '">';
+//    $html .=   '<div>';
+    $html .=     '<img src="' . $imgUrl . '" class="img-polaroid" alt="' . the_title('','',false) . '"/>' . $textOverlay;
+//    $html .=   '</div>';
+    $html .= '</a>';
+    return $html;
+  }
+}
+
+class PalmateInfoboxCarousel extends PalmateInfobox
+{
+  private $outBig = '';
+  private $outGrid = '';
+  
+  function elementBefore() {
+    $this->outBig =  '<div id="infoboxBigCarousel" class="carousel slide">';
+    $this->outBig .=   '<div class="carousel-inner">';
+
+    $this->outGrid =  '<div id="infoboxGridCarousel" class="carousel slide hidden-phone">';
+    $this->outGrid .=   '<div class="carousel-inner">';
+  }
+
+  function elementInfobox( $counter ) {
+    $active = ( $counter === 0 ) ? ' active' : '';
+
+    // Element for Big carousel
+    self::startBig( $active );
+    $this->outBig .= parent::infoboxHtml( 'infobox infoboxBig' );
+    self::endBig();
+
+    // Element for Grid carousel
+    if ( $counter % 2 === 0 ) {
+      if ( $counter > 0 ) {
+        self::endGridRow();
+      }
+      if ( $counter % 4 === 0 ) {
+        if ( $counter > 0 ) {
+          self::endGrid();
+        }
+        self::startGrid( $active );
+      }
+      self::startGridRow();
+    }
+    $this->outGrid .= parent::infoboxHtml( 'infobox infoboxSmall span6' );
+  }
+
+  function elementAfter( $counter ) {
+    // End Big carousel
+    $this->outBig .= '</div>';
+    $this->outBig .= '</div>';
+
+    // Fill out rows until even rows
+    self::endGridRow();
+    if ( $counter % 4 < 2 ) {
+      self::startGridRow();
+      self::endGridRow();
+    }
+    self::endGrid();
+
+    // End Grid carousel
+    $this->outGrid .= '</div></div>';
+  }
+
+  function startBig( $active ) {
+    $this->outBig .= '<div class="item' . $active . '">';
+    $this->outBig .=   '<div class="heightContainer">';
+    $this->outBig .=     '<div class="infoboxHeight65p"></div>';
+    $this->outBig .=     '<div class="heightItem">';
+  }
+
+  function endBig() {
+    $this->outBig .= '</div></div></div>';
+  }
+
+  function startGrid( $active ) {
+    $this->outGrid .= '<div class="item infoboxGrid' . $active . '">';
+  }
+
+  function startGridRow() {
+    $this->outGrid .= '<div class="row-fluid">';
+    $this->outGrid .=   '<div class="heightContainer">';
+    $this->outGrid .=      '<div class="infoboxHeight34p"></div>';
+    $this->outGrid .=      '<div class="heightItem">';
+  }
+
+  function endGridRow() {
+    $this->outGrid .= '</div></div></div>';
+  }
+
+  function endGrid() {
+    $this->outGrid .= '</div>';
+  }
+
+  function output() {
+    // Surround Big and Grid carousel with a row
+    $htmlTot  = '<div class="row-fluid infoboxContent">';
+    $htmlTot .=    '<div class="span6">' . $this->outBig . '</div>';
+    $htmlTot .=    '<div class="span6">' . $this->outGrid . '</div>';
+    $htmlTot .= '</div>';
+
+    // Start sliding carousels
+    $htmlTot .= '<script type="text/javascript">$(window).load(function() { $(\'#infoboxBigCarousel\').carousel( { interval: 4000 } ); $(\'#infoboxGridCarousel\').carousel( { interval: 6000 } ); })</script>';
+    return $htmlTot;
+  }
+}
+
 /**
  * Info box shortcode [infobox]
  */
 function palmate_infobox_shortcode( $atts ) {
-  $text = '<div class="page-header">';
-  $text .= '  <h1>På gång <small>just nu</small></h1>';
-  $text .= '</div>';
-  
-  $args = array(
-    'post_type' => 'infobox',
-    'post_status' => 'publish',
-    'posts_per_page' => -1,
-    'caller_get_posts'=> 1
-  );
-
-  $my_query = null;
-  $my_query = new WP_Query($args);
-  if ( $my_query->have_posts() ) {
-    $counter = 0;
-    while ( $my_query->have_posts() ) {
-      $my_query->the_post();
-
-      // Test if infobox should be removed
-      $end_date = get_field( 'infobox_enddate' );
-      $secondsbetween = strtotime( $end_date ) - time();
-      if ( $secondsbetween < 0 ) {
-        // Move to trash if end date has been passed
-        wp_update_post(array('ID' => get_the_ID(), 'post_status' => 'trash'));
-        continue;
-      }
-
-      // Add new row each second infobox
-      if ( $counter % 2 === 0 ) {
-        if ( $counter > 0 ) {
-          $text .= '</div>';
-        }
-        $text .= '<div class="row-fluid">';
-      }
-      
-      // Get link to use
-      $link = get_field( 'infobox_link' );
-      if ( empty( $link ) ) {
-        $link = get_permalink(get_the_ID());
-      }
-      
-      // Get image to use
-      $img_url = get_field( 'infobox_image' );
-      $text_overlay = '';
-      if ( empty( $img_url ) ) {
-        $img_url = '../assets/img/infobox.png';
-        $text_overlay = '    <h2>' . the_title('','',false) . '</h2>';
-      }
-
-      $text .= '  <a class="span6 infobox" href="' . $link . '">';
-      $text .= '  <div>';
-      $text .= '    <img src="' . $img_url . '" class="img-polaroid" alt="' . the_title('','',false) . '"/>';
-      $text .= $text_overlay;
-      $text .= '  </div>';
-      $text .= '  </a>';
-      $counter++;
-    }
-    if ( $counter > 0 ) {
-      $text .= '</div>';
-    }
-  }
-  wp_reset_query();  // Restore global post data stomped by the_post().
-
-  return $text;
+  return generateInfoboxes(new PalmateInfoboxCarousel());
 }
 add_shortcode( 'infobox', 'palmate_infobox_shortcode' );  
