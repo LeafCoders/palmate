@@ -1,6 +1,6 @@
 <?php
 
-class PalmateCalendar
+class CalendarOldFormat
 {
   protected $calData = null;
   private $event = null;
