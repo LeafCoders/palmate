@@ -22,6 +22,7 @@ require_once locate_template('/lib/infobox.php');                // Info box cus
 require_once locate_template('/lib/calendar-old-format.php');    // Old format calendar request and output
 require_once locate_template('/lib/calendar-rosette.php');       // Rosette calendar request and output
 require_once locate_template('/lib/person.php');                 // Person shortcode
+require_once locate_template('/lib/shortcodes.php');             // Some shortcodes
 
 require_once locate_template('/admin/palmate-admin-option.php'); // Options for Palmate Admin
 
@@ -48,5 +49,4 @@ function roots_setup() {
   add_editor_style('assets/css/editor-style.css');
 
 }
-
 add_action('after_setup_theme', 'roots_setup');

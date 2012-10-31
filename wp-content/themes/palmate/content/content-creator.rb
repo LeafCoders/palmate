@@ -42,7 +42,7 @@ $doc_start = <<END_OF_STRING
 END_OF_STRING
 
 $page_content_default = <<END_OF_STRING
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat, orci ac laoreet cursus, dolor sem luctus lorem, eget consequat magna felis a magna. Aliquam scelerisque condimentum ante, eget facilisis tortor lobortis in. In interdum venenatis justo eget consequat. Morbi commodo rhoncus mi nec pharetra. Aliquam erat volutpat. Mauris non lorem eu dolor hendrerit dapibus. Mauris mollis nisl quis sapien posuere consectetur. Nullam in sapien at nisi ornare bibendum at ut lectus. Pellentesque ut magna mauris. Nam viverra suscipit ligula, sed accumsan enim placerat nec. Cras vitae metus vel dolor ultrices sagittis. Duis venenatis augue sed risus laoreet congue ac ac leo. Donec fermentum accumsan libero sit amet iaculis. Duis tristique dictum enim, ac fringilla risus bibendum in. Nunc ornare, quam sit amet ultricies gravida, tortor mi malesuada urna, quis commodo dui nibh in lacus. Nunc vel tortor mi. Pellentesque vel urna a arcu adipiscing imperdiet vitae sit amet neque. Integer eu lectus et nunc dictum sagittis. Curabitur commodo vulputate fringilla. Sed eleifend, arcu convallis adipiscing congue, dui turpis commodo magna, et vehicula sapien turpis sit amet nisi.
+Saknar innehåll. Arbete pågår...
 END_OF_STRING
 
 $page_template = <<END_OF_STRING
@@ -269,12 +269,21 @@ class HomePage
     # Write page
     text = $page_template.clone
     text.gsub!("[ID]", "#{page_id}")
-    text.gsub!("[NAME]", "home")
-    text.gsub!("[TITLE]", "Home")
+    text.gsub!("[NAME]", "hem")
+    text.gsub!("[TITLE]", "Hem")
     text.gsub!("[PERMALINK]", "")
     text.gsub!("[MENU_ORDER]", "-1")
     text.gsub!("[TEMPLATE]", "page-front.php")
     text.gsub!("[PAGE_PARENT_ID]", "-1")
+
+    filename = "home.html"
+    if (File.exist?(filename))
+      contentfile = File.open(filename, "rb")
+      text.gsub!("[CONTENT]", contentfile.read)
+    else
+      text.gsub!("[CONTENT]", $page_content_default)
+    end
+
     file.puts(text)
   end
 end
@@ -353,98 +362,91 @@ File.open('wordpress-content.xml', 'w') do |out|
   container = Container.new(). \
     # Home
     add(HomePage.new()). \
-    # Tro & Undervisning
-    add(MenuTop.new("tro-undervisning", "Tro &amp; Undervisning") \
-      .add(Page.new("vi-tror-pa", "Vi tror på", "page-group-no-cal.php") \
-      ) \
-      .add(Page.new("undervisning", "Undervisning", "page-group-no-cal.php") \
-        .add(Page.new("teman", "Teman", "page-group-no-cal.php")) \
-        .add(Page.new("predikningar", "Predikningar", "page-group-no-cal.php")) \
-        .add(Page.new("bibelstudier", "Bibelstudier", "page-group-no-cal.php")) \
-      ) \
-      .add(Page.new("moten", "Möten", "page-group-no-cal.php") \
-        .add(Page.new("gudstjanst", "Gudstjänst", "page-group-no-cal.php")) \
-        .add(Page.new("pa-arabiska", "På arabiska", "page-group-no-cal.php")) \
-      ) \
-      .add(Page.new("kurser", "Kurser", "page-group-no-cal.php") \
-        .add(Page.new("steg-in-i-forsamling", "Steg in i församling", "page-group-no-cal.php")) \
+    # Möten
+    add(MenuTop.new("moten", "Möten") \
+      .add(Page.new("moten", "Möten", "page-groups.php") \
+        .add(Page.new("gudstjanst", "Gudstjänst", "page-group.php")) \
+        .add(Page.new("pa-arabiska", "På arabiska", "page-group.php")) \
+        .add(Page.new("cellgrupp", "Cellgrupp", "page-group.php")) \
+        .add(Page.new("bon", "Bön", "page-group.php")) \
+        .add(Page.new("kvinnofrukost", "Kvinnofrukost", "page-group.php")) \
       ) \
     ). \
-    # Bön & lovsång
-    add(MenuTop.new("bon-lovsang", "Bön &amp; Lovsång") \
-      .add(Page.new("bon", "Bön", "page-group-no-cal.php") \
-        .add(Page.new("kapellet", "Kapellet", "page-group-no-cal.php")) \
-        .add(Page.new("24-7", "24-7", "page-group-no-cal.php")) \
-      ) \
-      .add(Page.new("lovsang", "Lovsång", "page-group-no-cal.php") \
-        .add(Page.new("vox-deo", "Vox Deo", "page-group-no-cal.php")) \
-        .add(Page.new("brasset", "Brasset", "page-group-no-cal.php")) \
-        .add(Page.new("kom-helige-ande", "Kom Helige Ande", "page-group-no-cal.php")) \
-        .add(Page.new("konserter", "Konserter", "page-group-no-cal.php")) \
+    # Undervisning
+    add(MenuTop.new("undervisning", "Undervisning") \
+      .add(Page.new("undervisning", "Undervisning", "page-groups.php") \
+        .add(Page.new("predikningar", "Predikningar", "page-group.php")) \
+        .add(Page.new("alpha", "Alpha", "page-group.php")) \
+        .add(Page.new("steg-in-i-forsamling", "Steg in i forsamling", "page-group.php")) \
+        .add(Page.new("aktenskapskurs", "Äktenskapskurs", "page-group.php")) \
       ) \
     ). \
-    # Nyfiken på Gud
-    add(MenuTop.new("nyfiken-pa-gud", "Nyfiken på Gud") \
-      .add(Page.new("nyfiken-pa-gud", "Nyfiken på Gud", "page-group-no-cal.php") \
-        .add(Page.new("alpha", "Alpha", "page-group-no-cal.php")) \
-        .add(Page.new("jesusbussen", "Jesusbussen", "page-group-no-cal.php")) \
-        .add(Page.new("kvinnofrukost", "Kvinnofrukost", "page-group-no-cal.php")) \
+    # Barn
+    add(MenuTop.new("barn", "Barn") \
+      .add(Page.new("barn", "Barn", "page-groups.php") \
+        .add(Page.new("barn-babyrytmik", "Barn- och babyrytmik", "page-group.php")) \
+        .add(Page.new("lofteslandet", "Löfteslandet", "page-group.php")) \
+        .add(Page.new("barnkoren-hogtryck", "Barnkören H&ouml;gtryck", "page-group.php")) \
+        .add(Page.new("scout", "Scout", "page-group.php")) \
+        .add(Page.new("fritids", "Fritids", "page-group.php")) \
+       .add(Page.new("lager", "Läger", "page-group.php")) \
       ) \
     ). \
-    # Verksamhet
-    add(MenuTop.new("verksamhet", "Verksamhet") \
-      .add(Page.new("barn", "Barn", "page-group-no-cal.php") \
-        .add(Page.new("barn-babyrytmik", "Barn- och babyrytmik", "page-group-no-cal.php")) \
-        .add(Page.new("lofteslandet", "Löfteslandet", "page-group-no-cal.php")) \
-        .add(Page.new("barnkoren-hogtryck", "Barnkören H&ouml;gtryck", "page-group-no-cal.php")) \
-        .add(Page.new("scout", "Scout", "page-group-no-cal.php")) \
-        .add(Page.new("fritids", "Fritids", "page-group-no-cal.php")) \
-       .add(Page.new("lager", "Läger", "page-group-no-cal.php")) \
+    # Ungdom
+    add(MenuTop.new("ungdom", "Ungdom") \
+      .add(Page.new("ungdom", "Ungdom", "page-groups.php") \
+        .add(Page.new("enter", "Enter", "page-group.php")) \
+        .add(Page.new("konfa", "Konfa", "page-group.php")) \
+        .add(Page.new("teenstreet", "TeenStreet", "page-group.php")) \
       ) \
-      .add(Page.new("ungdom", "Ungdom", "page-group-no-cal.php") \
-        .add(Page.new("enter", "Enter", "page-group-no-cal.php")) \
-        .add(Page.new("konfa", "Konfa", "page-group-no-cal.php")) \
-        .add(Page.new("teenstreet", "TeenStreet", "page-group-no-cal.php")) \
+    ). \
+    # Pensionär
+    add(MenuTop.new("pensionar", "Pensionär") \
+      .add(Page.new("pensionar", "Pensionär", "page-groups.php") \
+        .add(Page.new("rpg65plus", "RPG 65+", "page-group.php")) \
       ) \
-      .add(Page.new("unga-vuxna", "Unga Vuxna", "page-group-no-cal.php") \
-        .add(Page.new("20plus", "20+", "page-group-no-cal.php")) \
-      ) \
-      .add(Page.new("vuxna", "Vuxna", "page-group-no-cal.php") \
-        .add(Page.new("cellgrupp", "Cellgrupp", "page-group-no-cal.php")) \
-        .add(Page.new("rpg65plus", "RPG 65+", "page-group-no-cal.php")) \
-        .add(Page.new("aktenskapskurs", "Äktenskapskurs", "page-group-no-cal.php")) \
-      ) \
-      .add(Page.new("om-forsamlingen", "Om församlingen", "page-group-no-cal.php") \
-        .add(Page.new("vart-sammanhang", "Vårt sammanhang", "page-group-no-cal.php")) \
-        .add(Page.new("vision", "Vision", "page-group-no-cal.php")) \
-        .add(Page.new("historik", "Historik", "page-group-no-cal.php")) \
-        .add(Page.new("forsamlingsledningen", "Församlingsledningen", "page-group-no-cal.php")) \
-        .add(Page.new("medlemskap", "Medlemskap", "page-group-no-cal.php")) \
+    ). \
+    # Musik
+    add(MenuTop.new("musik", "Musik") \
+      .add(Page.new("musik", "Musik", "page-groups.php") \
+        .add(Page.new("vox-deo", "Vox Deo", "page-group.php")) \
+        .add(Page.new("brasset", "Brasset", "page-group.php")) \
       ) \
     ). \
     # Mission
     add(MenuTop.new("mission", "Mission") \
-      .add(Page.new("mission", "Mission", "page-group-no-cal.php") \
-        .add(Page.new("vara-missionarer", "Våra missionärer", "page-group-no-cal.php")) \
-        .add(Page.new("stipendiat", "Stipendiat", "page-group-no-cal.php")) \
+      .add(Page.new("mission", "Mission", "page-groups.php") \
+        .add(Page.new("vara-missionarer", "Våra missionärer", "page-group.php")) \
+        .add(Page.new("missionsstipendium", "Missionsstipendium", "page-group.php")) \
       ) \
     ). \
-    # Kontakt
-    add(MenuTop.new("kontakt", "Kontakt") \
-      .add(Page.new("kontakt", "Kontakt", "page-group-no-cal.php") \
-        .add(Page.new("personal", "Personal", "page-group-no-cal.php")) \
-        .add(Page.new("adresser", "Adresser", "page-group-no-cal.php")) \
-        .add(Page.new("lediga-tjanster", "Lediga tjänster", "page-group-no-cal.php")) \
+    # Konferens
+    add(MenuTop.new("konferens", "Konferens") \
+      .add(Page.new("konferens", "Konferens", "page-group.php") \
       ) \
     ). \
     # Ryttargården
     add(MenuTop.new("ryttargarden", "Ryttargården") \
-      .add(Page.new("ryttargarden", "Ryttargården", "page-group-no-cal.php") \
-        .add(Page.new("cafe", "Caf&eacute;", "page-group-no-cal.php")) \
-        .add(Page.new("minigolf", "Minigolf", "page-group-no-cal.php")) \
-        .add(Page.new("motionshall", "Motionshall", "page-group-no-cal.php")) \
-        .add(Page.new("konferens", "Konferens", "page-group-no-cal.php")) \
-        .add(Page.new("hitta-hit", "Hitta hit", "page-group-no-cal.php")) \
+      .add(Page.new("ryttargarden", "Ryttargården", "page-group.php") \
+      ) \
+    ). \
+    # Församlingen
+    add(MenuTop.new("forsamlingen", "Församlingen") \
+      .add(Page.new("forsamlingen", "Församlingen", "page-groups.php") \
+        .add(Page.new("om-forsamlingen", "Om församlingen", "page-group.php")) \
+        .add(Page.new("personal", "Personal", "page-group.php")) \
+        .add(Page.new("forsamlingsledningen", "Församlingsledningen", "page-group.php")) \
+      ) \
+    ). \
+    # Församlingen internt
+    add(MenuTop.new("forsamlingen-internt", "Församlingen internt") \
+      .add(Page.new("forsamlingen-internt", "Församlingen internt", "page-groups.php") \
+        .add(Page.new("internt", "Internt", "page-group.php")) \
+      ) \
+    ). \
+    # Kalender
+    add(MenuTop.new("kalender", "Kalender") \
+      .add(Page.new("kalender", "Kalender", "page-calendar-rosette.php") \
       ) \
     )
 

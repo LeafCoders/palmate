@@ -3,8 +3,8 @@
     <a href="/">
       <br class="hidden-phone">
       <div class="row-fluid">
-        <div class="span8">
-          <img src="<?php get_template_directory_uri() ?>/assets/img/logga-ryttargardskyrkan-darkbackground-hd.png" />
+        <div class="span12">
+          <img src="<?php get_template_directory_uri() ?>/assets/img/logga-ryttargardskyrkan-darkbackground-hd-beta.png" />
         </div>
       </div>
       <br class="hidden-phone">

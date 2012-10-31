@@ -1,14 +1,15 @@
 <?php
 /*
-Template Name: Front page
+Template Name: Framsidan
 */
-the_post(); ?>
 
-<?php echo palmate_infobox_shortcode( '' ); ?>
-<div class="row-fluid">
-  <div id="main" class="span8 contentbox" role="main">
-    <?php the_content(); ?>
-  </div>
-  <?php get_template_part('templates/calendar', 'span4'); ?>
-</div>
+echo palmate_infobox_shortcode( '' );
+the_post();
 
+echo '<div id="main" role="main">';
+the_content();
+?>
+
+<?php
+echo '</div>';
+?>

@@ -401,7 +401,7 @@ function roots_excerpt_length($length) {
 }
 
 function roots_excerpt_more($more) {
-  return ' &hellip; <a href="' . get_permalink() . '">' . __('Continued', 'roots') . '</a>';
+  return ' &hellip; <a href="'. get_permalink() . '"><p style="display: inline;" class="readMore"></p></a>';
 }
 
 add_filter('excerpt_length', 'roots_excerpt_length');

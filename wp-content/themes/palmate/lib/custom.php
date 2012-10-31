@@ -4,11 +4,13 @@
 
 function showAdminMessages()
 {
-  if ( user_can( 'manage_options' ) && !function_exists( 'p2p_register_connection_type' ) ) {
-    echo '<div id="message" class="updated fade"><p><strong>Posts 2 Posts måste installeras!</strong></p></div>';
+  if ( user_can( 'manage_options' ) && !function_exists( 'register_field_group' ) ) {
+    echo '<div id="message" class="updated fade"><p><strong>Advanced Custom Fields måste installeras!</strong></p></div>';
   }
 }
 add_action( 'admin_notices', 'showAdminMessages' );
+
+/*
 
 function palmate_register_connection_types() {
   if ( function_exists( 'p2p_register_connection_type' ) ) {
@@ -105,8 +107,7 @@ function register_cpt_sermon() {
     register_post_type( 'sermon', $args );
 }
 add_action( 'init', 'register_cpt_sermon' );
-
-
+*/
 
 /**
  * A cleaner walker for wp_nav_menu() customized for Palmate
@@ -174,3 +175,24 @@ function palmate_nav_menu_args($args = '') {
   return array_merge($args, $roots_nav_menu_args);
 }
 add_filter('wp_nav_menu_args', 'palmate_nav_menu_args');
+
+/**
+ * Remove visual editor for pages. The visual editor does cleanups that removes valid html5 elements
+ */
+function palmate_page_can_richedit( $can ) {
+    global $post;
+
+    if ( 'page' == $post->post_type )
+        return false;
+
+    return $can;
+}
+add_filter( 'user_can_richedit', 'palmate_page_can_richedit' );
+
+/**
+ * Remove cleanup filters that rewrites <a> tags. A <a> tag may surround blocks in html5
+ * but wpautop rewrites thoose tags to multiple tags.
+ */
+remove_filter( 'the_content', 'wpautop' );
+remove_filter( 'the_excerpt', 'wpautop' );
+

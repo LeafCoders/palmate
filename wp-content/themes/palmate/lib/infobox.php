@@ -24,7 +24,7 @@ function register_cpt_infobox() {
   $args = array( 
     'labels' => $labels,
     'hierarchical' => false,
-    'description' => 'En infobox ha en egen sida eller länkas mot en annan sida',
+    'description' => 'En infobox har en egen sida eller länkas mot en annan sida',
     'supports' => array( 'title', 'editor', 'thumbnail' ),
     'public' => true,
     'show_ui' => true,
@@ -54,7 +54,7 @@ function register_cpt_infobox() {
           'label' => 'Bild',
           'name' => 'infobox_image',
           'type' => 'image',
-          'instructions' => 'Ange bild att visa i infoboxen. Storleken ska vara ca 300x180 pixlar.',
+          'instructions' => 'Ange bild att visa i infoboxen. Storleken ska vara ca 600x300 pixlar.',
           'required' => '0',
           'save_format' => 'url',
           'preview_size' => 'medium',
@@ -258,7 +258,7 @@ class PalmateInfoboxCarousel extends PalmateInfobox
   function startBig( $active ) {
     $this->outBig .= '<div class="item' . $active . '">';
     $this->outBig .=   '<div class="heightContainer">';
-    $this->outBig .=     '<div class="infoboxHeight65p"></div>';
+    $this->outBig .=     '<div class="infoboxHeight50p"></div>';
     $this->outBig .=     '<div class="heightItem">';
   }
 
@@ -273,7 +273,7 @@ class PalmateInfoboxCarousel extends PalmateInfobox
   function startGridRow() {
     $this->outGrid .= '<div class="row-fluid">';
     $this->outGrid .=   '<div class="heightContainer">';
-    $this->outGrid .=      '<div class="infoboxHeight34p"></div>';
+    $this->outGrid .=      '<div class="infoboxHeight25p"></div>';
     $this->outGrid .=      '<div class="heightItem">';
   }
 
