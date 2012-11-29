@@ -226,7 +226,7 @@ function roots_theme_activation_action() {
   if ($roots_theme_activation_options['create_front_page']) {
     $roots_theme_activation_options['create_front_page'] = false;
 
-    $default_pages = array('Home');
+    $default_pages = array('home');
     $existing_pages = get_pages();
     $temp = array();
 
@@ -247,7 +247,7 @@ function roots_theme_activation_action() {
       $result = wp_insert_post($add_default_pages);
     }
 
-    $home = get_page_by_title('Home');
+    $home = get_page_by_title('home');
     update_option('show_on_front', 'page');
     update_option('page_on_front', $home->ID);
 
