@@ -189,13 +189,11 @@ class PalmateInfobox
     $textOverlay = '';
     if ( empty( $imgUrl ) ) {
       $imgUrl = '../assets/img/infobox.png';
-      $textOverlay = '<h2>' . the_title('','',false) . '</h2>';
+//      $textOverlay = '<h2>' . the_title('','',false) . '</h2>';
     }
 
     $html =  '<a class="' . $class . '" href="' . $link . '">';
-//    $html .=   '<div>';
-    $html .=     '<img src="' . $imgUrl . '" class="img-polaroid" alt="' . the_title('','',false) . '"/>' . $textOverlay;
-//    $html .=   '</div>';
+    $html .= '  <img src="' . $imgUrl . '" alt="' . the_title('','',false) . '"/>' . $textOverlay;
     $html .= '</a>';
     return $html;
   }
@@ -298,10 +296,43 @@ class PalmateInfoboxCarousel extends PalmateInfobox
   }
 }
 
+class PalmateInfoboxCarouselEasy extends PalmateInfobox
+{
+  private $outBig = '';
+
+  function elementBefore() {
+    $this->out .= '<ul class="slides">';
+  }
+
+  function elementInfobox( $counter ) {
+    $this->out .= '<li>' . parent::infoboxHtml( '' ) . '</li>';
+  }
+
+  function elementAfter( $counter ) {
+    $this->out .= '</ul>';
+  }
+
+  function output() {
+    $htmlTot  = '<div class="row-fluid">';
+    $htmlTot .= '  <div class="span12">';
+    $htmlTot .= '    <div class="marginBoth">';
+    $htmlTot .= '      <div class="flexslider">';
+    $htmlTot .= $this->out;
+    $htmlTot .= '      </div>';
+    $htmlTot .= '    </div>';
+    $htmlTot .= '  </div>';
+    $htmlTot .= '</div>';
+
+    // Start sliding carousel
+    $htmlTot .= '<script type="text/javascript" charset="utf-8">$(window).load(function() { $(".flexslider").flexslider({ pauseOnAction: true, animation: "slide", itemWidth: 320, itemMargin: 4, minItems: 1, maxItems: 3 }); });</script>';
+    return $htmlTot;
+  }
+}
+
 /**
  * Info box shortcode [infobox]
  */
 function palmate_infobox_shortcode( $atts ) {
-  return generateInfoboxes(new PalmateInfoboxCarousel());
+  return generateInfoboxes(new PalmateInfoboxCarouselEasy());
 }
 add_shortcode( 'infobox', 'palmate_infobox_shortcode' );  

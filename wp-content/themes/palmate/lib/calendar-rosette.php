@@ -30,9 +30,9 @@ class CalendarRosette
   }
 
   protected function eventMonths( $week ) {
-    $monthSince = self::eventMonth( $week['since'] );
-    $monthUntil = self::eventMonth( $week['until'] );
-    $monthNames = $monthSince . ( $monthSince != $monthUntil ? ', ' . $monthUntil : '' );
+    $monthSince = self::eventMonth( $week[since] );
+    $monthUntil = self::eventMonth( $week[until] );
+    return $monthSince . ( $monthSince != $monthUntil ? ', ' . $monthUntil : '' );
   }
   
   protected function eventWeekDay( $day ) {

@@ -196,3 +196,11 @@ add_filter( 'user_can_richedit', 'palmate_page_can_richedit' );
 remove_filter( 'the_content', 'wpautop' );
 remove_filter( 'the_excerpt', 'wpautop' );
 
+/**
+ * the_slug is a missing function in WordPress. Keep it here until WordPress implements it
+ */
+function the_slug($echo = true){
+  $slug = basename(get_permalink());
+  if ($echo) echo $slug;
+  return $slug;
+}

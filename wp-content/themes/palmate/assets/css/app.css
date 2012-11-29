@@ -1,70 +1,61 @@
-/* ==========================================================================
-   Base
-   ========================================================================== */
+/* === Base ================================================================= */
 
 body {
   background-color: #ddd;
-  background-image: url('../img/body-background.png');
-  background-position: left top;
-  background-repeat: repeat;
-//  font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana,sans-serif;
-  font-size: 15px;
-  max-width: 979px;
-  margin-left: auto;
-  margin-right: auto;
+  background-image: url('../img/furley_bg.png');
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
-/* =============================================================================
-   Header
-   ========================================================================== */
-
-#banner {
-  background-image: url('../img/banner-background.png');
-  background-size: contain;
-
-  padding: 3px;
-  padding-top: 10px;
-  margin-bottom: 20px;
-}
-
-/* Fixed Topbar Navigation */
-body.top-navbar {
-  padding-top: 0px;
-}
-
-body.admin-bar .navbar-fixed-top { top: 28px; }
+/* === Header =============================================================== */
 
 .header-image {
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
   padding-bottom: 7px;
 }
 
-a.nav-header-palmate {
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
+@media (max-width: 767px) {
+  .header-image {
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
-a.nav-group-palmate {
-  padding-left: 30px;
-}
-
-
-/* ==========================================================================
-   Content
-   ========================================================================== */
+/* === Content  ============================================================= */
 
 #content {
-  background-image: url('../img/furley_bg.png');
   max-width: 979px;
   margin-left: auto;
   margin-right: auto;
 }
 
-h1 {
+h1, h2, h3, h4 {
   text-transform: uppercase;
   font-family: 'Lato', sans-serif;
+  font-weight: 900;
   color: #693;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 32px;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 20px;
+}
+
+h3 {
+  font-size: 16px;
+  line-height: 16px;
+}
+
+h4 {
+  font-size: 14px;
+  line-height: 14px;
 }
 
 h1:after {
@@ -82,17 +73,17 @@ h1:after {
   -o-box-shadow:      0px 2px 5px 0px #999;
   -ms-box-shadow:     0px 2px 5px 0px #999;
   box-shadow:         0px 2px 5px 0px #999;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
   border-radius: 3px;
+  behavior: url('/assets/css/PIE.htc');
   overflow: hidden;
-}
-
-.contentBox a {
-  color: #000;
 }
 
 .contentBox a:hover {
   text-decoration: none;
-  color: #362;
 }
 
 .contentBox dt {
@@ -100,26 +91,48 @@ h1:after {
   text-transform: uppercase;
 }
 
-.readMore:after,
-.contentBox dd:after {
+.contentGroupHeader {
+  background-size: auto 100%;
+  height: 150px;
+}
+
+.contentGroupHeader > h1 {
+  padding-top: 20px;
+  font-size: 64px;
+  line-height: 54px;
+  color: #fff;
+  text-shadow: 0px 0px 10px #000;
+}
+
+.readMore:after {
   display: inline-block;
   margin-left: 4px;
   padding: 2px 2px;
   color: #555;
   background-color: #eee;
   border: solid 1px #ccc;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
   border-radius: 3px;
+  behavior: url('/assets/css/PIE.htc');
   font-size: 12px;
   line-height: 12px;
   content: "Läs mer...";
 }
 
 .ageAndTime {
-  margin-top: -10px;
+  margin-top: 0px;
   margin-bottom: 10px;
 }
 .ageAndTime > span {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
   border-radius: 2px;
+  behavior: url('/assets/css/PIE.htc');
   border: 1px solid #ddd;
   padding: 2px 5px;
   margin-bottom: 10px;
@@ -135,9 +148,51 @@ h1:after {
   padding: 0px;
 }
 
-/* ==========================================================================
-   Padding and margin
-   ========================================================================== */
+.fileDownload {
+  margin: 0 2px;
+  padding: 2px 4px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+}
+
+.fileDownload:hover {
+  border: 1px solid #777;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 24px;
+    line-height: 24px;
+  }
+  
+  h2 {
+    font-size: 16px;
+    line-height: 16px;
+  }
+  
+  h3 {
+    font-size: 14px;
+    line-height: 14px;
+  }
+  
+  h4 {
+    font-size: 14px;
+    line-height: 14px;
+  }
+  
+  .contentGroupHeader {
+    height: 100px;
+  }
+
+  .contentGroupHeader > h1 {
+    font-size: 30px;
+    line-height: 30px;
+  }
+}
+
+
+
+/* === Padding and margin =================================================== */
 
 .paddingBoth {
   padding-left: 20px;
@@ -181,6 +236,11 @@ h1:after {
   margin-bottom: 10px;
 }
 
+.marginMoveUp {
+  margin-top: -25px;
+  padding-top: 10px;
+}
+
 @media (max-width: 767px) {
   .paddingLeft {
     padding-left: 0px;
@@ -198,9 +258,7 @@ h1:after {
   }
 }
 
-/* ==========================================================================
-   Image positioning
-   ========================================================================== */
+/* === Image positioning ==================================================== */
 
 figure {
   padding: 0px;
@@ -237,6 +295,7 @@ figure {
   }
 }
 
+/*
 .maximg {
   padding: 0px 10px 30px 10px;
 }
@@ -257,36 +316,9 @@ figure {
     width: auto;
   }
 }
+*/
 
-/* ==========================================================================
-   Primary Content
-   ========================================================================== */
-
-#main { }
-
-
-/* ==========================================================================
-   Sidebar
-   ========================================================================== */
-
-#sidebar { }
-
-
-
-/* ==========================================================================
-   Posts
-   ========================================================================== */
-
-.hentry header { }
-.hentry time { }
-.hentry p.byline { }
-.hentry .entry-content { }
-.hentry footer { }
-
-
-/* ==========================================================================
-   Calendar
-   ========================================================================== */
+/* === Calendar ============================================================= */
 
 .cal-week {
   width: 100%;
@@ -296,16 +328,23 @@ figure {
 
   text-rendering: optimizelegibility;
   font-family: 'Lato', sans-serif;
+  font-weight: 900;
   font-size: 14px;
   line-height: 14px;
 }
 
 .cal-week > p {
-  background-color: rgba(255,255,255,0.5);
-  padding: 4px 4px;
-  border-radius: 3px;
-  color: #2A5F21;
   text-align: left;
+  padding: 4px 4px;
+  color: #2A5F21;
+  background-color: rgba(255,255,255,0.5);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#80ffffff',GradientType=0 );
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  behavior: url('/assets/css/PIE.htc');
 }
 
 .cal-week > p > small {
@@ -319,21 +358,30 @@ figure {
 }
 
 .cal-date {
+  font-family: 'Lato', sans-serif;
   font-size: 18px;
   line-height: 18px;
   text-transform: uppercase;
   background-color: rgba(255,255,255,0.5);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#80ffffff',GradientType=0 );
   padding: 4px 4px;
-  border-radius: 3px;
   color: #2A5F21;
   float: left;
   width: 30px;
   display: inline;
   text-align: center;
 
-  -moz-box-shadow:    inset 0 0 3px #000;
-  -webkit-box-shadow: inset 0 0 3px #000;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow:    0 0 8px -3px #000;
+  -webkit-box-shadow: 0 0 8px -3px #000;
+  -o-box-shadow:      0 0 8px -3px #000;
+  -ms-box-shadow:     0 0 8px -3px #000;
   box-shadow:         0 0 8px -3px #000;
+  behavior: url('/assets/css/PIE.htc');
 }
 
 .cal-date > p {
@@ -346,7 +394,7 @@ figure {
 }
 
 .cal-sunday {
-  background-color: rgba(255,150,150,0.7);
+  color: #a00;
 }
 
 .cal-event {
@@ -388,7 +436,7 @@ figure {
 /* ==========================================================================
    Height control. Set height to be percent of width
    ========================================================================== */
-
+/*
 .heightContainer {
   display: inline-block;
   position: relative;
@@ -402,11 +450,12 @@ figure {
   left: 0;
   right: 0;
 }
+*/
 
 /* ==========================================================================
    Infobox
    ========================================================================== */
-
+/*
 .infoboxContent {
   padding-top: 20px;
   padding-bottom: 0px;
@@ -439,6 +488,7 @@ figure {
   -o-box-shadow:      0px 0px 10px 0px #73b532;
   -ms-box-shadow:     0px 0px 10px 0px #73b532;
   box-shadow:         0px 0px 10px 0px #73b532;
+  behavior: url('/assets/css/PIE.htc');
 }
 
 .infoboxBig > img {
@@ -496,10 +546,9 @@ figure {
     padding-top: 45%;
   }
 }
+*/
 
-/* ==========================================================================
-   Person
-   ========================================================================== */
+/* === Person =============================================================== */
 
 .person {
 //  border: 1px solid rgba(0,0,0,0.2);
@@ -540,13 +589,7 @@ figure {
 }
 */
 
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-
-#content-info { }
-
-
+/* === Footer =============================================================== */
 
 /* ==========================================================================
    WordPress Generated Classes
@@ -557,17 +600,3 @@ figure {
 .alignleft { float: left; }
 .alignright { float: right; }
 figure.alignnone { margin-left: 0; margin-right: 0; }
-
-
-
-/* ==========================================================================
-   Media Queries
-   ========================================================================== */
-
-@media (max-width: 979px) {
-  /* Fix top padding when using the responsive grid with the fixed topbar */
-  body.top-navbar {
-    padding-top: 0;
-  }
-}
-

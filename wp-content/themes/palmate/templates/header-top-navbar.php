@@ -4,12 +4,13 @@
       <br class="hidden-phone">
       <div class="row-fluid">
         <div class="span12">
-          <img src="<?php get_template_directory_uri() ?>/assets/img/logga-ryttargardskyrkan-darkbackground-hd-beta.png" />
+          <img src="<?php get_template_directory_uri() ?>/assets/img/logga-ryttargardskyrkan-hd.png" />
         </div>
       </div>
       <br class="hidden-phone">
     </a>
   </div>
+<!--
   <div class="navbar navbar-palmate">
     <div class="navbar-inner">
       <div class="container">
@@ -20,4 +21,5 @@
       </div>
     </div>
   </div>
+-->
 </header>

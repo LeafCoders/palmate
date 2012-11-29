@@ -21,26 +21,49 @@ add_shortcode( 'LatestBlogPost', 'palmate_latestBlogPost_shortcode' );
 /**
  * Calendar [Calendar width="span12"]
  */
-function calendar_shortcode( $atts ) {
-  extract( shortcode_atts( array(
-    'width' => 'span12'
-  ), $atts ) );
+function generate_palmate_calendar( $year, $week, $width ) {
+  $cal = new CalendarRosette();
+  if (empty($week)) {
+    $cal->request( rosette_api_url( 'eventweek' ) );
+  } else {
+    $cal->request( rosette_api_url( 'eventweek/' . $year . '-W' . $week ) );
+  }
 
-  $cal = new CalendarOldFormat();
-  $cal->request( 'http://www.ryttargardskyrkan.se/program/view.php' );
-
-  //$cal = new CalendarRosette();
-  //$cal->request( 'http://localhost:8888/assets/img/eventweek-3.json' );
-
-  $output  = '<div class="row-fluid">';
+  $output  = '<div id="calendar" class="row-fluid">';
+  $output .= '  <div class="pagination-centered">';
+  $output .= '    <div class="btn-group pagination-centered">';
+  $output .= '      <button onclick="loadCalendar(\'' . $year . '\', \'' . ($week-1) . '\')" class="btn"><i class="icon-arrow-left"></i></button>';
+  $output .= '      <button onclick="loadCalendar(\'' . $year . '\', \'' . date('W') . '\')" class="btn">Aktuell vecka</button>';
+  $output .= '      <button onclick="loadCalendar(\'' . $year . '\', \'' . ($week+1) . '\')" class="btn"><i class="icon-arrow-right"></i></button>';
+  $output .= '    </div>';
+  $output .= '  </div><br>';
   $output .= '  <div class="' . $width . '">';
   $output .= $cal->output();
   $output .= '  </div>';
   $output .= '</div>';
+  
   return $output;
+}
+
+function calendar_shortcode( $atts ) {
+  extract( shortcode_atts( array(
+    'year' => date("Y"),
+    'week' => date("W"),
+    'width' => 'span12'
+  ), $atts ) );
+
+  return generate_palmate_calendar( $year, $week, $width );
 }
 add_shortcode( 'Calendar', 'calendar_shortcode' );
 
+function palmate_ajax_loadCalendar() {
+	$year = $_POST['year'];
+	$week = $_POST['week'];
+  echo generate_palmate_calendar( $year, $week, 'span12' );
+	die(); // this is required to return a proper result
+}
+add_action('wp_ajax_loadCalendar', 'palmate_ajax_loadCalendar');
+add_action('wp_ajax_nopriv_loadCalendar', 'palmate_ajax_loadCalendar');
 
 /**
  * Insert one image that is only visible on a phone [ImageOnlyPhone imgurl="content-img-temp.png"]
@@ -101,4 +124,18 @@ function palmate_ageAndTime_shortcode( $atts ) {
   return $text;
 }
 add_shortcode( 'AgeAndTime', 'palmate_ageAndTime_shortcode' );
+
+/**
+ * Download file [FileDownload text='' filename="" icon="icon-file"]
+ */
+function palmate_fileDownload_shortcode( $atts ) {
+  extract( shortcode_atts( array(
+    'text' => '',
+    'filename' => '',
+    'icon' => 'icon-file'
+  ), $atts ) );
+
+  return '<a class="fileDownload" href="/assets/' . $filename . '"><i class="' . $icon . '"></i> ' . $text . '</a>';
+}
+add_shortcode( 'FileDownload', 'palmate_fileDownload_shortcode' );
 

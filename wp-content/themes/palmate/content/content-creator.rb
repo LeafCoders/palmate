@@ -42,7 +42,6 @@ $doc_start = <<END_OF_STRING
 END_OF_STRING
 
 $page_content_default = <<END_OF_STRING
-Saknar innehåll. Arbete pågår...
 END_OF_STRING
 
 $page_template = <<END_OF_STRING
@@ -369,7 +368,6 @@ File.open('wordpress-content.xml', 'w') do |out|
         .add(Page.new("pa-arabiska", "På arabiska", "page-group.php")) \
         .add(Page.new("cellgrupp", "Cellgrupp", "page-group.php")) \
         .add(Page.new("bon", "Bön", "page-group.php")) \
-        .add(Page.new("kvinnofrukost", "Kvinnofrukost", "page-group.php")) \
       ) \
     ). \
     # Undervisning
@@ -389,7 +387,7 @@ File.open('wordpress-content.xml', 'w') do |out|
         .add(Page.new("barnkoren-hogtryck", "Barnkören H&ouml;gtryck", "page-group.php")) \
         .add(Page.new("scout", "Scout", "page-group.php")) \
         .add(Page.new("fritids", "Fritids", "page-group.php")) \
-       .add(Page.new("lager", "Läger", "page-group.php")) \
+        .add(Page.new("lager", "Läger", "page-group.php")) \
       ) \
     ). \
     # Ungdom
@@ -416,13 +414,14 @@ File.open('wordpress-content.xml', 'w') do |out|
     # Mission
     add(MenuTop.new("mission", "Mission") \
       .add(Page.new("mission", "Mission", "page-groups.php") \
-        .add(Page.new("vara-missionarer", "Våra missionärer", "page-group.php")) \
+        .add(Page.new("missionsradet", "Missionsrådet", "page-group.php")) \
         .add(Page.new("missionsstipendium", "Missionsstipendium", "page-group.php")) \
       ) \
     ). \
     # Konferens
     add(MenuTop.new("konferens", "Konferens") \
-      .add(Page.new("konferens", "Konferens", "page-group.php") \
+      .add(Page.new("konferens", "Konferens", "page-groups.php") \
+        .add(Page.new("lokaler", "Lokaler", "page-group.php")) \
       ) \
     ). \
     # Ryttargården
@@ -436,12 +435,17 @@ File.open('wordpress-content.xml', 'w') do |out|
         .add(Page.new("om-forsamlingen", "Om församlingen", "page-group.php")) \
         .add(Page.new("personal", "Personal", "page-group.php")) \
         .add(Page.new("forsamlingsledningen", "Församlingsledningen", "page-group.php")) \
+        .add(Page.new("visionen", "Visionen", "page-group.php")) \
+        .add(Page.new("medlemskap", "Medlemskap", "page-group.php")) \
+        .add(Page.new("historik", "Historik", "page-group.php")) \
       ) \
     ). \
     # Församlingen internt
     add(MenuTop.new("forsamlingen-internt", "Församlingen internt") \
       .add(Page.new("forsamlingen-internt", "Församlingen internt", "page-groups.php") \
-        .add(Page.new("internt", "Internt", "page-group.php")) \
+        .add(Page.new("ljus-och-bild", "Ljus och Bild", "page-group.php")) \
+        .add(Page.new("epostlistor", "Epostlistor", "page-group.php")) \
+        .add(Page.new("websidan", "Websidan", "page-group.php")) \
       ) \
     ). \
     # Kalender
