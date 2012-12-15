@@ -2,6 +2,9 @@
 
 // Custom functions
 
+register_nav_menus(array('desktop_navigation'=>'Meny för desktop'));
+register_nav_menus(array('mobile_navigation'=>'Meny för mobil enhet'));
+
 function showAdminMessages()
 {
   if ( user_can( 'manage_options' ) && !function_exists( 'register_field_group' ) ) {
@@ -146,15 +149,13 @@ class Palmate_Nav_Walker extends Walker_Nav_Menu {
   }
   
   function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) {
+    // Remove 'active' class from menues
+    unset($element->classes);
+
     // Only allow dropdown menu at depth 0
     $element->is_dropdown = !empty($children_elements[$element->ID]) && ($depth === 0);
-
     if ($element->is_dropdown) {
       $element->classes[] = 'dropdown';
-    }
-    // Remove 'active' class from sub menues
-    if ($depth > 0) {
-      unset($element->classes);
     }
 
     parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output);
