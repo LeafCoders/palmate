@@ -321,7 +321,7 @@ File.open('wordpress-content.xml', 'w') do |out|
     add(Page.new("barn", "Barn", "page-groups.php") \
       .add(Page.new("barn-babyrytmik", "Barn- och babyrytmik", "page-group.php")) \
       .add(Page.new("lofteslandet", "Löfteslandet", "page-group.php")) \
-      .add(Page.new("barnkoren-hogtryck", "Barnkören H&ouml;gtryck", "page-group.php")) \
+      .add(Page.new("barnkoren", "Barnkören", "page-group.php")) \
       .add(Page.new("scout", "Scout", "page-group.php")) \
       .add(Page.new("fritids", "Fritids", "page-group.php")) \
       .add(Page.new("lager", "Läger", "page-group.php")) \

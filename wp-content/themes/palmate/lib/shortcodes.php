@@ -5,7 +5,7 @@
  */
 function palmate_latestBlogPost_shortcode( $atts ) {
   $response = wp_remote_get( 'http://www.ryttargardskyrkan.se/blogg-post2.php' );
-  $text = '<div style="max-height: 300px; overflow: hidden;">';
+  $text = '<div style="max-height: 250px; overflow: hidden;">';
   if ( !is_wp_error( $response ) ) {
     $text .= utf8_encode( $response[body] );
   } else {
