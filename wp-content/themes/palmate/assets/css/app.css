@@ -110,7 +110,7 @@ body {
 }
 
 .mobileNav > li > a {
-  display: block; // Makes <a> detect click on the whole row
+  display: block; /* Makes <a> detect click on the whole row */
 }
 
 /* === Content  ============================================================= */
@@ -411,54 +411,94 @@ figure {
 
 /* === Calendar ============================================================= */
 
-.cal-week {
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+}
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap div {
+  float: left;
   width: 100%;
-  padding: 2px;
-  color: #000;
+  position: relative;
+}
+
+.cal-container {
+  margin: 0;
   background-image: url('../img/calendar-background.png');
 
+  color: #000;
   text-rendering: optimizelegibility;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Lato', arial;
   font-weight: 900;
   font-size: 14px;
   line-height: 14px;
 }
 
-.cal-week > p {
-  text-align: left;
-  padding: 4px 4px;
+.cal-container table {
+  min-width: 100%;
+}
+
+.cal-container td {
+  vertical-align: top;
+}
+
+.cal-week {
+  font-size: 18px;
+  line-height: 18px;
+  text-align: center;
+  padding: 6px 6px 0px 6px;
   color: #2A5F21;
   background-color: rgba(255,255,255,0.5);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#80ffffff',GradientType=0 );
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -o-border-radius: 3px;
-  -ms-border-radius: 3px;
+}
+
+.cal-week > small {
+  display: block;
+  font-size: 12px;
+}
+
+.cal-week-prev {
+  float: left;
+  margin: 6px;
+}
+
+.cal-week-next {
+  float: right;
+  margin: 6px;
+}
+
+.cal-divider {
+  height: 2px;
+  -moz-box-shadow:    0 5px 10px   0px #000 inset;
+  -webkit-box-shadow: 0 5px 10px   0px #000 inset;
+  -o-box-shadow:      0 5px 10px -10px #000 inset;
+  -ms-box-shadow:     0 5px 10px -10px #000 inset;
+	box-shadow:         0 5px 10px -10px #000 inset;
   behavior: url('/assets/css/PIE.htc');
 }
 
-.cal-week > p > small {
-  float: right;
-}
-
-.cal-day {
-  clear: both;
-  min-height: 70px;
-  border-bottom: 1px dashed #888;
-}
-
 .cal-date {
-  font-family: 'Lato', sans-serif;
+  width: 45px;
+	min-height: 80px;
+	height: 80px;
+}
+
+.cal-date > div {
   font-size: 18px;
   line-height: 18px;
   text-transform: uppercase;
   background-color: rgba(255,255,255,0.5);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#80ffffff',GradientType=0 );
   padding: 4px 4px;
+	margin: 2px 2px 4px 4px;
   color: #2A5F21;
   float: left;
-  width: 30px;
+  max-width: 30px;
+  min-width: 30px;
   display: inline;
   text-align: center;
 
@@ -475,7 +515,7 @@ figure {
   behavior: url('/assets/css/PIE.htc');
 }
 
-.cal-date > p {
+.cal-date > div > p {
   display: block;
   font-size: 10px;
   line-height: 10px;
@@ -484,43 +524,36 @@ figure {
   margin: 0px;
 }
 
-.cal-sunday {
+.cal-sunday > div {
   color: #a00;
 }
 
+.cal-time {
+  padding-top: 4px;
+	width: 47px;
+
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0px 0px 2px #555;
+  letter-spacing: 1px;
+}
+
 .cal-event {
+  padding-top: 4px;
   text-transform: uppercase;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #fff;
-  text-shadow: 0px 0px 1px #000;
+  text-shadow: 0px 0px 2px #555;
   letter-spacing: 1px;
-  margin-top: 5px;
-  margin-left: 40px;
-
-  width: 80%;
-}
-
-.cal-event > p {
-  margin: 0px;
-  margin-left: 5px;
-  float: left;
-  width: 50px;
 }
 
 .cal-desc {
-  text-rendering: optimizelegibility;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 18px;
   color: #000;
-  display: block;
-  margin-left: 95px;
-
-  width: 60%;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }
 
 
@@ -642,18 +675,22 @@ figure {
 /* === Person =============================================================== */
 
 .person {
-//  border: 1px solid rgba(0,0,0,0.2);
+/*
+  border: 1px solid rgba(0,0,0,0.2);
 
-//  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-//  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-//  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	*/
 }
 
 .person > img {
   float: left;
-//  display: block;
-//  margin-left: auto;
-//  margin-right: auto;
+/*
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+	*/
 }
 
 .person > h4 {

@@ -9,7 +9,7 @@ the_post();
 <div class="span12 paddingBoth">
   <?php 
     $cal = new CalendarRosette();
-    $cal->request( rosette_api_url( 'eventweek' ) );
+    $cal->request( 'http://www.ryttargardskyrkan.se/program/palmate.php' ); //rosette_api_url( 'eventweek' ) );
     echo $cal->output();
 
     echo '<em>From: ' . rosette_api_url( 'eventweek' ) . '</em>';
