@@ -452,8 +452,8 @@ figure {
   text-align: center;
   padding: 6px 6px 0px 6px;
   color: #2A5F21;
+	background-color: #eee; /* IE8 */
   background-color: rgba(255,255,255,0.5);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#80ffffff',GradientType=0 );
 }
 
 .cal-week > small {
@@ -491,8 +491,8 @@ figure {
   font-size: 18px;
   line-height: 18px;
   text-transform: uppercase;
+	background-color: #eee; /* IE8 */
   background-color: rgba(255,255,255,0.5);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#80ffffff',GradientType=0 );
   padding: 4px 4px;
 	margin: 2px 2px 4px 4px;
   color: #2A5F21;
@@ -502,17 +502,16 @@ figure {
   display: inline;
   text-align: center;
 
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -o-border-radius: 3px;
-  -ms-border-radius: 3px;
-  border-radius: 3px;
   -moz-box-shadow:    0 0 8px -3px #000;
   -webkit-box-shadow: 0 0 8px -3px #000;
   -o-box-shadow:      0 0 8px -3px #000;
   -ms-box-shadow:     0 0 8px -3px #000;
   box-shadow:         0 0 8px -3px #000;
-  behavior: url('/assets/css/PIE.htc');
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
 }
 
 .cal-date > div > p {
@@ -543,10 +542,10 @@ figure {
   text-transform: uppercase;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   color: #fff;
   text-shadow: 0px 0px 2px #555;
   letter-spacing: 1px;
+	max-width: 0px;
 }
 
 .cal-desc {

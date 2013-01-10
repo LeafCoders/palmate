@@ -47,22 +47,17 @@ function generate_palmate_calendar( $cal, $year, $week, $width ) {
 
 	$ws = new WeekStepper( $year, $week );
   $ws->prevWeek();
-  $output .= '<div>' . $cal->outputEmpty( $ws->year(), $ws->week() ) . '</div>';
-  $ws->nextWeek();
-  $output .= '<div>' . $cal->output() . '</div>';
-  $ws->nextWeek();
-  $output .= '<div>' . $cal->outputEmpty( $ws->year(), $ws->week() ) . '</div>';
-  $ws->nextWeek();
-  $output .= '<div>' . $cal->outputEmpty( $ws->year(), $ws->week() ) . '</div>';
-  $ws->nextWeek();
-  $output .= '<div>' . $cal->outputEmpty( $ws->year(), $ws->week() ) . '</div>';
+	for ($i = 0; $i < 6; $i++) {
+    $output .= '<div>' . $cal->outputEmpty( $ws->year(), $ws->week() ) . '</div>';
+    $ws->nextWeek();
+	}
 
   $output .= '      </div>';
   $output .= '    </div>';
   $output .= '  </div>';
   $output .= '</div>';
 
-  $output .= '<script>var elem = document.getElementById("mySwipe");window.mySwipe = new Swipe(elem, {startSlide: 1, continuous: false, callback: swipeCalendarCallback});</script>';
+  $output .= '<script>var elem = document.getElementById("mySwipe");window.mySwipe = new Swipe(elem, {startSlide: 0, continuous: false, callback: swipeCalendarCallback});window.mySwipe.slide(1);</script>';
 
   return $output;
 }
