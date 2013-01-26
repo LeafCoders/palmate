@@ -3,7 +3,8 @@
 Template Name: Framsidan
 */
 
-echo palmate_infobox_shortcode( '' );
+echo palmate_noticebox_shortcode( '' );
+
 the_post();
 
 echo '<div id="main" role="main">';

@@ -1,30 +1,30 @@
 <?php
 
 /**
- * Info box post type
+ * Notice box post type
  */
-function register_cpt_infobox() {
+function register_cpt_noticebox() {
 
   // Register the post type
   $labels = array( 
-    'name' => _x( 'Infoboxar', 'infobox' ),
-    'singular_name' => _x( 'Infobox', 'infobox' ),
-    'add_new' => _x( 'Skapa ny', 'infobox' ),
-    'add_new_item' => _x( 'Skapa ny infobox', 'infobox' ),
-    'edit_item' => _x( 'Redigera infobox', 'infobox' ),
-    'new_item' => _x( 'Ny infobox', 'infobox' ),
-    'view_item' => _x( 'Visa infobox', 'infobox' ),
-    'search_items' => _x( 'Sök infobox', 'infobox' ),
-    'not_found' => _x( 'Hittade inga infoboxar', 'infobox' ),
-    'not_found_in_trash' => _x( 'Hittade inga infoboxar i papperskorgen', 'infobox' ),
-    'parent_item_colon' => _x( 'Förälder:', 'infobox' ),
-    'menu_name' => _x( 'Infoboxar', 'infobox' ),
+    'name' => _x( 'Notisboxar', 'noticebox' ),
+    'singular_name' => _x( 'Notisbox', 'noticebox' ),
+    'add_new' => _x( 'Skapa ny', 'noticebox' ),
+    'add_new_item' => _x( 'Skapa ny notisbox', 'noticebox' ),
+    'edit_item' => _x( 'Redigera notisbox', 'noticebox' ),
+    'new_item' => _x( 'Ny notisbox', 'noticebox' ),
+    'view_item' => _x( 'Visa notisbox', 'noticebox' ),
+    'search_items' => _x( 'Sök notisbox', 'noticebox' ),
+    'not_found' => _x( 'Hittade inga notisboxar', 'noticebox' ),
+    'not_found_in_trash' => _x( 'Hittade inga notisboxar i papperskorgen', 'noticebox' ),
+    'parent_item_colon' => _x( 'Förälder:', 'noticebox' ),
+    'menu_name' => _x( 'Notisboxar', 'noticebox' ),
   );
 
   $args = array( 
     'labels' => $labels,
     'hierarchical' => false,
-    'description' => 'En infobox har en egen sida eller länkas mot en annan sida',
+    'description' => 'En notisbox har en egen sida eller länkas mot en annan sida',
     'supports' => array( 'title', 'editor', 'thumbnail' ),
     'public' => true,
     'show_ui' => true,
@@ -33,28 +33,28 @@ function register_cpt_infobox() {
     'publicly_queryable' => true,
     'exclude_from_search' => false,
     'has_archive' => false,
-    'query_var' => 'infobox',
+    'query_var' => 'noticebox',
     'can_export' => true,
-    'rewrite' => array( 'slug' => 'infobox', 'with_front' => FALSE ),
+    'rewrite' => array( 'slug' => 'notis', 'with_front' => FALSE ),
     'menu_icon' => admin_url( '/images/media-button-image.gif'),
     'capability_type' => 'page'
   );
-  register_post_type( 'infobox', $args );
+  register_post_type( 'noticebox', $args );
 
-  // Add special fields for Infobox settings
+  // Add special fields for Noticebox settings
   if (function_exists( "register_field_group" ) ) {
     register_field_group( array(
       'id' => '5053a3598e93e',
-      'title' => 'Inställningar Infobox',
+      'title' => 'Inställningar för notisboxen',
       'fields' => 
       array (
         0 => 
         array (
           'key' => 'field_5057889f06efc',
           'label' => 'Bild',
-          'name' => 'infobox_image',
+          'name' => 'noticebox_image',
           'type' => 'image',
-          'instructions' => 'Ange bild att visa i infoboxen. Storleken ska vara ca 600x300 pixlar.',
+          'instructions' => 'Ange bild att visa i notisboxen. Storleken ska vara 940x400 pixlar.',
           'required' => '0',
           'save_format' => 'url',
           'preview_size' => 'medium',
@@ -64,9 +64,9 @@ function register_cpt_infobox() {
         array (
           'key' => 'field_505786e9d26d5',
           'label' => 'Slutdatum',
-          'name' => 'infobox_enddate',
+          'name' => 'noticebox_enddate',
           'type' => 'date_picker',
-          'instructions' => 'Ange ett datum då infoboxen ska sluta att visas.',
+          'instructions' => 'Ange ett datum då notisboxen ska sluta att visas.',
           'required' => '1',
           'date_format' => 'yymmdd',
           'display_format' => 'yy-mm-dd',
@@ -76,9 +76,9 @@ function register_cpt_infobox() {
         array (
           'key' => 'field_50538ab1443fd',
           'label' => 'Länk',
-          'name' => 'infobox_link',
+          'name' => 'noticebox_link',
           'type' => 'text',
-          'instructions' => 'Ange en länk till en sida om du vill att den sidan ska visas då användaren trycker på infoboxen. Lämna den tom ifall du vill att denna post ska visas.',
+          'instructions' => 'Ange en länk till den sida som du vill ska visas då användaren trycker på notisboxen. Lämna den tom ifall du vill att texten i denna post ska visas istället.',
           'required' => '0',
           'default_value' => '',
           'formatting' => 'html',
@@ -93,7 +93,7 @@ function register_cpt_infobox() {
           array (
             'param' => 'post_type',
             'operator' => '==',
-            'value' => 'infobox',
+            'value' => 'noticebox',
             'order_no' => '0',
           ),
         ),
@@ -118,12 +118,12 @@ function register_cpt_infobox() {
     ));
   }
 }
-add_action( 'init', 'register_cpt_infobox' );
+add_action( 'init', 'register_cpt_noticebox' );
 
 
-function generateInfoboxes( $generator ) {
+function generateNoticeboxes( $generator ) {
     $args = array(
-      'post_type' => 'infobox',
+      'post_type' => 'noticebox',
       'post_status' => 'publish',
       'posts_per_page' => -1,
       'caller_get_posts'=> 1
@@ -132,15 +132,15 @@ function generateInfoboxes( $generator ) {
 
     if ( $query->have_posts() ) {
       $counter = 0;
-      $generator->elementBefore();
+      $generator->elementsBefore();
       while ( $query->have_posts() ) {
         $query->the_post();
         if ( $generator->verifyEndDate() ) {
-          $generator->elementInfobox( $counter );
+          $generator->elementNoticebox( $counter );
           $counter++;
         }
       }
-      $generator->elementAfter( $counter );
+      $generator->elementsAfter( $counter );
     }
     // Restore global post data stomped by the_post()
     wp_reset_query();
@@ -148,19 +148,19 @@ function generateInfoboxes( $generator ) {
     return $generator->output();
 }
 
-class PalmateInfobox
+class PalmateNoticebox
 {
   protected $html = '';
 
-  function elementBefore() {
+  function elementsBefore() {
     $this->html = '<ul>';
   }
 
-  function elementInfobox( $counter ) {
-    $this->html .= '<li>infobox</li>';
+  function elementNoticebox( $counter ) {
+    $this->html .= '<li>noticebox</li>';
   }
 
-  function elementAfter( $counter ) {
+  function elementsAfter( $counter ) {
     $this->html .= '</ul>';
   }
   
@@ -169,7 +169,7 @@ class PalmateInfobox
   }
 
   function verifyEndDate() {
-    $endDate = get_field( 'infobox_enddate' );
+    $endDate = get_field( 'noticebox_enddate' );
     $secondsBetween = strtotime( $endDate ) - time();
     if ( $secondsBetween < 0 ) {
       // Move to trash if end date has been passed
@@ -179,16 +179,16 @@ class PalmateInfobox
     return true;
   }
 
-  function infoboxHtml( $class ) {
-    $link = get_field( 'infobox_link' );
+  function noticeboxHtml( $class ) {
+    $link = get_field( 'noticebox_link' );
     if ( empty( $link ) ) {
       $link = get_permalink(get_the_ID());
     }
 
-    $imgUrl = get_field( 'infobox_image' );
+    $imgUrl = get_field( 'noticebox_image' );
     $textOverlay = '';
     if ( empty( $imgUrl ) ) {
-      $imgUrl = '../assets/img/infobox.png';
+      $imgUrl = '../assets/img/noticebox.png';
 //      $textOverlay = '<h2>' . the_title('','',false) . '</h2>';
     }
 
@@ -199,25 +199,25 @@ class PalmateInfobox
   }
 }
 
-class PalmateInfoboxCarousel extends PalmateInfobox
+class PalmateNoticeboxCarousel extends PalmateNoticebox
 {
   private $outBig = '';
   private $outGrid = '';
   
-  function elementBefore() {
-    $this->outBig =  '<div id="infoboxBigCarousel" class="carousel slide">';
+  function elementsBefore() {
+    $this->outBig =  '<div id="noticeboxBigCarousel" class="carousel slide">';
     $this->outBig .=   '<div class="carousel-inner">';
 
-    $this->outGrid =  '<div id="infoboxGridCarousel" class="carousel slide hidden-phone">';
+    $this->outGrid =  '<div id="noticeboxGridCarousel" class="carousel slide hidden-phone">';
     $this->outGrid .=   '<div class="carousel-inner">';
   }
 
-  function elementInfobox( $counter ) {
+  function elementNoticebox( $counter ) {
     $active = ( $counter === 0 ) ? ' active' : '';
 
     // Element for Big carousel
     self::startBig( $active );
-    $this->outBig .= parent::infoboxHtml( 'infobox infoboxBig' );
+    $this->outBig .= parent::noticeboxHtml( 'noticebox noticeboxBig' );
     self::endBig();
 
     // Element for Grid carousel
@@ -233,10 +233,10 @@ class PalmateInfoboxCarousel extends PalmateInfobox
       }
       self::startGridRow();
     }
-    $this->outGrid .= parent::infoboxHtml( 'infobox infoboxSmall span6' );
+    $this->outGrid .= parent::noticeboxHtml( 'noticebox noticeboxSmall span6' );
   }
 
-  function elementAfter( $counter ) {
+  function elementsAfter( $counter ) {
     // End Big carousel
     $this->outBig .= '</div>';
     $this->outBig .= '</div>';
@@ -256,7 +256,7 @@ class PalmateInfoboxCarousel extends PalmateInfobox
   function startBig( $active ) {
     $this->outBig .= '<div class="item' . $active . '">';
     $this->outBig .=   '<div class="heightContainer">';
-    $this->outBig .=     '<div class="infoboxHeight50p"></div>';
+    $this->outBig .=     '<div class="noticeboxHeight50p"></div>';
     $this->outBig .=     '<div class="heightItem">';
   }
 
@@ -265,13 +265,13 @@ class PalmateInfoboxCarousel extends PalmateInfobox
   }
 
   function startGrid( $active ) {
-    $this->outGrid .= '<div class="item infoboxGrid' . $active . '">';
+    $this->outGrid .= '<div class="item noticeboxGrid' . $active . '">';
   }
 
   function startGridRow() {
     $this->outGrid .= '<div class="row-fluid">';
     $this->outGrid .=   '<div class="heightContainer">';
-    $this->outGrid .=      '<div class="infoboxHeight25p"></div>';
+    $this->outGrid .=      '<div class="noticeboxHeight25p"></div>';
     $this->outGrid .=      '<div class="heightItem">';
   }
 
@@ -285,54 +285,67 @@ class PalmateInfoboxCarousel extends PalmateInfobox
 
   function output() {
     // Surround Big and Grid carousel with a row
-    $htmlTot  = '<div class="row-fluid infoboxContent">';
+    $htmlTot  = '<div class="row-fluid noticeboxContent">';
     $htmlTot .=    '<div class="span6">' . $this->outBig . '</div>';
     $htmlTot .=    '<div class="span6">' . $this->outGrid . '</div>';
     $htmlTot .= '</div>';
 
     // Start sliding carousels
-    $htmlTot .= '<script type="text/javascript">$(window).load(function() { $(\'#infoboxBigCarousel\').carousel( { interval: 4000 } ); $(\'#infoboxGridCarousel\').carousel( { interval: 6000 } ); })</script>';
+    $htmlTot .= '<script type="text/javascript">$(window).load(function() { $(\'#noticeboxBigCarousel\').carousel( { interval: 4000 } ); $(\'#noticeboxGridCarousel\').carousel( { interval: 6000 } ); })</script>';
     return $htmlTot;
   }
 }
 
-class PalmateInfoboxCarouselEasy extends PalmateInfobox
+class PalmateNoticeboxSwipe extends PalmateNoticebox
 {
-  private $outBig = '';
+  private $out = '';
 
-  function elementBefore() {
-    $this->out .= '<ul class="slides">';
+  function elementsBefore() {
+    $this->out .= '<div class="row-fluid">';
+    $this->out .= '  <div class="span12">';
+    $this->out .= '    <div class="contentBox marginBoth" style="padding-bottom: 0px;">';
+    $this->out .= '		   <div id="noticeboxSwipe" class="swipe">';
+    $this->out .= '		     <div class="swipe-wrap">';
   }
 
-  function elementInfobox( $counter ) {
-    $this->out .= '<li>' . parent::infoboxHtml( '' ) . '</li>';
+  function elementNoticebox( $counter ) {
+    $this->out .= '<div>' . parent::noticeboxHtml( 'noticebox' ) . '</div>';
   }
 
-  function elementAfter( $counter ) {
-    $this->out .= '</ul>';
+  function elementsAfter( $counter ) {
+    $this->out .= '        </div>';
+    $this->out .= '	     </div>';
+    $this->out .= '    </div>';
+    $this->out .= '  </div>';
+    $this->out .= '</div>';
+    $this->out .= '<div class="row-fluid">';
+    $this->out .= '  <div class="span12">';
+    $this->out .= '    <div class="noticeboxNav">';
+    $this->out .= '		   <ul class="marginBoth">';
+
+    // Add bullets for each noticebox. Set first one to class="on"
+		$onClass = ' class="on"';
+		for ($i = 0; $i < $counter; $i++) {
+			$this->out .= '<li><a' . $onClass . ' href="#" onclick="noticeboxSwipe.slide(' . $i . ');return false;"></a></li>';
+			$onClass = '';
+		}
+
+    $this->out .= '		   </ul>';
+    $this->out .= '    </div>';
+    $this->out .= '  </div>';
+    $this->out .= '</div>';
+    $this->out .= '<script type="text/javascript">var noticeboxSwipe = new Swipe(document.getElementById("noticeboxSwipe"), { auto: 8000, callback: function(pos, e) { var i = bullets.length; while (i--) { bullets[i].className = " "; } bullets[pos].className = "on";} }), bullets = $(".noticeboxNav > ul > li > a");</script>';
   }
 
   function output() {
-    $htmlTot  = '<div class="row-fluid">';
-    $htmlTot .= '  <div class="span12">';
-    $htmlTot .= '    <div class="marginBoth">';
-    $htmlTot .= '      <div class="flexslider">';
-    $htmlTot .= $this->out;
-    $htmlTot .= '      </div>';
-    $htmlTot .= '    </div>';
-    $htmlTot .= '  </div>';
-    $htmlTot .= '</div>';
-
-    // Start sliding carousel
-    $htmlTot .= '<script type="text/javascript" charset="utf-8">$(window).load(function() { $(".flexslider").flexslider({ pauseOnAction: true, animation: "slide", itemWidth: 320, itemMargin: 4, minItems: 1, maxItems: 3 }); });</script>';
-    return $htmlTot;
+    return $this->out;
   }
 }
 
 /**
- * Info box shortcode [infobox]
+ * Notice box shortcode [noticebox]
  */
-function palmate_infobox_shortcode( $atts ) {
-  return generateInfoboxes(new PalmateInfoboxCarouselEasy());
+function palmate_noticebox_shortcode( $atts ) {
+  return generateNoticeboxes(new PalmateNoticeboxSwipe());
 }
-add_shortcode( 'infobox', 'palmate_infobox_shortcode' );  
+add_shortcode( 'noticebox', 'palmate_noticebox_shortcode' );  

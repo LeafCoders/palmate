@@ -17,7 +17,8 @@ body {
 
 @media (max-width: 767px) {
   .header-image {
-    margin-top: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding-left: 10px;
     padding-right: 60px;
   }
@@ -34,8 +35,8 @@ body {
 .navbar .nav > li > a {
   text-transform: uppercase;
   font-size: 13px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 13px;
+  padding-right: 13px;
 }
 
 #mobileMenuToggle {
@@ -79,7 +80,6 @@ body {
   -ms-box-shadow:     0 0 10px #222;
   box-shadow:         0 0 10px #222;
   behavior: url('/assets/css/PIE.htc');
-  
 }
 
 .mobileMenuHeader {
@@ -132,6 +132,7 @@ h1, h2, h3, h4 {
 h1 {
   font-size: 32px;
   line-height: 32px;
+	padding-top: 10px;
 }
 
 h2 {
@@ -147,12 +148,6 @@ h3 {
 h4 {
   font-size: 14px;
   line-height: 14px;
-}
-
-h1:after {
-  content: "TESTVERSION";
-  color: #f00;
-  font-size: 10px;
 }
 
 .contentBox {
@@ -347,6 +342,23 @@ h1:after {
     margin-left: 10px;
     margin-right: 10px;
   }
+}
+
+.smallBox {
+  width: 45%;
+  margin: 0 0 10px 0;
+  padding: 0 0;
+	border: 4px solid #fff;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	box-shadow: 0 1px 4px rgba(0,0,0,.2);
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+	-o-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+	zoom: 1;
+	behavior: url('/assets/css/PIE.htc');
 }
 
 /* === Image positioning ==================================================== */
@@ -576,30 +588,78 @@ figure {
 */
 
 /* ==========================================================================
-   Infobox
+   Noticebox
    ========================================================================== */
+
+
+#noticeboxSwipe {
+  background-color: #fff;
+  margin: 4px;
+  border-radius: 4px;
+}
+	 
+.noticebox > img {
+  width: 100%;
+}
+
+.noticeboxNav {
+  width: 100%;
+	text-align: center;
+	margin-top: -3px;
+}
+.noticeboxNav li {
+  margin: 0 6px;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+}
+.noticeboxNav li a {
+  width: 11px;
+	height: 11px;
+	display: block;
+	background: #666;
+	background: rgba(0,0,0,0.1);
+	cursor: pointer;
+	text-indent: -9999px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-o-border-radius: 20px;
+	border-radius: 20px;
+	box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+	behavior: url('/assets/css/PIE.htc');
+}
+.noticeboxNav li a:hover {
+  background: #333;
+	background: rgba(0,0,0,0.7);
+}
+.noticeboxNav li a.on {
+  background: #000;
+	background: rgba(0,0,0,0.5);
+	cursor: default;
+}
+
 /*
-.infoboxContent {
+.noticeboxContent {
   padding-top: 20px;
   padding-bottom: 0px;
   margin-bottom: -20px;
 }
 
-.infoboxHeight25p {
+.noticeboxHeight25p {
   padding-top: 25%;
 }
 
-.infoboxHeight50p {
+.noticeboxHeight50p {
   padding-top: 50%;
 }
 
-.infobox {
+.noticebox {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-.infobox > img:hover {
+.noticebox > img:hover {
   -moz-transition:    box-shadow 0.5s;
   -webkit-transition: box-shadow 0.5s;
   -o-transition:      box-shadow 0.5s;
@@ -614,21 +674,21 @@ figure {
   behavior: url('/assets/css/PIE.htc');
 }
 
-.infoboxBig > img {
+.noticeboxBig > img {
   margin-top: 3px;
   margin-left: 20px;
   width: 90%;
   height: 90%;
 }
 
-.infoboxSmall > img {
+.noticeboxSmall > img {
   margin-top: 3px;
   margin-left: 15px;
   width: 85%;
   height: 80%;
 }
 
-.infobox > h2 {
+.noticebox > h2 {
   position: relative;
   left: 0px;
   color: #fff;
@@ -640,32 +700,32 @@ figure {
   white-space: nowrap;
 }
 
-.infoboxBig > h2 {
+.noticeboxBig > h2 {
   bottom: 60px;
   padding-left: 35px;
   font-size: 26px;
 }
 
-.infoboxSmall > h2 {
+.noticeboxSmall > h2 {
   bottom: 50px;
   padding-left: 30px;
   font-size: 16px;
 }
 
 @media (max-width: 767px) {
-  .infoboxBig > img {
+  .noticeboxBig > img {
     display: block;
     margin-top: 0px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .infoboxBig > h2 {
+  .noticeboxBig > h2 {
     left: 15%;
     width: 60%;
   }
 
-  .infoboxHeight65p {
+  .noticeboxHeight65p {
     padding-top: 45%;
   }
 }

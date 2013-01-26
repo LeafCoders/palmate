@@ -18,7 +18,7 @@ require_once locate_template('/lib/post-types.php');      // Custom post types
 require_once locate_template('/lib/metaboxes.php');       // Custom metaboxes
 require_once locate_template('/lib/custom.php');          // Custom functions
 
-require_once locate_template('/lib/infobox.php');                // Info box custom post type
+require_once locate_template('/lib/noticebox.php');              // Notice box custom post type
 require_once locate_template('/lib/calendar-old-format.php');    // Old format calendar request and output
 require_once locate_template('/lib/calendar-rosette.php');       // Rosette calendar request and output
 require_once locate_template('/lib/person.php');                 // Person shortcode

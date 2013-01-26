@@ -7,7 +7,7 @@
       </header>
       <div class="entry-content row-fluid">
         <div class="span6"><?php the_content(); ?></div>
-        <div class="span6"><img class="img-polaroid" src="<?php echo get_field( 'infobox_image' ); ?>" alt="infobox" /></div>
+        <div class="span6"><img class="img-polaroid" src="<?php echo get_field( 'noticebox_image' ); ?>" alt="notis" /></div>
       </div>
     </div>
   </div>

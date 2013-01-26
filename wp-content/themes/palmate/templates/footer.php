@@ -1,6 +1,11 @@
 <footer id="content-info" class="container" role="contentinfo">
-  <?php dynamic_sidebar('sidebar-footer'); ?>
-  <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?></p>
+  <div class="row-fluid hidden-phone">
+    <div class="span12">
+	    <div class="marginBoth" style="color: #888;">
+				Logga in: <a style="color: #888;" href="http://www.ryttargardskyrkan.se/admin">Sidor</a> | <a style="color: #888;" href="http://backend.ryttargardskyrkan.se/administrator">Event</a>
+			</div>
+    </div>
+  </div>
 </footer>
 
 <?php wp_footer(); ?>

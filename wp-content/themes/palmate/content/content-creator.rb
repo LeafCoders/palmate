@@ -374,23 +374,21 @@ File.open('wordpress-content.xml', 'w') do |out|
     add(MenuTop.new($menu_desktop, "moten", "Möten", "/#moten")). \
     add(MenuTop.new($menu_desktop, "undervisning", "Undervisning", "/#undervisning")). \
     add(MenuTop.new($menu_desktop, "verksamhet", "Verksamhet", "/#verksamhet")). \
-    add(MenuTop.new($menu_desktop, "mission", "Mission", "/mission")). \
-    add(MenuTop.new($menu_desktop, "konferens", "Konferens", "/konferens")). \
+    add(MenuTop.new($menu_desktop, "mission", "Mission", "/#mission")). \
+    add(MenuTop.new($menu_desktop, "konferens", "Konferens", "/#konferens")). \
     add(MenuTop.new($menu_desktop, "ryttargarden", "Ryttargården", "/#ryttargarden")). \
     add(MenuTop.new($menu_desktop, "forsamlingen", "Församlingen", "/#forsamlingen")). \
     add(MenuTop.new($menu_desktop, "kontakt", "Kontakt", "/#kontakt")). \
 
     # Menu for mobile devices
-    add(MenuTop.new($menu_mobile, "kalender", "Kalender", "/#kalender")). \
     add(MenuTop.new($menu_mobile, "moten", "Möten", "/#moten")). \
     add(MenuTop.new($menu_mobile, "undervisning", "Undervisning", "/#undervisning")). \
     add(MenuTop.new($menu_mobile, "verksamhet", "Verksamhet", "/#verksamhet")). \
-    add(MenuTop.new($menu_mobile, "mission", "Mission", "/mission")). \
-    add(MenuTop.new($menu_mobile, "konferens", "Konferens", "/konferens")). \
+    add(MenuTop.new($menu_mobile, "mission", "Mission", "/#mission")). \
+    add(MenuTop.new($menu_mobile, "konferens", "Konferens", "/#konferens")). \
     add(MenuTop.new($menu_mobile, "ryttargarden", "Ryttargården", "/#ryttargarden")). \
     add(MenuTop.new($menu_mobile, "forsamlingen", "Församlingen", "/#forsamlingen")). \
     add(MenuTop.new($menu_mobile, "kontakt", "Kontakt", "/#kontakt"))
-
 
   out.puts($doc_start)
   container.write(out)
