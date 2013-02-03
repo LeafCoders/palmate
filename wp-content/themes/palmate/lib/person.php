@@ -37,9 +37,15 @@ function register_cpt_personnel() {
     'can_export' => true,
     'rewrite' => array( 'slug' => 'personnel', 'with_front' => FALSE ),
     'menu_icon' => admin_url( '/images/media-button-other.gif'),
-    'capability_type' => 'page'
+    'capability_type' => 'personnel'
   );
   register_post_type( 'personnel', $args );
+
+  global $wp_roles;
+  $wp_roles->add_cap( 'administrator', 'edit_personnel' );
+  $wp_roles->add_cap( 'administrator', 'edit_personnels' );
+  $wp_roles->add_cap( 'administrator', 'delete_personnel' );
+  $wp_roles->add_cap( 'administrator', 'publish_personnels' );
 
   if (function_exists( "register_field_group" ) ) {
   	register_field_group(array (
@@ -156,15 +162,16 @@ function palmate_personnel_shortcode( $atts ) {
     'posts_per_page' => -1,
     'caller_get_posts'=> 1
   );
-  $query = new WP_Query($args);
+  $personell_query = null;
+  $personell_query = new WP_Query($args);
 
   $text = '';
-  while ( $query->have_posts() ) {
-    $query->the_post();
+  while ( $personell_query->have_posts() ) {
+    $personell_query->the_post();
 
     $imgUrl = get_field( 'image' );
     if ( empty( $imgUrl ) ) {
-      $imgUrl = '/assets/img/person_unknown.png';
+      $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
     }
 
     // Add unvisible text in email address to trick the boots
@@ -174,7 +181,7 @@ function palmate_personnel_shortcode( $atts ) {
     }
     $text .= '<div class="row-fluid marginBottom">';
     $text .= '  <div class="span3">';
-    $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" />';
+    $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
     $text .= '  </div>';
     $text .= '  <div class="span9">';
     $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
@@ -191,6 +198,7 @@ function palmate_personnel_shortcode( $atts ) {
     $text .= '</div>';
     $text .= '<div class="dividerHor marginBottom visible-phone"></div>';
   }
+  wp_reset_query();
   return $text;
 }
 add_shortcode( 'Personal', 'palmate_personnel_shortcode' );  
@@ -233,9 +241,15 @@ function register_cpt_churchleader() {
     'can_export' => true,
     'rewrite' => array( 'slug' => 'churchleader', 'with_front' => FALSE ),
     'menu_icon' => admin_url( '/images/media-button-other.gif'),
-    'capability_type' => 'page'
+    'capability_type' => 'churchleader'
   );
   register_post_type( 'churchleader', $args );
+
+  global $wp_roles;
+  $wp_roles->add_cap( 'administrator', 'edit_churchleader' );
+  $wp_roles->add_cap( 'administrator', 'edit_churchleaders' );
+  $wp_roles->add_cap( 'administrator', 'delete_churchleader' );
+  $wp_roles->add_cap( 'administrator', 'publish_churchleaders' );
 
   if (function_exists( "register_field_group" ) ) {
   	register_field_group(array (
@@ -316,20 +330,21 @@ function palmate_churchleader_shortcode( $atts ) {
     'posts_per_page' => -1,
     'caller_get_posts'=> 1
   );
-  $query = new WP_Query($args);
+  $churchleader_query = null;
+  $churchleader_query = new WP_Query($args);
 
   $text = '';
-  while ( $query->have_posts() ) {
-    $query->the_post();
+  while ( $churchleader_query->have_posts() ) {
+    $churchleader_query->the_post();
 
     $imgUrl = get_field( 'image' );
     if ( empty( $imgUrl ) ) {
-      $imgUrl = '/assets/img/person_unknown.png';
+      $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
     }
 
     $text .= '<div class="row-fluid marginBottom">';
     $text .= '  <div class="span3">';
-    $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" />';
+    $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
     $text .= '  </div>';
     $text .= '  <div class="span9">';
     $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
@@ -337,6 +352,7 @@ function palmate_churchleader_shortcode( $atts ) {
     $text .= '</div>';
     $text .= '<div class="dividerHor marginBottom visible-phone"></div>';
   }
+  wp_reset_query();
   return $text;
 }
 add_shortcode( 'Församlingsledare', 'palmate_churchleader_shortcode' );  
@@ -379,9 +395,15 @@ function register_cpt_boardleader() {
     'can_export' => true,
     'rewrite' => array( 'slug' => 'boardleader', 'with_front' => FALSE ),
     'menu_icon' => admin_url( '/images/media-button-other.gif'),
-    'capability_type' => 'page'
+    'capability_type' => 'boardleader'
   );
   register_post_type( 'boardleader', $args );
+
+  global $wp_roles;
+  $wp_roles->add_cap( 'administrator', 'edit_boardleader' );
+  $wp_roles->add_cap( 'administrator', 'edit_boardleaders' );
+  $wp_roles->add_cap( 'administrator', 'delete_boardleader' );
+  $wp_roles->add_cap( 'administrator', 'publish_boardleaders' );
 
   if (function_exists( "register_field_group" ) ) {
   	register_field_group(array (
@@ -462,20 +484,21 @@ function palmate_boardleader_shortcode( $atts ) {
     'posts_per_page' => -1,
     'caller_get_posts' => 1
   );
-  $query = new WP_Query($args);
+  $boardleader_query = null;
+  $boardleader_query = new WP_Query($args);
 
   $text = '';
-  while ( $query->have_posts() ) {
-    $query->the_post();
+  while ( $boardleader_query->have_posts() ) {
+    $boardleader_query->the_post();
 
     $imgUrl = get_field( 'image' );
     if ( empty( $imgUrl ) ) {
-      $imgUrl = '/assets/img/person_unknown.png';
+      $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
     }
 
     $text .= '<div class="row-fluid marginBottom">';
     $text .= '  <div class="span3">';
-    $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" />';
+    $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
     $text .= '  </div>';
     $text .= '  <div class="span9">';
     $text .= '    <h3>' . the_title( '', '', false ) . '</h3>';
@@ -484,6 +507,7 @@ function palmate_boardleader_shortcode( $atts ) {
     $text .= '</div>';
     $text .= '<div class="dividerHor marginBottom visible-phone"></div>';
   }
+  wp_reset_query();
   return $text;
 }
 add_shortcode( 'Rådsordföranden', 'palmate_boardleader_shortcode' );  

@@ -37,9 +37,15 @@ function register_cpt_noticebox() {
     'can_export' => true,
     'rewrite' => array( 'slug' => 'notis', 'with_front' => FALSE ),
     'menu_icon' => admin_url( '/images/media-button-image.gif'),
-    'capability_type' => 'page'
+    'capability_type' => 'noticebox'
   );
   register_post_type( 'noticebox', $args );
+
+  global $wp_roles;
+  $wp_roles->add_cap( 'administrator', 'edit_noticebox' );
+  $wp_roles->add_cap( 'administrator', 'edit_noticeboxs' );
+  $wp_roles->add_cap( 'administrator', 'delete_noticebox' );
+  $wp_roles->add_cap( 'administrator', 'publish_noticeboxs' );
 
   // Add special fields for Noticebox settings
   if (function_exists( "register_field_group" ) ) {

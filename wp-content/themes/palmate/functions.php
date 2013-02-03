@@ -25,6 +25,7 @@ require_once locate_template('/lib/person.php');                 // Person short
 require_once locate_template('/lib/shortcodes.php');             // Some shortcodes
 
 require_once locate_template('/admin/palmate-admin-option.php'); // Options for Palmate Admin
+require_once locate_template('/admin/palmate-edit-cap.php');     // Edit capabilities
 
 
 function roots_setup() {
