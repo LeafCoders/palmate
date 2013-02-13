@@ -48,106 +48,95 @@ function register_cpt_personnel() {
   $wp_roles->add_cap( 'administrator', 'publish_personnels' );
 
   if (function_exists( "register_field_group" ) ) {
-  	register_field_group(array (
-  		'id' => '5083049be407a',
-  		'title' => 'Personal',
-  		'fields' => 
-  		array (
-  			0 => 
-  			array (
-  				'label' => 'Namn',
-  				'name' => 'name',
-  				'type' => 'text',
-  				'instructions' => 'Personens förnamn och efternamn. Samma som anges i titelraden.',
-  				'required' => '1',
-  				'default_value' => '',
-  				'formatting' => 'none',
-  				'key' => 'field_50830489c715b',
-  				'order_no' => '0',
-  			),
-  			1 => 
-  			array (
-  				'label' => 'E-post',
-  				'name' => 'email',
-  				'type' => 'text',
-  				'instructions' => 'E-postadress till personen',
-  				'required' => '0',
-  				'default_value' => '',
-  				'formatting' => 'none',
-  				'key' => 'field_50830489c8302',
-  				'order_no' => '1',
-  			),
-  			2 => 
-  			array (
-  				'label' => 'Telefonnummer',
-  				'name' => 'phone',
-  				'type' => 'text',
-  				'instructions' => 'Telefonnummer till personen',
-  				'required' => '0',
-  				'default_value' => '',
-  				'formatting' => 'none',
-  				'key' => 'field_50830489c783d',
-  				'order_no' => '2',
-  			),
-  			3 => 
-  			array (
-  				'label' => 'Beskrivning',
-  				'name' => 'description',
-  				'type' => 'text',
-  				'instructions' => 'T.ex. "Pastor" eller "Receptionist"',
-  				'required' => '0',
-  				'default_value' => '',
-  				'formatting' => 'none',
-  				'key' => 'field_50830489c870c',
-  				'order_no' => '3',
-  			),
-  			4 => 
-  			array (
-  				'label' => 'Bild',
-  				'name' => 'image',
-  				'type' => 'image',
-  				'instructions' => 'Bild i storleken 100x150',
-  				'required' => '0',
-  				'save_format' => 'url',
-  				'preview_size' => 'full',
-  				'key' => 'field_50830489cc8b3',
-  				'order_no' => '4',
-  			),
-  		),
-  		'location' => 
-  		array (
-  			'rules' => 
-  			array (
-  				0 => 
-  				array (
-  					'param' => 'post_type',
-  					'operator' => '==',
-  					'value' => 'personnel',
-  					'order_no' => '0',
-  				),
-  			),
-  			'allorany' => 'all',
-  		),
-  		'options' => 
-  		array (
-  			'position' => 'normal',
-  			'layout' => 'no_box',
-  			'hide_on_screen' => 
-  			array (
-  				0 => 'the_content',
-  				1 => 'excerpt',
-  				2 => 'custom_fields',
-  				3 => 'discussion',
-  				4 => 'comments',
-  				5 => 'revisions',
-  				6 => 'slug',
-  				7 => 'author',
-  				8 => 'format',
-  				9 => 'featured_image'
-  			),
-  		),
-  		'menu_order' => 0,
-  	));
+    register_field_group(array (
+      'id' => '5083049be407a',
+      'title' => 'Personal',
+      'fields' => array (
+        0 => array (
+          'label' => 'Namn',
+          'name' => 'name',
+          'type' => 'text',
+          'instructions' => 'Personens förnamn och efternamn. Samma som anges i titelraden.',
+          'required' => '1',
+          'default_value' => '',
+          'formatting' => 'none',
+          'key' => 'field_50830489c715b',
+          'order_no' => '0',
+        ),
+        1 => array (
+          'label' => 'E-post',
+          'name' => 'email',
+          'type' => 'text',
+          'instructions' => 'E-postadress till personen',
+          'required' => '0',
+          'default_value' => '',
+          'formatting' => 'none',
+          'key' => 'field_50830489c8302',
+          'order_no' => '1',
+        ),
+        2 => array (
+          'label' => 'Telefonnummer',
+          'name' => 'phone',
+          'type' => 'text',
+          'instructions' => 'Telefonnummer till personen',
+          'required' => '0',
+          'default_value' => '',
+          'formatting' => 'none',
+          'key' => 'field_50830489c783d',
+          'order_no' => '2',
+        ),
+        3 => array (
+          'label' => 'Beskrivning',
+          'name' => 'description',
+          'type' => 'text',
+          'instructions' => 'T.ex. "Pastor" eller "Receptionist"',
+          'required' => '0',
+          'default_value' => '',
+          'formatting' => 'none',
+          'key' => 'field_50830489c870c',
+          'order_no' => '3',
+        ),
+        4 => array (
+          'label' => 'Bild',
+          'name' => 'image',
+          'type' => 'image',
+          'instructions' => 'Bild i storleken 100x150',
+          'required' => '0',
+          'save_format' => 'url',
+          'preview_size' => 'full',
+          'key' => 'field_50830489cc8b3',
+          'order_no' => '4',
+        ),
+      ),
+      'location' => array (
+        'rules' => array (
+          0 => array (
+            'param' => 'post_type',
+            'operator' => '==',
+            'value' => 'personnel',
+            'order_no' => '0',
+          ),
+        ),
+        'allorany' => 'all',
+      ),
+      'options' => array (
+        'position' => 'normal',
+        'layout' => 'no_box',
+        'hide_on_screen' => array (
+          0 => 'the_content',
+          1 => 'excerpt',
+          2 => 'custom_fields',
+          3 => 'discussion',
+          4 => 'comments',
+          5 => 'revisions',
+          6 => 'slug',
+          7 => 'author',
+          8 => 'format',
+          9 => 'featured_image'
+        ),
+      ),
+      'menu_order' => 0,
+    ));
   }
 }
 add_action( 'init', 'register_cpt_personnel' );
@@ -162,12 +151,12 @@ function palmate_personnel_shortcode( $atts ) {
     'posts_per_page' => -1,
     'caller_get_posts'=> 1
   );
-  $personell_query = null;
-  $personell_query = new WP_Query($args);
+  $personnel_query = null;
+  $personnel_query = new WP_Query($args);
 
   $text = '';
-  while ( $personell_query->have_posts() ) {
-    $personell_query->the_post();
+  while ( $personnel_query->have_posts() ) {
+    $personnel_query->the_post();
 
     $imgUrl = get_field( 'image' );
     if ( empty( $imgUrl ) ) {
@@ -252,70 +241,62 @@ function register_cpt_churchleader() {
   $wp_roles->add_cap( 'administrator', 'publish_churchleaders' );
 
   if (function_exists( "register_field_group" ) ) {
-  	register_field_group(array (
-  		'id' => '508304907abe4',
-  		'title' => 'Församlingsledare',
-  		'fields' => 
-  		array (
-  			0 => 
-  			array (
-  				'label' => 'Namn',
-  				'name' => 'name',
-  				'type' => 'text',
-  				'instructions' => 'Församlingsledarens förnamn och efternamn. Samma som anges i titelraden.',
-  				'required' => '1',
-  				'default_value' => '',
-  				'formatting' => 'none',
-  				'key' => 'field_508304815b9c7',
-  				'order_no' => '0',
-  			),
-  			1 => 
-  			array (
-  				'label' => 'Bild',
-  				'name' => 'image',
-  				'type' => 'image',
-  				'instructions' => 'Bild i storleken 100x150',
-  				'required' => '0',
-  				'save_format' => 'url',
-  				'preview_size' => 'full',
-  				'key' => 'field_50830488b39cc',
-  				'order_no' => '4',
-  			),
-  		),
-  		'location' => 
-  		array (
-  			'rules' => 
-  			array (
-  				0 => 
-  				array (
-  					'param' => 'post_type',
-  					'operator' => '==',
-  					'value' => 'churchleader',
-  					'order_no' => '0',
-  				),
-  			),
-  			'allorany' => 'all',
-  		),
-  		'options' => 
-  		array (
-  			'position' => 'normal',
-  			'layout' => 'no_box',
-  			'hide_on_screen' => 
-  			array (
-  				0 => 'the_content',
-  				1 => 'excerpt',
-  				2 => 'custom_fields',
-  				3 => 'discussion',
-  				4 => 'comments',
-  				5 => 'revisions',
-  				6 => 'slug',
-  				7 => 'author',
-  				8 => 'format',
-  				9 => 'featured_image'
-  			),
-  		),
-  		'menu_order' => 0,
-  	));
+    register_field_group(array (
+      'id' => '508304907abe4',
+      'title' => 'Församlingsledare',
+      'fields' => array (
+        0 => array (
+          'label' => 'Namn',
+          'name' => 'name',
+          'type' => 'text',
+          'instructions' => 'Församlingsledarens förnamn och efternamn. Samma som anges i titelraden.',
+          'required' => '1',
+          'default_value' => '',
+          'formatting' => 'none',
+          'key' => 'field_508304815b9c7',
+          'order_no' => '0',
+        ),
+        1 => array (
+          'label' => 'Bild',
+          'name' => 'image',
+          'type' => 'image',
+          'instructions' => 'Bild i storleken 100x150',
+          'required' => '0',
+          'save_format' => 'url',
+          'preview_size' => 'full',
+          'key' => 'field_50830488b39cc',
+          'order_no' => '4',
+        ),
+      ),
+      'location' => array (
+        'rules' => array (
+          0 => array (
+            'param' => 'post_type',
+            'operator' => '==',
+            'value' => 'churchleader',
+            'order_no' => '0',
+          ),
+        ),
+        'allorany' => 'all',
+      ),
+      'options' => array (
+        'position' => 'normal',
+        'layout' => 'no_box',
+        'hide_on_screen' => array (
+          0 => 'the_content',
+          1 => 'excerpt',
+          2 => 'custom_fields',
+          3 => 'discussion',
+          4 => 'comments',
+          5 => 'revisions',
+          6 => 'slug',
+          7 => 'author',
+          8 => 'format',
+          9 => 'featured_image'
+        ),
+      ),
+      'menu_order' => 0,
+    ));
   }
 }
 add_action( 'init', 'register_cpt_churchleader' );
@@ -406,70 +387,62 @@ function register_cpt_boardleader() {
   $wp_roles->add_cap( 'administrator', 'publish_boardleaders' );
 
   if (function_exists( "register_field_group" ) ) {
-  	register_field_group(array (
-  		'id' => '5083049abe407',
-  		'title' => 'Rådsordförande',
-  		'fields' => 
-  		array (
-  			0 => 
-  			array (
-  				'label' => 'Namn',
-  				'name' => 'name',
-  				'type' => 'text',
-  				'instructions' => 'Rådsordförarens förnamn och efternamn. Ange rådets namn i titelraden.',
-  				'required' => '1',
-  				'default_value' => '',
-  				'formatting' => 'none',
-  				'key' => 'field_5083048b9c715',
-  				'order_no' => '0',
-  			),
-  			1 => 
-  			array (
-  				'label' => 'Bild',
-  				'name' => 'image',
-  				'type' => 'image',
-  				'instructions' => 'Bild i storleken 100x150',
-  				'required' => '0',
-  				'save_format' => 'url',
-  				'preview_size' => 'full',
-  				'key' => 'field_508304839cc8b',
-  				'order_no' => '1',
-  			),
-  		),
-  		'location' => 
-  		array (
-  			'rules' => 
-  			array (
-  				0 => 
-  				array (
-  					'param' => 'post_type',
-  					'operator' => '==',
-  					'value' => 'boardleader',
-  					'order_no' => '0',
-  				),
-  			),
-  			'allorany' => 'all',
-  		),
-  		'options' => 
-  		array (
-  			'position' => 'normal',
-  			'layout' => 'no_box',
-  			'hide_on_screen' => 
-  			array (
-  				0 => 'the_content',
-  				1 => 'excerpt',
-  				2 => 'custom_fields',
-  				3 => 'discussion',
-  				4 => 'comments',
-  				5 => 'revisions',
-  				6 => 'slug',
-  				7 => 'author',
-  				8 => 'format',
-  				9 => 'featured_image'
-  			),
-  		),
-  		'menu_order' => 0,
-  	));
+    register_field_group(array (
+      'id' => '5083049abe407',
+      'title' => 'Rådsordförande',
+      'fields' => array (
+        0 => array (
+          'label' => 'Namn',
+          'name' => 'name',
+          'type' => 'text',
+          'instructions' => 'Rådsordförarens förnamn och efternamn. Ange rådets namn i titelraden.',
+          'required' => '1',
+          'default_value' => '',
+          'formatting' => 'none',
+          'key' => 'field_5083048b9c715',
+          'order_no' => '0',
+        ),
+        1 => array (
+          'label' => 'Bild',
+          'name' => 'image',
+          'type' => 'image',
+          'instructions' => 'Bild i storleken 100x150',
+          'required' => '0',
+          'save_format' => 'url',
+          'preview_size' => 'full',
+          'key' => 'field_508304839cc8b',
+          'order_no' => '1',
+        ),
+      ),
+      'location' => array (
+        'rules' => array (
+          0 => array (
+            'param' => 'post_type',
+            'operator' => '==',
+            'value' => 'boardleader',
+            'order_no' => '0',
+          ),
+        ),
+        'allorany' => 'all',
+      ),
+      'options' => array (
+        'position' => 'normal',
+        'layout' => 'no_box',
+        'hide_on_screen' => array (
+          0 => 'the_content',
+          1 => 'excerpt',
+          2 => 'custom_fields',
+          3 => 'discussion',
+          4 => 'comments',
+          5 => 'revisions',
+          6 => 'slug',
+          7 => 'author',
+          8 => 'format',
+          9 => 'featured_image'
+        ),
+      ),
+      'menu_order' => 0,
+    ));
   }
 }
 add_action( 'init', 'register_cpt_boardleader' );

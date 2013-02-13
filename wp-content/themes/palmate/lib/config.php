@@ -9,7 +9,7 @@ add_theme_support('bootstrap-top-navbar');  // Enable Bootstrap's fixed navbar
 
 $get_theme_name = explode('/themes/', get_template_directory());
 define('GOOGLE_ANALYTICS_ID',       ''); // UA-XXXXX-Y
-define('POST_EXCERPT_LENGTH',       40);
+define('POST_EXCERPT_LENGTH',       20);
 define('WP_BASE',                   wp_base_dir());
 define('THEME_NAME',                next($get_theme_name));
 define('RELATIVE_PLUGIN_PATH',      str_replace(site_url() . '/', '', plugins_url()));

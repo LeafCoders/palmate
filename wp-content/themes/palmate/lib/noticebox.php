@@ -310,8 +310,8 @@ class PalmateNoticeboxSwipe extends PalmateNoticebox
     $this->out .= '<div class="row-fluid">';
     $this->out .= '  <div class="span12">';
     $this->out .= '    <div class="contentBox marginBoth" style="padding-bottom: 0px;">';
-    $this->out .= '		   <div id="noticeboxSwipe" class="swipe">';
-    $this->out .= '		     <div class="swipe-wrap">';
+    $this->out .= '      <div id="noticeboxSwipe" class="swipe">';
+    $this->out .= '        <div class="swipe-wrap">';
   }
 
   function elementNoticebox( $counter ) {
@@ -330,11 +330,11 @@ class PalmateNoticeboxSwipe extends PalmateNoticebox
     $this->out .= '		   <ul class="marginBoth">';
 
     // Add bullets for each noticebox. Set first one to class="on"
-		$onClass = ' class="on"';
-		for ($i = 0; $i < $counter; $i++) {
-			$this->out .= '<li><a' . $onClass . ' href="#" onclick="noticeboxSwipe.slide(' . $i . ');return false;"></a></li>';
-			$onClass = '';
-		}
+    $onClass = ' class="on"';
+    for ($i = 0; $i < $counter; $i++) {
+      $this->out .= '<li><a' . $onClass . ' href="#" onclick="noticeboxSwipe.slide(' . $i . ');return false;"></a></li>';
+      $onClass = '';
+    }
 
     $this->out .= '		   </ul>';
     $this->out .= '    </div>';

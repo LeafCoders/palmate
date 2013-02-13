@@ -5,7 +5,7 @@
     </div>
   </div>
 </div>
-<?php if (get_the_content() !== "") : ?>
+<?php if (mb_strlen(get_the_content()) > 20) : ?>
 <div class="row-fluid">
   <div class="span12">
     <div class="contentBox marginMoveUp marginBoth paddingBoth">

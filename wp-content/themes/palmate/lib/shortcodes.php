@@ -205,11 +205,11 @@ add_shortcode( 'FileDownload', 'palmate_fileDownload_shortcode' );
  *   <p>Title|Content|Link</p>
  */
 function palmate_list_shortcode( $atts, $content ) {
-  $content = strip_tags($content, '<p><img><b><i><ul><ol><li>');
+  $content = strip_tags($content, '<p><img><b><i><ul><ol><li><a>');
   $text = '';
   $count = preg_match_all('/<p[^>]*>(.*?)<\/p>/is', $content, $matches);
   for ($i = 0; $i < $count; ++$i) {
-    $row = strip_tags($matches[0][$i], '<img><b><i><ul><ol><li>');
+    $row = strip_tags($matches[0][$i], '<img><b><i><ul><ol><li><a>');
     $items = explode('|', $row);
     $itemcount = count($items);
     if ($itemcount > 1) {
