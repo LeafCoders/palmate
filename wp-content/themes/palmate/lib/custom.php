@@ -73,13 +73,12 @@ add_filter('wp_nav_menu_args', 'palmate_nav_menu_args');
 /**
  * Remove visual editor for pages. The visual editor does cleanups that removes valid html5 elements
  */
-function palmate_page_can_richedit( $can ) {
-    global $post;
+function palmate_page_can_richedit($can) {
+  global $post;
+  if ('page' == $post->post_type)
+    return false;
 
-    if ( 'page' == $post->post_type )
-        return false;
-
-    return $can;
+  return $can;
 }
 add_filter( 'user_can_richedit', 'palmate_page_can_richedit' );
 
