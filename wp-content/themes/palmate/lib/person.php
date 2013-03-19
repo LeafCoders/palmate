@@ -165,8 +165,8 @@ function palmate_personnel_shortcode( $atts ) {
 
     // Add unvisible text in email address to trick the boots
     $email = get_field( 'email' );
-    if ( strpos( $email, '@ryttargardskyrkan.se' ) != false ) {
-      $email = str_replace( '@ryttargardskyrkan.se', '<i style="display: none;">.felaktig</i>@ryttargardskyrkan.se', get_field( 'email' ) );
+    if ( strpos( $email, EMAIL_DOMAIN ) != false ) {
+      $email = str_replace( EMAIL_DOMAIN, '<i style="display: none;">.felaktig</i>' . EMAIL_DOMAIN, get_field( 'email' ) );
     }
     $text .= '<div class="row-fluid marginBottom">';
     $text .= '  <div class="span3">';

@@ -167,7 +167,11 @@ function palmate_get_the_news_content_small() {
  * Get image for the active news post
  */
 function palmate_get_the_news_image() {
-  return wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium')[0];
+  $img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium');
+  if (is_array($img)) {
+    return $img[0];
+  }
+  return '';
 }
 
 /**

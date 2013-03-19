@@ -1,24 +1,5 @@
 <?php
 
-/**
- * Latest blog post shortcode [LatestBlogPost]
- */
-function palmate_latestBlogPost_shortcode( $atts ) {
-  $response = wp_remote_get( 'http://backend.ryttargardskyrkan.se/blogg-post2.php' );
-  $text = '<div style="max-height: 300px; overflow: hidden;">';
-  if ( !is_wp_error( $response ) ) {
-    $text .= utf8_encode( $response[body] );
-  } else {
-    $text .= 'Kunde inte hitta bloggen.';
-  }
-  $text .= '</div>';
-  $text .= '<a href="http://blogg.ryttargardskyrkan.se/"><p>Mer på bloggen<span class="readMore"></span></p></a>';
-
-  return $text;
-}
-add_shortcode( 'LatestBlogPost', 'palmate_latestBlogPost_shortcode' );
-
-
 class WeekStepper
 {
   protected $date = null;
@@ -72,9 +53,9 @@ function generate_palmate_calendar_request( $year, $week ) {
   $fromOldCalendar = true;
   if ( $fromOldCalendar ) {
     if (empty($week)) {
-      $cal->request( 'http://backend.ryttargardskyrkan.se/program/palmate.php' );
+      $cal->request( rosette_api_url('palmate.php') );
     } else {
-      $cal->request( 'http://backend.ryttargardskyrkan.se/program/palmate.php?year=' . $year . '&week=' . $week );
+      $cal->request( rosette_api_url('palmate.php') . '?year=' . $year . '&week=' . $week );
     }
   }
   else {

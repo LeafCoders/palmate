@@ -27,16 +27,16 @@ $doc_start = <<END_OF_STRING
 >
 
 <channel>
-	<title>Ryttargårdskyrkan</title>
+	<title>Site title</title>
 	<link>http://localhost:8888</link>
-	<description>Ryttargårdskyrkan</description>
+	<description>Site description</description>
 	<pubDate>Sun, 12 Aug 2012 17:00:00 +0000</pubDate>
 	<language>sv-SE</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>http://localhost:8888</wp:base_site_url>
 	<wp:base_blog_url>http://localhost:8888</wp:base_blog_url>
 
-	<wp:author><wp:author_id>1</wp:author_id><wp:author_login>admin</wp:author_login><wp:author_email>admin@ebilen.se</wp:author_email><wp:author_display_name><![CDATA[admin]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
+	<wp:author><wp:author_id>1</wp:author_id><wp:author_login>admin</wp:author_login><wp:author_email>admin@admin.se</wp:author_email><wp:author_display_name><![CDATA[admin]]></wp:author_display_name><wp:author_first_name><![CDATA[]]></wp:author_first_name><wp:author_last_name><![CDATA[]]></wp:author_last_name></wp:author>
 	<wp:term><wp:term_id>9</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug>desktopMenu</wp:term_slug><wp:term_name><![CDATA[Meny för desktop]]></wp:term_name></wp:term>
 	<wp:term><wp:term_id>10</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug>mobileMenu</wp:term_slug><wp:term_name><![CDATA[Meny för mobil enhet]]></wp:term_name></wp:term>
 
@@ -303,92 +303,24 @@ File.open('wordpress-content.xml', 'w') do |out|
   container = Container.new(). \
     # Home
     add(HomePage.new()). \
-    # Möten
-    add(Page.new("moten", "Möten", "page-groups.php") \
-      .add(Page.new("gudstjanst", "Gudstjänst", "page-group.php")) \
-      .add(Page.new("pa-arabiska", "På arabiska", "page-group.php")) \
-      .add(Page.new("cellgrupp", "Cellgrupp", "page-group.php")) \
-      .add(Page.new("bon", "Bön", "page-group.php")) \
+    # Page1
+    add(Page.new("page1", "Page 1", "page-groups.php") \
+      .add(Page.new("page1a", "Part A", "page-group.php")) \
+      .add(Page.new("page1b", "Part B", "page-group.php")) \
     ). \
-    # Undervisning
-    add(Page.new("undervisning", "Undervisning", "page-groups.php") \
-      .add(Page.new("predikningar", "Predikningar", "page-group.php")) \
-      .add(Page.new("alpha", "Alpha", "page-group.php")) \
-      .add(Page.new("steg-in-i-forsamling", "Steg in i forsamling", "page-group.php")) \
-      .add(Page.new("aktenskapskurs", "Äktenskapskurs", "page-group.php")) \
+    # Page2
+    add(Page.new("page2", "Page 2", "page-groups.php") \
+      .add(Page.new("page2a", "Part A", "page-group.php")) \
     ). \
-    # Barn
-    add(Page.new("barn", "Barn", "page-groups.php") \
-      .add(Page.new("barn-babyrytmik", "Barn- och babyrytmik", "page-group.php")) \
-      .add(Page.new("lofteslandet", "Löfteslandet", "page-group.php")) \
-      .add(Page.new("barnkoren", "Barnkören", "page-group.php")) \
-      .add(Page.new("scout", "Scout", "page-group.php")) \
-      .add(Page.new("fritids", "Fritids", "page-group.php")) \
-      .add(Page.new("lager", "Läger", "page-group.php")) \
-    ). \
-    # Ungdom
-    add(Page.new("ungdom", "Ungdom", "page-groups.php") \
-      .add(Page.new("enter", "Enter", "page-group.php")) \
-      .add(Page.new("konfa", "Konfa", "page-group.php")) \
-      .add(Page.new("teenstreet", "TeenStreet", "page-group.php")) \
-    ). \
-    # Pensionär
-    add(Page.new("pensionar", "Pensionär", "page-groups.php") \
-      .add(Page.new("rpg65plus", "RPG 65+", "page-group.php")) \
-    ). \
-    # Musik
-    add(Page.new("musik", "Musik", "page-groups.php") \
-      .add(Page.new("vox-deo", "Vox Deo", "page-group.php")) \
-      .add(Page.new("brasset", "Brasset", "page-group.php")) \
-    ). \
-    # Mission
-    add(Page.new("mission", "Mission", "page-groups.php") \
-      .add(Page.new("missionsradet", "Missionsrådet", "page-group.php")) \
-      .add(Page.new("missionsstipendium", "Missionsstipendium", "page-group.php")) \
-    ). \
-    # Konferens
-    add(Page.new("konferens", "Konferens", "page-groups.php") \
-      .add(Page.new("lokaler", "Lokaler", "page-group.php")) \
-    ). \
-    # Ryttargården
-    add(Page.new("ryttargarden", "Ryttargården", "page-group.php")). \
-    # Församlingen
-    add(Page.new("forsamlingen", "Församlingen", "page-groups.php") \
-      .add(Page.new("om-forsamlingen", "Om församlingen", "page-group.php")) \
-      .add(Page.new("personal", "Personal", "page-group.php")) \
-      .add(Page.new("forsamlingsledningen", "Församlingsledningen", "page-group.php")) \
-      .add(Page.new("visionen", "Visionen", "page-group.php")) \
-      .add(Page.new("medlemskap", "Medlemskap", "page-group.php")) \
-      .add(Page.new("historik", "Historik", "page-group.php")) \
-    ). \
-    # Församlingen internt
-    add(Page.new("forsamlingen-internt", "Församlingen internt", "page-groups.php") \
-      .add(Page.new("ljus-och-bild", "Ljus och Bild", "page-group.php")) \
-      .add(Page.new("epostlistor", "Epostlistor", "page-group.php")) \
-      .add(Page.new("websidan", "Websidan", "page-group.php")) \
-    ). \
-    # Kalender
-    add(Page.new("kalender", "Kalender", "page-calendar-rosette.php")). \
 
     # Menu for desktops
-    add(MenuTop.new($menu_desktop, "moten", "Möten", "/#moten")). \
-    add(MenuTop.new($menu_desktop, "undervisning", "Undervisning", "/#undervisning")). \
-    add(MenuTop.new($menu_desktop, "verksamhet", "Verksamhet", "/#verksamhet")). \
-    add(MenuTop.new($menu_desktop, "mission", "Mission", "/#mission")). \
-    add(MenuTop.new($menu_desktop, "konferens", "Konferens", "/#konferens")). \
-    add(MenuTop.new($menu_desktop, "ryttargarden", "Ryttargården", "/#ryttargarden")). \
-    add(MenuTop.new($menu_desktop, "forsamlingen", "Församlingen", "/#forsamlingen")). \
-    add(MenuTop.new($menu_desktop, "kontakt", "Kontakt", "/#kontakt")). \
+    add(MenuTop.new($menu_desktop, "page1", "Page 1", "/page1")). \
+    add(MenuTop.new($menu_desktop, "page1a", "Part 1A", "/page1/#part1a")). \
+    add(MenuTop.new($menu_desktop, "page1b", "Part 1B", "/page1/#part1b")). \
 
     # Menu for mobile devices
-    add(MenuTop.new($menu_mobile, "moten", "Möten", "/#moten")). \
-    add(MenuTop.new($menu_mobile, "undervisning", "Undervisning", "/#undervisning")). \
-    add(MenuTop.new($menu_mobile, "verksamhet", "Verksamhet", "/#verksamhet")). \
-    add(MenuTop.new($menu_mobile, "mission", "Mission", "/#mission")). \
-    add(MenuTop.new($menu_mobile, "konferens", "Konferens", "/#konferens")). \
-    add(MenuTop.new($menu_mobile, "ryttargarden", "Ryttargården", "/#ryttargarden")). \
-    add(MenuTop.new($menu_mobile, "forsamlingen", "Församlingen", "/#forsamlingen")). \
-    add(MenuTop.new($menu_mobile, "kontakt", "Kontakt", "/#kontakt"))
+    add(MenuTop.new($menu_desktop, "page1", "Page 1", "/page1")). \
+    add(MenuTop.new($menu_desktop, "page2", "Page 2", "/page2"))
 
   out.puts($doc_start)
   container.write(out)

@@ -340,7 +340,7 @@ class PalmateNoticeboxSwipe extends PalmateNoticebox
     $this->out .= '    </div>';
     $this->out .= '  </div>';
     $this->out .= '</div>';
-    $this->out .= '<script type="text/javascript">var noticeboxSwipe = new Swipe(document.getElementById("noticeboxSwipe"), { auto: 8000, callback: function(pos, e) { var i = bullets.length; while (i--) { bullets[i].className = " "; } bullets[pos].className = "on";} }), bullets = $(".noticeboxNav > ul > li > a");</script>';
+    $this->out .= '<script type="text/javascript">var noticeboxSwipe = new Swipe(document.getElementById("noticeboxSwipe"), { auto: 12000, callback: function(pos, e) { var i = bullets.length; while (i--) { bullets[i].className = " "; } bullets[pos].className = "on";} }), bullets = $(".noticeboxNav > ul > li > a");</script>';
   }
 
   function output() {
