@@ -10,16 +10,16 @@ class CalendarRosette
     $response = wp_remote_get( $url );
     if ( !is_wp_error( $response ) ) {
 //      $this->calData = json_decode( $response[body], true );
-			$text = str_replace( 'week":01', 'week":1', $response[body]);
-			$text = str_replace( 'week":02', 'week":2', $text);
-			$text = str_replace( 'week":03', 'week":3', $text);
-			$text = str_replace( 'week":04', 'week":4', $text);
-			$text = str_replace( 'week":05', 'week":5', $text);
-			$text = str_replace( 'week":06', 'week":6', $text);
-			$text = str_replace( 'week":07', 'week":7', $text);
-			$text = str_replace( 'week":08', 'week":8', $text);
-			$text = str_replace( 'week":09', 'week":9', $text);
-			$this->calData = json_decode( $text, true );
+      $text = str_replace( 'week":01', 'week":1', $response[body]);
+      $text = str_replace( 'week":02', 'week":2', $text);
+      $text = str_replace( 'week":03', 'week":3', $text);
+      $text = str_replace( 'week":04', 'week":4', $text);
+      $text = str_replace( 'week":05', 'week":5', $text);
+      $text = str_replace( 'week":06', 'week":6', $text);
+      $text = str_replace( 'week":07', 'week":7', $text);
+      $text = str_replace( 'week":08', 'week":8', $text);
+      $text = str_replace( 'week":09', 'week":9', $text);
+      $this->calData = json_decode( $text, true );
     }
 	}
 
@@ -33,20 +33,24 @@ class CalendarRosette
 
   function outputHeader() {
     if ( !empty( $this->calData ) ) {
-			return '<div class="cal-week">Vecka ' . $this->calData[week] . ', ' . self::eventYear( $this->calData ) . '<small>' . self::eventMonths( $this->calData ) . '</small></div>';
+      return '<div class="cal-week">Vecka ' . $this->calData[week] . ', ' . self::eventYear( $this->calData ) . '<small>' . self::eventMonths( $this->calData ) . '</small></div>';
     }
     return '<div></div>';
   }
 
   function outputEmpty( $year, $week ) {
-    return '<div data-year="' . $year . '" data-months="..." data-week="' . $week . '"><table><tbody><tr><td></td></tr></tbody></table></div>';
+    return '<div data-year="' . $year . '" data-months="..." data-week="' . $week . '"><table><tbody><tr><td><div class="progress progress-striped active"><div class="bar bar-success" style="width: 100%;">Hämtar kalender</div></div></td></tr></tbody></table></div>';
+  }
+
+  function outputFull( $year, $week ) {
+    return '<div data-hascontent="yes" data-year="' . $year . '" data-months="' . self::eventMonths($this->calData) . '" data-week="' . $week . '">' . self::output() .	'</div>';
   }
 
 /* ------ Data functions ------------------------------------------------------ */
 
   protected function eventYear( $week ) {
     $dateTime = new DateTime( $week[since] );
-		$dateTime->modify( '+3 days' );  /* Forth day sets the week number */
+    $dateTime->modify( '+3 days' );  /* Forth day sets the week number */
     return date_i18n( 'Y', $dateTime->getTimeStamp() );
   }
 
@@ -81,7 +85,7 @@ class CalendarRosette
 /* ------ Format functions ---------------------------------------------------- */
 
   protected function week( &$output, $week ) {
-    $output .= '<div data-year="' . self::eventYear( $week ) . '" data-months="' . self::eventMonths( $week ) . '" data-week="' . $week[week] . '"><table><tbody>';
+    $output .= '<div data-hascontent="yes" data-year="' . self::eventYear( $week ) . '" data-months="' . self::eventMonths( $week ) . '" data-week="' . $week[week] . '"><table><tbody>';
 
     // Iterate through all days
     foreach ( $week[days] as $day ) {
@@ -93,36 +97,40 @@ class CalendarRosette
 
   protected function day( &$output, $day ) {
     // Iterate through all events
-		$rows = 0;
-		$eventsOutput = '';
+    $rows = 0;
+    $eventsOutput = '';
     foreach ( $day[events] as $event ) {
       $rows += self::event( $eventsOutput, $event );
     }
-		$rows = max( $rows, 1 );
+    $rows = max( $rows, 1 );
 
     $sunday = ( $day[dayNumber] == 7 ) ? ' cal-sunday' : '';
 
     $output .= '<tr><td colspan="3" class="cal-divider"></td></tr>';
     $output .= '<tr>';
-		$output .= '<td rowspan="' . $rows . '" class="cal-date' . $sunday . '">';
+    $output .= '<td rowspan="' . $rows . '" class="cal-date' . $sunday . '">';
     $output .= '<div>' . self::eventDay( $day ) . '<p>' . self::eventWeekDay( $day ) . '</p></div>';
     $output .= '</td>';
     $output .= $eventsOutput;
-		$output .= '</tr>';
+    $output .= '</tr>';
   }
 
   protected function event( &$output, $event ) {
+    $theme = $event[tema];
     $description = $event[description];
 
     if ( !empty( $output ) ) {
-			$output .= '<tr>';
-		}
-    $output .= '<td class="cal-time">' . self::eventTime( $event ) . '</td><td class="cal-event">' . self::eventTitle( $event ) . '</td></tr>';
-    if ( !empty( $description ) ) {
-      $output .= '<tr><td></td><td class="cal-desc">' . $description . '</td></tr>';
-			return 2;
+      $output .= '<tr>';
     }
-		return 1;
+    $output .= '<td class="cal-time">' . self::eventTime( $event ) . '</td><td class="cal-event">' . self::eventTitle( $event ) . '</td></tr>';
+    if ( !empty( $theme ) || !empty( $description ) ) {
+      if ( !empty( $theme ) ) {
+        $theme = 'Tema: ' . $theme . '<br/>';
+      }
+      $output .= '<tr><td></td><td class="cal-desc">' . $theme . $description . '</td></tr>';
+      return 2;
+    }
+    return 1;
   }
 }
 

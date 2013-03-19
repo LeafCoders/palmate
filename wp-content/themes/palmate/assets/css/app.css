@@ -2,7 +2,7 @@
 
 body {
   background-color: #ddd;
-  background-image: url('../img/furley_bg.png');
+  background-image: url('../img/furley_bg.jpg');
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -132,12 +132,13 @@ h1, h2, h3, h4 {
 h1 {
   font-size: 32px;
   line-height: 32px;
-	padding-top: 10px;
+  padding-top: 6px;
 }
 
 h2 {
   font-size: 20px;
   line-height: 20px;
+  padding-top: 6px;
 }
 
 h3 {
@@ -168,8 +169,16 @@ h4 {
   overflow: hidden;
 }
 
-.contentBox a:hover {
-  text-decoration: none;
+.contentBox a {
+  color: #693;
+}
+
+.hideHref a {
+  color: #000;
+}
+
+.hideHref a:hover {
+  color: #693;
 }
 
 .contentBox dt {
@@ -183,9 +192,9 @@ h4 {
 }
 
 .contentGroupHeader > h1 {
-  padding-top: 20px;
+  padding-top: 65px;
   font-size: 64px;
-  line-height: 54px;
+  line-height: 64px;
   color: #fff;
   text-shadow: 0px 0px 10px #000;
 }
@@ -235,14 +244,17 @@ h4 {
 }
 
 .fileDownload {
-  margin: 0 2px;
+  margin: 2px 2px;
   padding: 2px 4px;
   background-color: #eee;
   border: 1px solid #ddd;
+	display: inline-block;
 }
 
 .fileDownload:hover {
   border: 1px solid #777;
+  color: #000;
+	text-decoration: none;
 }
 
 @media (max-width: 767px) {
@@ -271,8 +283,9 @@ h4 {
   }
 
   .contentGroupHeader > h1 {
-    font-size: 30px;
-    line-height: 30px;
+    padding-top: 45px;
+    font-size: 36px;
+    line-height: 36px;
   }
 }
 
@@ -397,29 +410,6 @@ figure {
     margin: auto;
   }
 }
-
-/*
-.maximg {
-  padding: 0px 10px 30px 10px;
-}
-
-.maximg > img {
-  display: block;
-  max-width: 100%;
-  width:100%;
-  height:auto;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media (max-width: 767px) {
-  .maximg > img {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: auto;
-  }
-}
-*/
 
 /* === Calendar ============================================================= */
 
@@ -567,189 +557,78 @@ figure {
   color: #000;
 }
 
-
-/* ==========================================================================
-   Height control. Set height to be percent of width
-   ========================================================================== */
-/*
-.heightContainer {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-}
-
-.heightItem {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-*/
-
-/* ==========================================================================
-   Noticebox
-   ========================================================================== */
-
+/* === Noticebox ============================================================ */
 
 #noticeboxSwipe {
   background-color: #fff;
   margin: 4px;
   border-radius: 4px;
 }
-	 
+
 .noticebox > img {
   width: 100%;
 }
 
 .noticeboxNav {
   width: 100%;
-	text-align: center;
-	margin-top: -3px;
+  text-align: center;
+  margin-top: -3px;
 }
 .noticeboxNav li {
   margin: 0 6px;
-	display: inline-block;
-	zoom: 1;
-	*display: inline;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
 }
 .noticeboxNav li a {
   width: 11px;
-	height: 11px;
-	display: block;
-	background: #666;
-	background: rgba(0,0,0,0.1);
-	cursor: pointer;
-	text-indent: -9999px;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	-o-border-radius: 20px;
-	border-radius: 20px;
-	box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
-	behavior: url('/assets/css/PIE.htc');
+  height: 11px;
+  display: block;
+  background: #666;
+  background: rgba(0,0,0,0.1);
+  cursor: pointer;
+  text-indent: -9999px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+  behavior: url('/assets/css/PIE.htc');
 }
 .noticeboxNav li a:hover {
   background: #333;
-	background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.7);
 }
 .noticeboxNav li a.on {
   background: #000;
-	background: rgba(0,0,0,0.5);
-	cursor: default;
+  background: rgba(0,0,0,0.5);
+  cursor: default;
 }
 
-/*
-.noticeboxContent {
-  padding-top: 20px;
-  padding-bottom: 0px;
-  margin-bottom: -20px;
+/* === News =============================================================== */
+
+.newsMeta {
+  line-height: 7px;
+  font-size: 11px;
+  color: #999;
 }
 
-.noticeboxHeight25p {
-  padding-top: 25%;
-}
-
-.noticeboxHeight50p {
-  padding-top: 50%;
-}
-
-.noticebox {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.noticebox > img:hover {
-  -moz-transition:    box-shadow 0.5s;
-  -webkit-transition: box-shadow 0.5s;
-  -o-transition:      box-shadow 0.5s;
-  -ms-transition:     box-shadow 0.5s;
-  transition:         box-shadow 0.5s;
-
-  -moz-box-shadow:    0px 0px 10px 0px #73b532;
-  -webkit-box-shadow: 0px 0px 10px 0px #73b532;
-  -o-box-shadow:      0px 0px 10px 0px #73b532;
-  -ms-box-shadow:     0px 0px 10px 0px #73b532;
-  box-shadow:         0px 0px 10px 0px #73b532;
-  behavior: url('/assets/css/PIE.htc');
-}
-
-.noticeboxBig > img {
-  margin-top: 3px;
-  margin-left: 20px;
-  width: 90%;
-  height: 90%;
-}
-
-.noticeboxSmall > img {
-  margin-top: 3px;
-  margin-left: 15px;
-  width: 85%;
-  height: 80%;
-}
-
-.noticebox > h2 {
-  position: relative;
-  left: 0px;
-  color: #fff;
-  text-rendering: optimizelegibility;
-  font-family: 'Lato', sans-serif;
-  text-transform: uppercase;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.noticeboxBig > h2 {
-  bottom: 60px;
-  padding-left: 35px;
-  font-size: 26px;
-}
-
-.noticeboxSmall > h2 {
-  bottom: 50px;
-  padding-left: 30px;
-  font-size: 16px;
+.newsImg {
+  max-height: 100px;
+  padding: 10px 0 20px 0;
 }
 
 @media (max-width: 767px) {
-  .noticeboxBig > img {
-    display: block;
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .noticeboxBig > h2 {
-    left: 15%;
-    width: 60%;
-  }
-
-  .noticeboxHeight65p {
-    padding-top: 45%;
+  .newsImg {
+    max-height: 100px;
+    padding: 5px 0 0 0;
   }
 }
-*/
 
 /* === Person =============================================================== */
 
-.person {
-/*
-  border: 1px solid rgba(0,0,0,0.2);
-
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	*/
-}
-
 .person > img {
   float: left;
-/*
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-	*/
 }
 
 .person > h4 {
@@ -761,20 +640,6 @@ figure {
   padding-left: 150px;
   line-height: 14px;
 }
-
-/*
-.person-mail:before {
-  content: "E-POST";
-  display: block;
-  font-size: 12px;
-}
-
-.person-tele:before {
-  content: "TELE";
-  display: block;
-  font-size: 12px;
-}
-*/
 
 /* === Footer =============================================================== */
 

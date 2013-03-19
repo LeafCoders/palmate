@@ -3,7 +3,7 @@
 Template Name: Framsidan
 */
 
-echo palmate_noticebox_shortcode( '' );
+echo palmate_noticebox_shortcode();
 
 the_post();
 

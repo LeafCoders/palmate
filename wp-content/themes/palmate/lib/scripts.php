@@ -17,10 +17,7 @@
 
 function roots_scripts() {
   wp_enqueue_style('roots_bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', false, null);
-//  wp_enqueue_style('roots_bootstrap_responsive', get_template_directory_uri() . '/assets/css/bootstrap-responsive.css', array('roots_bootstrap'), null);
   wp_enqueue_style('roots_app', get_template_directory_uri() . '/assets/css/app.css', false, null);
-//  wp_enqueue_style('roots_bootstrap-nav-style', get_template_directory_uri() . '/assets/css/bootstrap-nav-style.css', false, null);
-  wp_enqueue_style('flexslider', get_template_directory_uri() . '/assets/css/flexslider.css', false, null);
 
   // Load style.css from child theme
   if (is_child_theme()) {

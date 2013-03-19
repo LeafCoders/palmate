@@ -37,9 +37,15 @@ function register_cpt_noticebox() {
     'can_export' => true,
     'rewrite' => array( 'slug' => 'notis', 'with_front' => FALSE ),
     'menu_icon' => admin_url( '/images/media-button-image.gif'),
-    'capability_type' => 'page'
+    'capability_type' => 'noticebox'
   );
   register_post_type( 'noticebox', $args );
+
+  global $wp_roles;
+  $wp_roles->add_cap( 'administrator', 'edit_noticebox' );
+  $wp_roles->add_cap( 'administrator', 'edit_noticeboxs' );
+  $wp_roles->add_cap( 'administrator', 'delete_noticebox' );
+  $wp_roles->add_cap( 'administrator', 'publish_noticeboxs' );
 
   // Add special fields for Noticebox settings
   if (function_exists( "register_field_group" ) ) {
@@ -304,8 +310,8 @@ class PalmateNoticeboxSwipe extends PalmateNoticebox
     $this->out .= '<div class="row-fluid">';
     $this->out .= '  <div class="span12">';
     $this->out .= '    <div class="contentBox marginBoth" style="padding-bottom: 0px;">';
-    $this->out .= '		   <div id="noticeboxSwipe" class="swipe">';
-    $this->out .= '		     <div class="swipe-wrap">';
+    $this->out .= '      <div id="noticeboxSwipe" class="swipe">';
+    $this->out .= '        <div class="swipe-wrap">';
   }
 
   function elementNoticebox( $counter ) {
@@ -324,17 +330,17 @@ class PalmateNoticeboxSwipe extends PalmateNoticebox
     $this->out .= '		   <ul class="marginBoth">';
 
     // Add bullets for each noticebox. Set first one to class="on"
-		$onClass = ' class="on"';
-		for ($i = 0; $i < $counter; $i++) {
-			$this->out .= '<li><a' . $onClass . ' href="#" onclick="noticeboxSwipe.slide(' . $i . ');return false;"></a></li>';
-			$onClass = '';
-		}
+    $onClass = ' class="on"';
+    for ($i = 0; $i < $counter; $i++) {
+      $this->out .= '<li><a' . $onClass . ' href="#" onclick="noticeboxSwipe.slide(' . $i . ');return false;"></a></li>';
+      $onClass = '';
+    }
 
     $this->out .= '		   </ul>';
     $this->out .= '    </div>';
     $this->out .= '  </div>';
     $this->out .= '</div>';
-    $this->out .= '<script type="text/javascript">var noticeboxSwipe = new Swipe(document.getElementById("noticeboxSwipe"), { auto: 8000, callback: function(pos, e) { var i = bullets.length; while (i--) { bullets[i].className = " "; } bullets[pos].className = "on";} }), bullets = $(".noticeboxNav > ul > li > a");</script>';
+    $this->out .= '<script type="text/javascript">var noticeboxSwipe = new Swipe(document.getElementById("noticeboxSwipe"), { auto: 12000, callback: function(pos, e) { var i = bullets.length; while (i--) { bullets[i].className = " "; } bullets[pos].className = "on";} }), bullets = $(".noticeboxNav > ul > li > a");</script>';
   }
 
   function output() {

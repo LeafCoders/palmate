@@ -4,7 +4,7 @@
       <br class="hidden-phone">
       <div class="row-fluid">
         <div class="span12">
-          <img src="<?php get_template_directory_uri() ?>/assets/img/logga-ryttargardskyrkan-hd.png" />
+          <img src="<?php get_template_directory_uri() ?>/assets/img/header-logo.png" />
         </div>
       </div>
       <br class="hidden-phone">
@@ -15,7 +15,7 @@
     <nav onclick="$('#mobileMenu').toggle(false);">
       <div class="mobileMenuHeader">
         <a href="/#">
-          <img src="<?php get_template_directory_uri() ?>/assets/img/logga-ryttargardskyrkan-hd.png" />
+          <img src="<?php get_template_directory_uri() ?>/assets/img/header-logo.png" />
         </a>
       </div>
       <?php wp_nav_menu(array('theme_location' => 'mobile_navigation', 'menu_class' => 'mobileNav')); ?>
