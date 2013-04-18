@@ -66,7 +66,13 @@ function register_newsgroup_taxonomies() {
   register_taxonomy('newsgroup', 'news', array(
     'hierarchical' => true,
     'labels' => $labels,
-    'rewrite' => array( 'slug' => 'gruppnyheter', 'with_front' => false )
+    'rewrite' => array( 'slug' => 'gruppnyheter', 'with_front' => false ),
+    'capabilities' => array (
+      'manage_terms' => 'edit_news',
+      'edit_terms' => 'edit_newss',
+      'delete_terms' => 'delete_news',
+      'assign_terms' => 'edit_newss'
+    )
   ));
 
   // Setup a news group that indicate that the news should be visible on front page
@@ -78,9 +84,63 @@ function register_newsgroup_taxonomies() {
         'parent'=> null
       )
     );
-  }    
+  }
 }
 add_action( 'init', 'register_newsgroup_taxonomies', 0 );
+
+/**
+ * Get image for the active news post
+ */
+function palmate_get_the_news_image() {
+  $img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium');
+  if (is_array($img)) {
+    return $img[0];
+  }
+  return '/assets/img/news-empty.png';
+}
+
+/**
+ * Get meta data for the active news post
+ */
+function palmate_get_the_news_meta() {
+  $meta = get_the_date('Y-m-d');
+  $categories = get_the_terms(get_the_ID(), 'newsgroup');
+  if ($categories) {
+    foreach ($categories as $category) {
+      if (strcmp($category->slug, 'front-news') != 0) {
+        $meta .= ' | ' . $category->name;
+      }
+    }
+  }
+  return $meta;
+}
+
+/**
+* Get content for the active news post
+ */
+function palmate_get_the_news_content( $only_excerpt = false ) {
+  $hideHref = $only_excerpt ? ' hideHref' : '';
+
+  $content  = '<div class="media' . $hideHref . '" style="margin-bottom: 10px;">';
+  $content .= '  <a class="pull-left" href="/nyheter/' . the_slug('','', false) . '">';
+  $content .= '    <img class="media-object" style="margin-bottom: 1px; width: 140px; min-width: 140px; max-width: 140px;"';
+  $content .= '         alt="Nyhet" src="' . palmate_get_the_news_image() . '"></img>';
+  $content .= '  </a>';
+  $content .= '  <div class="media-body">';
+  $content .= '    <a href="/nyheter/' . the_slug('','', false) . '">';
+  $content .= '      <h3 class="media-heading">' . the_title('', '', false) . '</h3>';
+  $content .= '    </a>';
+  $content .= '    <p class="newsMeta">' . palmate_get_the_news_meta() . '</p>';
+  if ($only_excerpt) {
+    $content .= '  <a href="/nyheter/' . the_slug('','', false) . '">' . wpautop(apply_filters('the_excerpt', get_the_excerpt())) . '</a>';
+  } else {
+    $content .= '      ' . wpautop(apply_filters('the_content', get_the_content()));
+  }
+  $content .= '  </div>';
+  $content .= '</div>';
+  $content .= '<p class="dividerHor"></p>';
+  return $content;
+}
 
 /**
  * Get all news for a specific group
@@ -111,7 +171,7 @@ function palmate_get_newsgroup_contents( $group, $items = 4 ) {
   $text = '';
   while ($news_query->have_posts()) {
     $news_query->the_post();
-    $text .= palmate_get_the_news_content_small();
+    $text .= palmate_get_the_news_content(true);
   }
   wp_reset_query();
   $text .= '<a href="/gruppnyheter/' . $group . '">Visa alla nyheter för gruppen</a>';
@@ -119,130 +179,26 @@ function palmate_get_newsgroup_contents( $group, $items = 4 ) {
 }
 
 /**
- * Get content for the active news post
- */
-function palmate_get_the_news_content($addHref = true) {
-  $content = '<div class="row-fluid hideHref">';
-  global $more; 
-  if ($addHref) {
-    $more = 0; // Turn on more function for posts
-    $content .= '<a href="/nyheter/' . the_slug('','', false) . '">';
-  } else {
-    $more = 1; // Turn off more function for posts
-  }
-  $offset = ' offset4';
-  $imgUrl = palmate_get_the_news_image();
-  if (!empty($imgUrl)) {
-    $content .= '<div class="span4 paddingRight"><img class="newsImg" src="' . $imgUrl . '"></img></div>';
-    $offset = '';
-  }
-
-  $content .= '<div class="span8' . $offset . '"><h3>' . the_title('', '', false) . '</h3>';
-  $content .= '<p class="newsMeta">' . palmate_get_the_news_meta() . '</p>';
-  $content .= '<p>' . wpautop(apply_filters('the_content', get_the_content('&hellip;'))) . '</p>';
-  if ($addHref) {
-    $content .= '</a>';
-  }
-  $content .= '</div></div><p class="dividerHor"></p>';
-  return $content;
-}
-
-/**
- * Get content for the active news post in a small style
- */
-function palmate_get_the_news_content_small() {
-  $content = '<div class="row-fluid hideHref"><div class="span12"><a href="/nyheter/' . the_slug('','', false) . '">';
-  $imgUrl = palmate_get_the_news_image();
-  if (!empty($imgUrl)) {
-    $content .= '<img style="max-height: 100px;" src="' . $imgUrl . '"></img>';
-  }
-  $content .= '<h3>' . the_title( '', '', false ) . '</h3>';
-  $content .= '<p class="newsMeta" style="line-height: 5px; font-size: 10px; color: #999;">' . palmate_get_the_news_meta() . '</p>';
-  $content .= '<p>' . wpautop(apply_filters('the_excerpt', get_the_excerpt())) . '</p>';
-  $content .= '</a></div></div><p class="dividerHor"></p>';
-  return $content;
-}
-
-/**
- * Get image for the active news post
- */
-function palmate_get_the_news_image() {
-  $img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'medium');
-  if (is_array($img)) {
-    return $img[0];
-  }
-  return '';
-}
-
-/**
- * Get meta data for the active news post
- */
-function palmate_get_the_news_meta() {
-  $meta = get_the_date('Y-m-d');
-  $categories = get_the_terms(get_the_ID(), 'newsgroup');
-  if ($categories) {
-    foreach ($categories as $category) {
-      if (strcmp($category->slug, 'front-news') != 0) {
-        $meta .= ' | ' . $category->name;
-      }
-    }
-  }
-  return $meta;
-}
-
-/**
  * News shortcode [News]
  */
-function palmate_news_shortcode($atts) {
+function palmate_news_shortcode() {
   $args = array(
     'post_type' => 'news',
     'newsgroup' => 'front-news',
     'post_status' => 'publish',
-    'posts_per_page' => 8,
+    'posts_per_page' => 4,
     'caller_get_posts'=> 1
   );
   $news_query = null;
   $news_query = new WP_Query($args);
 
-  $counter = 0;
-  $full = '';
-  $left = '';
-  $right = '';
-
+  $content = "";
   while ($news_query->have_posts()) {
     $news_query->the_post();
-
-    if ($counter < 2) {
-      $full .= palmate_get_the_news_content();
-    } else {
-      $imgUrl = palmate_get_the_news_image();
-      $small = '<a href="/nyheter/' . the_slug('','', false) . '">';
-      if (!empty($imgUrl)) {
-//TODO:        $small .= '<img style="max-height: 100px;" src="' . $imgUrl . '"></img>';
-      }
-      $small .= '<h3>' . the_title( '', '', false ) . '</h3>';
-      $small .= '<p class="newsMeta" style="line-height: 5px; font-size: 10px; color: #999;">' . palmate_get_the_news_meta() . '</p>';
-      $small .= '<p>' . wpautop(apply_filters('the_excerpt', get_the_excerpt())) . '</p></a>';
-      $small .= '<p class="dividerHor"></p>';
-      if ($counter % 2) {
-        $right .= $small;
-      } else {
-        $left .= $small;
-      }
-    }
-    $counter += 1;
+    $content .= palmate_get_the_news_content(true);
   }
-
   wp_reset_query();
-
-  if (empty($left)) {
-    return $full . '<a href="/nyheter">Visa alla nyheter</a>';
-  } else {
-    $full .= '<div class="row-fluid hidden-phone hideHref">';
-    $full .= '<div class="span6 paddingRight">' . $left . '</div>';
-    $full .= '<div class="span6 paddingLeft">' . $right . '</div>';
-    $full .= '</div>' . '<a href="/nyheter">Visa alla nyheter</a>';
-    return $full;
-  }
+  return $content . '<a href="/nyheter">Visa alla nyheter</a>';
 }
+
 add_shortcode( 'News', 'palmate_news_shortcode' );

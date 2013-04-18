@@ -41,11 +41,11 @@ class CalendarOldFormat
   }
   
   protected function eventMonth() {
-    return date_i18n( 'F', $this->event->getTimeStamp() );
+    return date_i18n( 'F', $this->event->format('U') );
   }
   
   protected function eventWeekDay() {
-    return date_i18n( 'D', $this->event->getTimeStamp() );
+    return date_i18n( 'D', $this->event->format('U') );
   }
 
   protected function eventDay() {

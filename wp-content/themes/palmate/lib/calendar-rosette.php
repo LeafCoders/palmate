@@ -51,12 +51,12 @@ class CalendarRosette
   protected function eventYear( $week ) {
     $dateTime = new DateTime( $week[since] );
     $dateTime->modify( '+3 days' );  /* Forth day sets the week number */
-    return date_i18n( 'Y', $dateTime->getTimeStamp() );
+    return date_i18n( 'Y', $dateTime->format('U') );
   }
 
   protected function eventMonth( $date ) {
     $dateTime = new DateTime( $date );
-    return date_i18n( 'F', $dateTime->getTimeStamp() );
+    return date_i18n( 'F', $dateTime->format('U') );
   }
 
   protected function eventMonths( $week ) {
@@ -67,7 +67,7 @@ class CalendarRosette
   
   protected function eventWeekDay( $day ) {
     $dateTime = new DateTime( substr( $day[date], 0, 10 ) );
-    return date_i18n( 'D', $dateTime->getTimeStamp() );
+    return date_i18n( 'D', $dateTime->format('U') );
   }
 
   protected function eventDay( $day ) {
