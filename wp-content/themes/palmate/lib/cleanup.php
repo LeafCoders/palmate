@@ -401,7 +401,7 @@ function roots_excerpt_length($length) {
 }
 
 function roots_excerpt_more($more) {
-  return '&hellip;';
+  return '<span class="readMore"></span>';
 }
 
 add_filter('excerpt_length', 'roots_excerpt_length');
@@ -636,3 +636,22 @@ function roots_get_search_form() {
 }
 
 add_filter('get_search_form', 'roots_get_search_form');
+
+/**
+ * Include custom post types in search
+ */
+function include_post_types_in_search( $query ) {
+  if ( is_search() && $query->is_main_query() ) {
+    $post_types = get_post_types( array('public' => true, 'exclude_from_search' => false), 'objects' );
+    $searchable_types = array();
+    if ( $post_types ) {
+      foreach( $post_types as $type ) {
+        $searchable_types[] = $type->name;
+      }
+    }
+    $query->set( 'post_type', $searchable_types );
+  }
+  return $query;
+}
+add_action('pre_get_posts', 'include_post_types_in_search');
+

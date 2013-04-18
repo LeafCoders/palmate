@@ -54,3 +54,13 @@ function updatePalmateCalButtons($page, $numPages) {
     $("#calNextWeekBtn").removeAttr('disabled');
   }
 };
+
+/**
+* Replace map image with iframe of OpenStreetMap content
+* Android 2.3 devices has a bug with iframes that positioned them at start of page
+*/
+function replaceWithMap() {
+  var mapextent = $("#map").attr('data-mapextent');
+  var markerpos = $("#map").attr('data-markerpos');
+  $("#map").replaceWith('<iframe width="100%" height="300px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox=' + mapextent + '&amp;layer=mapquest&amp;marker=' + markerpos + '" style="border: 1px solid black"></iframe>');
+}

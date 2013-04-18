@@ -1,5 +1,5 @@
 <article class="hentry row-fluid">
-  <div class="span12">
+  <div class="span10 offset1">
     <div class="contentBox marginBoth paddingBoth">
       <header>
         <a href="/nyheter"><h1 class="entry-title">Nyheter</h1></a>
@@ -7,7 +7,7 @@
       <?php
       while (have_posts()) :
         the_post();
-        echo palmate_get_the_news_content(false);
+        echo palmate_get_the_news_content();
       endwhile;
       $big = 999999999;
       echo paginate_links(array(

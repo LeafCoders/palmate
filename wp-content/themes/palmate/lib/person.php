@@ -31,11 +31,11 @@ function register_cpt_personnel() {
     'show_in_menu' => true,
     'show_in_nav_menus' => false,
     'publicly_queryable' => true,
-    'exclude_from_search' => true,
+    'exclude_from_search' => false,
     'has_archive' => false,
     'query_var' => 'personnel',
     'can_export' => true,
-    'rewrite' => array( 'slug' => 'personnel', 'with_front' => FALSE ),
+    'rewrite' => array( 'slug' => 'personal', 'with_front' => FALSE ),
     'menu_icon' => admin_url( '/images/media-button-other.gif'),
     'capability_type' => 'personnel'
   );
@@ -141,6 +141,38 @@ function register_cpt_personnel() {
 }
 add_action( 'init', 'register_cpt_personnel' );
 
+function palmate_get_personnel_text() {
+  $text = '';
+  $imgUrl = get_field( 'image' );
+  if ( empty( $imgUrl ) ) {
+    $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
+  }
+
+  // Add unvisible text in email address to trick the boots
+  $email = get_field( 'email' );
+  if ( strpos( $email, EMAIL_DOMAIN ) != false ) {
+    $email = str_replace( EMAIL_DOMAIN, '<i style="display: none;">.felaktig</i>' . EMAIL_DOMAIN, get_field( 'email' ) );
+  }
+  $text .= '<div class="row-fluid marginBottom">';
+  $text .= '  <div class="span3">';
+  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
+  $text .= '  </div>';
+  $text .= '  <div class="span9">';
+  $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
+  $text .= '    <p><strong>' . get_field( 'description' ) . '</strong></p>';
+
+  if ( !empty( $email ) ) {
+    $text .= '    <p>E-post:  ' . $email . '</p>';
+  }
+  $phone = get_field( 'phone' );
+  if ( !empty( $phone ) ) {
+    $text .= '    <p>Tel:  ' . $phone . '</p>';
+   }
+  $text .= '  </div>';
+  $text .= '</div>';
+  return $text;
+}
+
 /**
  * Personnel shortcode [Personal]
  */
@@ -157,34 +189,7 @@ function palmate_personnel_shortcode( $atts ) {
   $text = '';
   while ( $personnel_query->have_posts() ) {
     $personnel_query->the_post();
-
-    $imgUrl = get_field( 'image' );
-    if ( empty( $imgUrl ) ) {
-      $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
-    }
-
-    // Add unvisible text in email address to trick the boots
-    $email = get_field( 'email' );
-    if ( strpos( $email, EMAIL_DOMAIN ) != false ) {
-      $email = str_replace( EMAIL_DOMAIN, '<i style="display: none;">.felaktig</i>' . EMAIL_DOMAIN, get_field( 'email' ) );
-    }
-    $text .= '<div class="row-fluid marginBottom">';
-    $text .= '  <div class="span3">';
-    $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
-    $text .= '  </div>';
-    $text .= '  <div class="span9">';
-    $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
-    $text .= '    <p><strong>' . get_field( 'description' ) . '</strong></p>';
-
-    if ( !empty( $email ) ) {
-      $text .= '    <p>E-post:  ' . $email . '</p>';
-    }
-    $phone = get_field( 'phone' );
-    if ( !empty( $phone ) ) {
-      $text .= '    <p>Tel:  ' . $phone . '</p>';
-     }
-    $text .= '  </div>';
-    $text .= '</div>';
+    $text .= palmate_get_personnel_text();
     $text .= '<div class="dividerHor marginBottom visible-phone"></div>';
   }
   wp_reset_query();
@@ -224,11 +229,11 @@ function register_cpt_churchleader() {
     'show_in_menu' => true,
     'show_in_nav_menus' => false,
     'publicly_queryable' => true,
-    'exclude_from_search' => true,
+    'exclude_from_search' => false,
     'has_archive' => false,
     'query_var' => 'churchleader',
     'can_export' => true,
-    'rewrite' => array( 'slug' => 'churchleader', 'with_front' => FALSE ),
+    'rewrite' => array( 'slug' => 'forsamlingsledare', 'with_front' => FALSE ),
     'menu_icon' => admin_url( '/images/media-button-other.gif'),
     'capability_type' => 'churchleader'
   );
@@ -301,6 +306,25 @@ function register_cpt_churchleader() {
 }
 add_action( 'init', 'register_cpt_churchleader' );
 
+function palmate_get_churchleader_text() {
+  $text = '';
+  $imgUrl = get_field( 'image' );
+  if ( empty( $imgUrl ) ) {
+    $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
+  }
+
+  $text .= '<div class="row-fluid marginBottom">';
+  $text .= '  <div class="span3">';
+  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
+  $text .= '  </div>';
+  $text .= '  <div class="span9">';
+  $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
+  $text .= '    <p><strong>Församlingsledare</strong></p>';
+  $text .= '  </div>';
+  $text .= '</div>';
+  return $text;
+}
+
 /**
  * Church leader shortcode [Församlingsledare]
  */
@@ -317,20 +341,7 @@ function palmate_churchleader_shortcode( $atts ) {
   $text = '';
   while ( $churchleader_query->have_posts() ) {
     $churchleader_query->the_post();
-
-    $imgUrl = get_field( 'image' );
-    if ( empty( $imgUrl ) ) {
-      $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
-    }
-
-    $text .= '<div class="row-fluid marginBottom">';
-    $text .= '  <div class="span3">';
-    $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
-    $text .= '  </div>';
-    $text .= '  <div class="span9">';
-    $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
-    $text .= '  </div>';
-    $text .= '</div>';
+    $text .= palmate_get_churchleader_text();
     $text .= '<div class="dividerHor marginBottom visible-phone"></div>';
   }
   wp_reset_query();
@@ -370,11 +381,11 @@ function register_cpt_boardleader() {
     'show_in_menu' => true,
     'show_in_nav_menus' => false,
     'publicly_queryable' => true,
-    'exclude_from_search' => true,
+    'exclude_from_search' => false,
     'has_archive' => false,
     'query_var' => 'boardleader',
     'can_export' => true,
-    'rewrite' => array( 'slug' => 'boardleader', 'with_front' => FALSE ),
+    'rewrite' => array( 'slug' => 'radsordforande', 'with_front' => FALSE ),
     'menu_icon' => admin_url( '/images/media-button-other.gif'),
     'capability_type' => 'boardleader'
   );
@@ -447,6 +458,25 @@ function register_cpt_boardleader() {
 }
 add_action( 'init', 'register_cpt_boardleader' );
 
+function palmate_get_boardleader_text() {
+  $text = '';
+  $imgUrl = get_field( 'image' );
+  if ( empty( $imgUrl ) ) {
+    $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
+  }
+
+  $text .= '<div class="row-fluid marginBottom">';
+  $text .= '  <div class="span3">';
+  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
+  $text .= '  </div>';
+  $text .= '  <div class="span9">';
+  $text .= '    <h3>' . the_title( '', '', false ) . '</h3>';
+  $text .= '    <p><strong>Ordförande: </strong>' . get_field( 'name' ) . '</p>';
+  $text .= '  </div>';
+  $text .= '</div>';
+  return $text;
+}
+
 /**
  * Board leader shortcode [Rådsordföranden]
  */
@@ -463,21 +493,7 @@ function palmate_boardleader_shortcode( $atts ) {
   $text = '';
   while ( $boardleader_query->have_posts() ) {
     $boardleader_query->the_post();
-
-    $imgUrl = get_field( 'image' );
-    if ( empty( $imgUrl ) ) {
-      $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
-    }
-
-    $text .= '<div class="row-fluid marginBottom">';
-    $text .= '  <div class="span3">';
-    $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
-    $text .= '  </div>';
-    $text .= '  <div class="span9">';
-    $text .= '    <h3>' . the_title( '', '', false ) . '</h3>';
-    $text .= '    <p>' . get_field( 'name' ) . '</p>';
-    $text .= '  </div>';
-    $text .= '</div>';
+    $text .= palmate_get_boardleader_text();
     $text .= '<div class="dividerHor marginBottom visible-phone"></div>';
   }
   wp_reset_query();
