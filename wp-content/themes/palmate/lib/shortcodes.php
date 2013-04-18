@@ -151,6 +151,24 @@ function imageColumn_shortcode( $atts ) {
 add_shortcode( 'ImageColumn', 'imageColumn_shortcode' );
 
 /**
+ * Insert image in a row [ImageRow imgurls="content-img-temp.png" span="span4"]
+ */
+function imageRow_shortcode( $atts ) {
+  extract( shortcode_atts( array(
+    'span' => 'span4',
+    'imgurls' => 'content-img-temp.png',
+  ), $atts ) );
+
+  $output = '<div class="row-fluid">';
+  foreach ( explode(',', $imgurls) as $imgUrl ) {
+    $output .= '  <div class="' . $span . ' marginBottom paddingBoth"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgUrl . '" /></figure></div>';
+  }
+  $output .= '</div>';
+  return $output;
+}
+add_shortcode( 'ImageRow', 'imageRow_shortcode' );
+
+/**
  * Age and time box [AgeAndTime age="", time=""]
  */
 function palmate_ageAndTime_shortcode( $atts ) {
@@ -208,3 +226,14 @@ function palmate_list_shortcode( $atts, $content ) {
 }
 add_shortcode( 'List', 'palmate_list_shortcode' );
 
+/**
+ * Inserts a search box
+ */
+function palmate_search_shortcode() {
+  ob_start();
+  get_search_form();
+  $searchform = ob_get_contents();
+  ob_end_clean();  
+  return $searchform;
+}
+add_shortcode( 'Search', 'palmate_search_shortcode' );

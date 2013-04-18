@@ -23,7 +23,10 @@ require_once locate_template('/lib/news.php');                   // News custom 
 require_once locate_template('/lib/shortcodes.php');             // Some shortcodes
 
 require_once locate_template('/admin/palmate-admin-option.php'); // Options for Palmate Admin
-require_once locate_template('/admin/palmate-edit-cap.php');     // Edit capabilities
+if (is_user_logged_in) {
+  require_once locate_template('/admin/palmate-edit-cap.php');     // Edit capabilities
+  require_once locate_template('/admin/palmate-user-manual.php');  // User manual
+}
 
 
 function roots_setup() {

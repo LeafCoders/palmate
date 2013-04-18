@@ -136,22 +136,32 @@ function generateNoticeboxes( $generator ) {
     );
     $query = new WP_Query($args);
 
+    $counter = 0;
     if ( $query->have_posts() ) {
-      $counter = 0;
-      $generator->elementsBefore();
-      while ( $query->have_posts() ) {
-        $query->the_post();
-        if ( $generator->verifyEndDate() ) {
-          $generator->elementNoticebox( $counter );
-          $counter++;
+      if ( $query->found_posts > 1 ) {
+        $generator->elementsBefore();
+        while ( $query->have_posts() ) {
+          $query->the_post();
+          if ( $generator->verifyEndDate() ) {
+            $generator->elementNoticebox( $counter );
+            $counter++;
+          }
         }
+        $generator->elementsAfter( $counter );
+      } else {
+        $query->the_post();
+        $counter++;
+        $generator->singleElementNoticebox();
       }
-      $generator->elementsAfter( $counter );
     }
     // Restore global post data stomped by the_post()
     wp_reset_query();
-   
-    return $generator->output();
+
+    if ( $counter > 0 ) {
+      return $generator->output();
+    } else {
+      return "";
+    }
 }
 
 class PalmateNoticebox
@@ -166,6 +176,9 @@ class PalmateNoticebox
     $this->html .= '<li>noticebox</li>';
   }
 
+  function singleElementNoticebox() {
+  }
+
   function elementsAfter( $counter ) {
     $this->html .= '</ul>';
   }
@@ -177,7 +190,7 @@ class PalmateNoticebox
   function verifyEndDate() {
     $endDate = get_field( 'noticebox_enddate' );
     $secondsBetween = strtotime( $endDate ) - time();
-    if ( $secondsBetween < 0 ) {
+    if ( $secondsBetween < 24*60*60 ) {
       // Move to trash if end date has been passed
       wp_update_post(array('ID' => get_the_ID(), 'post_status' => 'trash'));
       return false;
@@ -318,16 +331,26 @@ class PalmateNoticeboxSwipe extends PalmateNoticebox
     $this->out .= '<div>' . parent::noticeboxHtml( 'noticebox' ) . '</div>';
   }
 
+  function singleElementNoticebox() {
+    $this->out .= '<div class="row-fluid">';
+    $this->out .= '  <div class="span12">';
+    $this->out .= '    <div class="contentBox marginBoth" style="padding-bottom: 0px;">';
+    $this->out .= '<div>' . parent::noticeboxHtml( 'noticebox' ) . '</div>';
+    $this->out .= '    </div>';
+    $this->out .= '  </div>';
+    $this->out .= '</div>';
+  }
+
   function elementsAfter( $counter ) {
     $this->out .= '        </div>';
-    $this->out .= '	     </div>';
+    $this->out .= '      </div>';
     $this->out .= '    </div>';
     $this->out .= '  </div>';
     $this->out .= '</div>';
     $this->out .= '<div class="row-fluid">';
     $this->out .= '  <div class="span12">';
     $this->out .= '    <div class="noticeboxNav">';
-    $this->out .= '		   <ul class="marginBoth">';
+    $this->out .= '      <ul class="marginBoth">';
 
     // Add bullets for each noticebox. Set first one to class="on"
     $onClass = ' class="on"';
@@ -336,7 +359,7 @@ class PalmateNoticeboxSwipe extends PalmateNoticebox
       $onClass = '';
     }
 
-    $this->out .= '		   </ul>';
+    $this->out .= '      </ul>';
     $this->out .= '    </div>';
     $this->out .= '  </div>';
     $this->out .= '</div>';
@@ -351,7 +374,7 @@ class PalmateNoticeboxSwipe extends PalmateNoticebox
 /**
  * Notice box shortcode [noticebox]
  */
-function palmate_noticebox_shortcode( $atts ) {
+function palmate_noticebox_shortcode() {
   return generateNoticeboxes(new PalmateNoticeboxSwipe());
 }
 add_shortcode( 'noticebox', 'palmate_noticebox_shortcode' );  

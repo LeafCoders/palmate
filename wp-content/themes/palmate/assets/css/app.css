@@ -113,6 +113,17 @@ body {
   display: block; /* Makes <a> detect click on the whole row */
 }
 
+#searchBox {
+  padding-top: 15px;
+  height: 35px;
+  background-color: #8fb149;
+  background-image: url('../img/calendar-background.png');
+}
+
+#map {
+  cursor: pointer;
+}
+
 /* === Content  ============================================================= */
 
 #content {
