@@ -1,7 +1,7 @@
 <?php while (have_posts()) : the_post(); ?>
 <article id="<?php echo $post->post_name; ?>" class="hentry row-fluid">
   <div class="span12">
-    <div class="contentBox marginBoth paddingBoth">
+    <div class="contentBox paddingBoth">
       <header>
         <h1 class="entry-title"><?php the_title(); ?></h1>
       </header>

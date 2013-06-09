@@ -2,13 +2,13 @@
   <article id="searchResult" class="hentry row-fluid">
     <div class="row-fluid">
       <div class="span12">
-        <div id="searchBox" class="contentBox paddingBoth marginBoth">
+        <div id="searchBox" class="contentBox paddingBoth">
           <?php echo palmate_search_shortcode(); ?>
         </div>
       </div>
     </div>
     <div class="span12">
-      <div class="contentBox marginBoth paddingBoth">
+      <div class="contentBox paddingBoth">
         <header>
           <h3><small>Sökresultat för</small></h3>
           <h1 class="entry-title">"<?php echo get_search_query(); ?>"</h1>
@@ -42,13 +42,13 @@
   <article id="searchResult" class="hentry row-fluid no-results not-found">
     <div class="row-fluid">
       <div class="span12">
-        <div id="searchBox" class="contentBox paddingBoth marginBoth">
+        <div id="searchBox" class="contentBox paddingBoth">
           <?php echo palmate_search_shortcode(); ?>
         </div>
       </div>
     </div>
     <div class="span12">
-      <div class="contentBox marginBoth paddingBoth">
+      <div class="contentBox paddingBoth">
         <header>
           <h1 class="entry-title">Hittade inget</h1>
         </header>

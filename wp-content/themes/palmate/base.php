@@ -5,7 +5,7 @@
   <div id="content">
     <?php get_template_part('templates/header-top-navbar'); ?>
 
-    <div id="wrap" class="container-fluid" role="document">
+    <div id="wrap" class="container-fluid marginBoth" role="document">
       <?php include roots_template_path(); ?>
     </div><!-- /#wrap -->
 
