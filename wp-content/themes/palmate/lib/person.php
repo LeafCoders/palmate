@@ -155,7 +155,7 @@ function palmate_get_personnel_text() {
   }
   $text .= '<div class="row-fluid marginBottom">';
   $text .= '  <div class="span3">';
-  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
+  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" >';
   $text .= '  </div>';
   $text .= '  <div class="span9">';
   $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
@@ -315,7 +315,7 @@ function palmate_get_churchleader_text() {
 
   $text .= '<div class="row-fluid marginBottom">';
   $text .= '  <div class="span3">';
-  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
+  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" >';
   $text .= '  </div>';
   $text .= '  <div class="span9">';
   $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
@@ -467,7 +467,7 @@ function palmate_get_boardleader_text() {
 
   $text .= '<div class="row-fluid marginBottom">';
   $text .= '  <div class="span3">';
-  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
+  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" >';
   $text .= '  </div>';
   $text .= '  <div class="span9">';
   $text .= '    <h3>' . the_title( '', '', false ) . '</h3>';

@@ -124,7 +124,7 @@ function palmate_get_the_news_content( $only_excerpt = false ) {
   $content  = '<div class="media' . $hideHref . '" style="margin-bottom: 10px;">';
   $content .= '  <a class="pull-left" href="/nyheter/' . the_slug('','', false) . '">';
   $content .= '    <img class="media-object" style="margin-bottom: 1px; width: 140px; min-width: 140px; max-width: 140px;"';
-  $content .= '         alt="Nyhet" src="' . palmate_get_the_news_image() . '"></img>';
+  $content .= '         alt="Nyhet" src="' . palmate_get_the_news_image() . '">';
   $content .= '  </a>';
   $content .= '  <div class="media-body">';
   $content .= '    <a href="/nyheter/' . the_slug('','', false) . '">';

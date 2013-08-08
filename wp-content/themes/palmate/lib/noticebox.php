@@ -212,7 +212,7 @@ class PalmateNoticebox
     }
 
     $html =  '<a class="' . $class . '" href="' . $link . '">';
-    $html .= '  <img src="' . $imgUrl . '" alt="' . the_title('','',false) . '"/>' . $textOverlay;
+    $html .= '  <img src="' . $imgUrl . '" alt="' . the_title('','',false) . '">' . $textOverlay;
     $html .= '</a>';
     return $html;
   }

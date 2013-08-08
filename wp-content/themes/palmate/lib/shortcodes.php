@@ -113,7 +113,7 @@ function imageOnlyPhone_shortcode( $atts ) {
   ), $atts ) );
 
   $output  = '<div class="row-fluid marginBottom visible-phone">';
-  $output .= '  <div class="span12"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgurl . '" /></figure></div>';
+  $output .= '  <div class="span12"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgurl . '"></figure></div>';
   $output .= '</div>';
   return $output;
 }
@@ -137,7 +137,7 @@ function imageColumn_shortcode( $atts ) {
   $output = '<div class="' . $span . '">';
   foreach ( explode(',', $imgurls) as $imgUrl ) {
     $output .= '<div class="row-fluid marginBottom' . $hiddenClass . '">';
-    $output .= '  <div class="span12"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgUrl . '" /></figure></div>';
+    $output .= '  <div class="span12"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgUrl . '"></figure></div>';
     $output .= '</div>';
 
     // Set hidden after first item
@@ -161,7 +161,7 @@ function imageRow_shortcode( $atts ) {
 
   $output = '<div class="row-fluid">';
   foreach ( explode(',', $imgurls) as $imgUrl ) {
-    $output .= '  <div class="' . $span . ' marginBottom paddingBoth"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgUrl . '" /></figure></div>';
+    $output .= '  <div class="' . $span . ' marginBottom paddingBoth"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgUrl . '"></figure></div>';
   }
   $output .= '</div>';
   return $output;
