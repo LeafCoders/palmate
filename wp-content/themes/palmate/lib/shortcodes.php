@@ -113,7 +113,7 @@ function imageOnlyPhone_shortcode( $atts ) {
   ), $atts ) );
 
   $output  = '<div class="row-fluid marginBottom visible-phone">';
-  $output .= '  <div class="span12"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgurl . '"></figure></div>';
+  $output .= '  <div class="span12"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgurl . '" alt="Bild"></figure></div>';
   $output .= '</div>';
   return $output;
 }
@@ -137,7 +137,7 @@ function imageColumn_shortcode( $atts ) {
   $output = '<div class="' . $span . '">';
   foreach ( explode(',', $imgurls) as $imgUrl ) {
     $output .= '<div class="row-fluid marginBottom' . $hiddenClass . '">';
-    $output .= '  <div class="span12"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgUrl . '"></figure></div>';
+    $output .= '  <div class="span12"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgUrl . '" alt="Bild"></figure></div>';
     $output .= '</div>';
 
     // Set hidden after first item
@@ -161,7 +161,7 @@ function imageRow_shortcode( $atts ) {
 
   $output = '<div class="row-fluid">';
   foreach ( explode(',', $imgurls) as $imgUrl ) {
-    $output .= '  <div class="' . $span . ' marginBottom paddingBoth"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgUrl . '"></figure></div>';
+    $output .= '  <div class="' . $span . ' marginBottom paddingBoth"><figure><img class="img-polaroid imgCenter" src="/assets/img/content/' . $imgUrl . '" alt="Bild"></figure></div>';
   }
   $output .= '</div>';
   return $output;
@@ -233,7 +233,7 @@ function palmate_search_shortcode() {
   ob_start();
   get_search_form();
   $searchform = ob_get_contents();
-  ob_end_clean();  
+  ob_end_clean();
   return $searchform;
 }
 add_shortcode( 'Search', 'palmate_search_shortcode' );
