@@ -324,22 +324,12 @@ h4 {
 }
 
 .marginLeft {
-  margin-left: 0px;
-  margin-right: 10px;
-}
-
-.marginRight {
   margin-left: 10px;
   margin-right: 0px;
 }
 
-.marginRightNarrow {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.marginCenter {
-  margin-left: 10px;
+.marginRight {
+  margin-left: 0px;
   margin-right: 10px;
 }
 
@@ -353,19 +343,24 @@ h4 {
 }
 
 @media (max-width: 767px) {
-  .paddingLeft {
+  .paddingBoth {
     padding-left: 10px;
-  }
-  .paddingRight {
     padding-right: 10px;
   }
-  .marginBoth,
-  .marginLeft,
-  .marginRight,
-  .marginRightNarrow,
-  .marginCenter {
+  .paddingLeft {
+    padding-left: 0px;
+  }
+  .paddingRight {
+    padding-right: 0px;
+  }
+  .marginBoth {
     margin-left: 10px;
     margin-right: 10px;
+  }
+  .marginLeft,
+  .marginRight {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
 
