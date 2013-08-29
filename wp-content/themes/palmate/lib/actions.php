@@ -29,3 +29,25 @@ function roots_google_analytics() {
 }
 
 add_action('wp_footer', 'roots_google_analytics');
+
+
+/**
+ * Detect if member is or has logged in
+ */
+function palmate_detect_member_status() {
+  global $palmate_is_member;
+  $palmate_is_member = false;
+  if (trim(MEMBER_PASSWORD) == false) {
+    $palmate_is_member = false;
+  } elseif ($_COOKIE["palmate_member"] == MEMBER_PASSWORD) {
+    $palmate_is_member = true;
+  } elseif ($_POST["member_pwd"] == MEMBER_PASSWORD) {
+    unset($_POST['member_pwd']);
+    $expire = time()+5*60; // cookie expires after 5 minute
+    setcookie("palmate_member", MEMBER_PASSWORD, $expire);
+    $palmate_is_member = true;
+  }
+}
+
+add_action('init', 'palmate_detect_member_status');
+

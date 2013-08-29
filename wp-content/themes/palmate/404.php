@@ -1,6 +1,6 @@
 <article id="searchResult" class="hentry row-fluid">
   <div class="span12">
-    <div class="contentBox marginBoth paddingBoth">
+    <div class="contentBox paddingBoth">
       <header>
         <h1 class="entry-title">Sidan finns inte</h1>
       </header>

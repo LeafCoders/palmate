@@ -17,6 +17,8 @@ define('FULL_RELATIVE_PLUGIN_PATH', WP_BASE . '/' . RELATIVE_PLUGIN_PATH);
 define('RELATIVE_CONTENT_PATH',     str_replace(site_url() . '/', '', content_url()));
 define('THEME_PATH',                RELATIVE_CONTENT_PATH . '/themes/' . THEME_NAME);
 define('EMAIL_DOMAIN',              '@');
+define('BACKEND_URL',               '/wp-admin');
+define('MEMBER_PASSWORD',           '');
 
 // Set the content width based on the theme's design and stylesheet
 if (!isset($content_width)) { $content_width = 940; }

@@ -633,6 +633,7 @@ add_filter('request', 'roots_request_filter');
  */
 function roots_get_search_form() {
   locate_template('/templates/searchform.php', true, true);
+  return '';
 }
 
 add_filter('get_search_form', 'roots_get_search_form');

@@ -44,6 +44,7 @@ function register_cpt_personnel() {
   global $wp_roles;
   $wp_roles->add_cap( 'administrator', 'edit_personnel' );
   $wp_roles->add_cap( 'administrator', 'edit_personnels' );
+  $wp_roles->add_cap( 'administrator', 'edit_others_personnels' );
   $wp_roles->add_cap( 'administrator', 'delete_personnel' );
   $wp_roles->add_cap( 'administrator', 'publish_personnels' );
 
@@ -155,7 +156,7 @@ function palmate_get_personnel_text() {
   }
   $text .= '<div class="row-fluid marginBottom">';
   $text .= '  <div class="span3">';
-  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
+  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" >';
   $text .= '  </div>';
   $text .= '  <div class="span9">';
   $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
@@ -242,6 +243,7 @@ function register_cpt_churchleader() {
   global $wp_roles;
   $wp_roles->add_cap( 'administrator', 'edit_churchleader' );
   $wp_roles->add_cap( 'administrator', 'edit_churchleaders' );
+  $wp_roles->add_cap( 'administrator', 'edit_others_churchleaders' );
   $wp_roles->add_cap( 'administrator', 'delete_churchleader' );
   $wp_roles->add_cap( 'administrator', 'publish_churchleaders' );
 
@@ -315,7 +317,7 @@ function palmate_get_churchleader_text() {
 
   $text .= '<div class="row-fluid marginBottom">';
   $text .= '  <div class="span3">';
-  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
+  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" >';
   $text .= '  </div>';
   $text .= '  <div class="span9">';
   $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
@@ -363,7 +365,7 @@ function register_cpt_boardleader() {
     'add_new_item' => _x( 'Skapa ny rådsordförande', 'boardleader' ),
     'edit_item' => _x( 'Redigera rådsordförande', 'boardleader' ),
     'new_item' => _x( 'Ny rådsordförande', 'boardleader' ),
-    'view_item' => _x( 'Visa rådsordförandena', 'boardleader' ),
+    'view_item' => _x( 'Visa rådsordförande', 'boardleader' ),
     'search_items' => _x( 'Sök rådsordförande', 'boardleader' ),
     'not_found' => _x( 'Hittade ingen rådsordförande', 'boardleader' ),
     'not_found_in_trash' => _x( 'Hittade ingen rådsordförande i papperskorgen', 'boardleader' ),
@@ -394,6 +396,7 @@ function register_cpt_boardleader() {
   global $wp_roles;
   $wp_roles->add_cap( 'administrator', 'edit_boardleader' );
   $wp_roles->add_cap( 'administrator', 'edit_boardleaders' );
+  $wp_roles->add_cap( 'administrator', 'edit_others_boardleaders' );
   $wp_roles->add_cap( 'administrator', 'delete_boardleader' );
   $wp_roles->add_cap( 'administrator', 'publish_boardleaders' );
 
@@ -414,6 +417,17 @@ function register_cpt_boardleader() {
           'order_no' => '0',
         ),
         1 => array (
+          'label' => 'E-post',
+          'name' => 'email',
+          'type' => 'text',
+          'instructions' => 'E-postadress till rådet',
+          'required' => '0',
+          'default_value' => '',
+          'formatting' => 'none',
+          'key' => 'field_50848c0937843',
+          'order_no' => '1',
+        ),
+        2 => array (
           'label' => 'Bild',
           'name' => 'image',
           'type' => 'image',
@@ -422,7 +436,7 @@ function register_cpt_boardleader() {
           'save_format' => 'url',
           'preview_size' => 'full',
           'key' => 'field_508304839cc8b',
-          'order_no' => '1',
+          'order_no' => '2',
         ),
       ),
       'location' => array (
@@ -464,14 +478,21 @@ function palmate_get_boardleader_text() {
   if ( empty( $imgUrl ) ) {
     $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
   }
+  $email = get_field( 'email' );
+  if ( strpos( $email, EMAIL_DOMAIN ) != false ) {
+    $email = str_replace( EMAIL_DOMAIN, '<i style="display: none;">.felaktig</i>' . EMAIL_DOMAIN, get_field( 'email' ) );
+  }
 
   $text .= '<div class="row-fluid marginBottom">';
   $text .= '  <div class="span3">';
-  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" ></img>';
+  $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" >';
   $text .= '  </div>';
   $text .= '  <div class="span9">';
   $text .= '    <h3>' . the_title( '', '', false ) . '</h3>';
-  $text .= '    <p><strong>Ordförande: </strong>' . get_field( 'name' ) . '</p>';
+  $text .= '    <p>' . get_field( 'name' ) . ' (Ordförande)</p>';
+  if ( !empty( $email ) ) {
+    $text .= '    <p>E-post:  ' . $email . '</p>';
+  }
   $text .= '  </div>';
   $text .= '</div>';
   return $text;

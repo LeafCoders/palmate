@@ -14,19 +14,21 @@
  *                       [2] Associated object ID
  */
 function palmate_edit_cap_filter( $allcaps, $cap, $args ) {
-  if ( 'edit_post' == $args[0] || 'edit_page' == $args[0] ) :
+  if (in_array('edit_others_pages', $cap) && isset($args[2])) :
     $post_objects = get_field('palmate_edit_page_cap', 'user_' . $args[1]);
-    if( $post_objects ) :
-      $has_post_id = false;
-      foreach( $post_objects as $post_object) :
-        if($post_object->ID == $args[2])
+    if ($post_objects) :
+      $has_post_id = count($post_objects) == 0 ? true : false;
+      foreach ($post_objects as $post_object) :
+        if ($post_object->ID == $args[2]) :
           $has_post_id = true;
+        endif;
       endforeach;
-      if ($has_post_id == false)
-        $allcaps[$cap[0]] = false;
-      return $allcaps;
+      if ($has_post_id == false) :
+        foreach ($cap as $c) :
+          $allcaps[$c] = false;
+        endforeach;
+      endif;
     endif;
-    $allcaps[$cap[0]] = true;
   endif;
 
   return $allcaps;
@@ -35,8 +37,7 @@ add_filter( 'user_has_cap', 'palmate_edit_cap_filter', 10, 3 );
 
 
 function register_palmate_edit_cap() {
-  if(function_exists("register_field_group"))
-  {
+  if (function_exists("register_field_group")) {
     register_field_group(array (
       'id' => '51ed1149046ce',
       'title' => 'Skrivrättigheter',
