@@ -43,6 +43,7 @@ function register_cpt_news() {
   global $wp_roles;
   $wp_roles->add_cap( 'administrator', 'edit_news' );
   $wp_roles->add_cap( 'administrator', 'edit_newss' );
+  $wp_roles->add_cap( 'administrator', 'edit_others_newss' );
   $wp_roles->add_cap( 'administrator', 'delete_news' );
   $wp_roles->add_cap( 'administrator', 'publish_newss' );
 } 

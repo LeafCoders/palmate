@@ -44,6 +44,7 @@ function register_cpt_noticebox() {
   global $wp_roles;
   $wp_roles->add_cap( 'administrator', 'edit_noticebox' );
   $wp_roles->add_cap( 'administrator', 'edit_noticeboxs' );
+  $wp_roles->add_cap( 'administrator', 'edit_others_noticeboxs' );
   $wp_roles->add_cap( 'administrator', 'delete_noticebox' );
   $wp_roles->add_cap( 'administrator', 'publish_noticeboxs' );
 

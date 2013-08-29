@@ -14,17 +14,17 @@
  *                       [2] Associated object ID
  */
 function palmate_edit_cap_filter( $allcaps, $cap, $args ) {
-  if ( in_array('edit_others_pages', $cap) ) :
+  if (in_array('edit_others_pages', $cap) && isset($args[2])) :
     $post_objects = get_field('palmate_edit_page_cap', 'user_' . $args[1]);
-    if ( $post_objects ) :
-      $has_post_id = false;
-      foreach ( $post_objects as $post_object) :
+    if ($post_objects) :
+      $has_post_id = count($post_objects) == 0 ? true : false;
+      foreach ($post_objects as $post_object) :
         if ($post_object->ID == $args[2]) :
           $has_post_id = true;
         endif;
       endforeach;
       if ($has_post_id == false) :
-        foreach ( $cap as $c ) :
+        foreach ($cap as $c) :
           $allcaps[$c] = false;
         endforeach;
       endif;

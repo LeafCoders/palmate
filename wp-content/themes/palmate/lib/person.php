@@ -44,6 +44,7 @@ function register_cpt_personnel() {
   global $wp_roles;
   $wp_roles->add_cap( 'administrator', 'edit_personnel' );
   $wp_roles->add_cap( 'administrator', 'edit_personnels' );
+  $wp_roles->add_cap( 'administrator', 'edit_others_personnels' );
   $wp_roles->add_cap( 'administrator', 'delete_personnel' );
   $wp_roles->add_cap( 'administrator', 'publish_personnels' );
 
@@ -242,6 +243,7 @@ function register_cpt_churchleader() {
   global $wp_roles;
   $wp_roles->add_cap( 'administrator', 'edit_churchleader' );
   $wp_roles->add_cap( 'administrator', 'edit_churchleaders' );
+  $wp_roles->add_cap( 'administrator', 'edit_others_churchleaders' );
   $wp_roles->add_cap( 'administrator', 'delete_churchleader' );
   $wp_roles->add_cap( 'administrator', 'publish_churchleaders' );
 
@@ -394,6 +396,7 @@ function register_cpt_boardleader() {
   global $wp_roles;
   $wp_roles->add_cap( 'administrator', 'edit_boardleader' );
   $wp_roles->add_cap( 'administrator', 'edit_boardleaders' );
+  $wp_roles->add_cap( 'administrator', 'edit_others_boardleaders' );
   $wp_roles->add_cap( 'administrator', 'delete_boardleader' );
   $wp_roles->add_cap( 'administrator', 'publish_boardleaders' );
 
