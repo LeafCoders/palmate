@@ -111,8 +111,11 @@ class CalendarRosette
     $output .= '<td rowspan="' . $rows . '" class="cal-date' . $sunday . '">';
     $output .= '<div>' . self::eventDay( $day ) . '<p>' . self::eventWeekDay( $day ) . '</p></div>';
     $output .= '</td>';
-    $output .= $eventsOutput;
-    $output .= '</tr>';
+    if ( empty( $eventsOutput ) ) {
+      $output .= '<td colspan="2"></td></tr>';
+    } else {
+      $output .= $eventsOutput;
+    }
   }
 
   protected function event( &$output, $event ) {
@@ -125,7 +128,7 @@ class CalendarRosette
     $output .= '<td class="cal-time">' . self::eventTime( $event ) . '</td><td class="cal-event">' . self::eventTitle( $event ) . '</td></tr>';
     if ( !empty( $theme ) || !empty( $description ) ) {
       if ( !empty( $theme ) ) {
-        $theme = 'Tema: ' . $theme . '<br/>';
+        $theme = 'Tema: ' . $theme . '<br>';
       }
       $output .= '<tr><td></td><td class="cal-desc">' . $theme . $description . '</td></tr>';
       return 2;

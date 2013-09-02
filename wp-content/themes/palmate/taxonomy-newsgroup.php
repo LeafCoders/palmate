@@ -1,6 +1,6 @@
 <article id="<?php echo $post->post_name; ?>" class="hentry row-fluid">
   <div class="span10 offset1">
-    <div class="contentBox marginBoth paddingBoth">
+    <div class="contentBox paddingBoth">
       <header>
         <h1 class="entry-title">Nyheter - <?php echo get_queried_object()->name; ?></h1>
       </header>
