@@ -253,14 +253,14 @@ function register_cpt_churchleader() {
       'title' => 'Församlingsledare',
       'fields' => array (
         0 => array (
-          'label' => 'Namn',
-          'name' => 'name',
+          'label' => 'Titel',
+          'name' => 'description',
           'type' => 'text',
-          'instructions' => 'Församlingsledarens förnamn och efternamn. Samma som anges i titelraden.',
-          'required' => '1',
-          'default_value' => '',
+          'instructions' => 'Om fältet utelämnas visas texten "Församlingsledare".',
+          'required' => '0',
+          'default_value' => 'Församlingsledare',
           'formatting' => 'none',
-          'key' => 'field_508304815b9c7',
+          'key' => 'field_5088830149c748',
           'order_no' => '0',
         ),
         1 => array (
@@ -314,14 +314,18 @@ function palmate_get_churchleader_text() {
   if ( empty( $imgUrl ) ) {
     $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
   }
+  $description = get_field( 'description' );
+  if ( empty( $description ) ) {
+    $description = 'Församlingsledare';
+  }
 
   $text .= '<div class="row-fluid marginBottom">';
   $text .= '  <div class="span3">';
   $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" >';
   $text .= '  </div>';
   $text .= '  <div class="span9">';
-  $text .= '    <h3>' . get_field( 'name' ) . '</h3>';
-  $text .= '    <p><strong>Församlingsledare</strong></p>';
+  $text .= '    <h3>' . the_title( '', '', false ) . '</h3>';
+  $text .= '    <p><strong>' . $description . '</strong></p>';
   $text .= '  </div>';
   $text .= '</div>';
   return $text;

@@ -64,3 +64,12 @@ function replaceWithMap() {
   var markerpos = $("#map").attr('data-markerpos');
   $("#map").replaceWith('<iframe width="100%" height="300px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox=' + mapextent + '&amp;layer=mapquest&amp;marker=' + markerpos + '" style="border: 1px solid black"></iframe>');
 }
+
+
+/**
+* Expand next element and removes the specified element
+*/
+function expandNextElem(element) {
+  $(element).css({"display": "none"});
+  $(element).next().css({"max-height": ""});
+}

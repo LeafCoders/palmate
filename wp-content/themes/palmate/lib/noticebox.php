@@ -201,18 +201,20 @@ class PalmateNoticebox
 
   function noticeboxHtml( $class ) {
     $link = get_field( 'noticebox_link' );
+    $target = '';
     if ( empty( $link ) ) {
       $link = get_permalink(get_the_ID());
+    } else {
+      $target = ' target="_blank"';
     }
 
     $imgUrl = get_field( 'noticebox_image' );
     $textOverlay = '';
     if ( empty( $imgUrl ) ) {
       $imgUrl = '../assets/img/noticebox.png';
-//      $textOverlay = '<h2>' . the_title('','',false) . '</h2>';
     }
 
-    $html =  '<a class="' . $class . '" href="' . $link . '">';
+    $html =  '<a class="' . $class . '" href="' . $link . '"' . $target . '>';
     $html .= '  <img src="' . $imgUrl . '" alt="' . the_title('','',false) . '">' . $textOverlay;
     $html .= '</a>';
     return $html;

@@ -192,7 +192,7 @@ function palmate_fileDownload_shortcode( $atts ) {
     'icon' => 'icon-file'
   ), $atts ) );
 
-  return '<a class="fileDownload" href="/assets/' . $filename . '"><i class="' . $icon . '"></i> ' . $text . '</a>';
+  return '<a class="fileDownload" href="/assets/' . $filename . '" target="_blank"><i class="' . $icon . '"></i> ' . $text . '</a>';
 }
 add_shortcode( 'FileDownload', 'palmate_fileDownload_shortcode' );
 
