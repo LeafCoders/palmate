@@ -73,3 +73,12 @@ function expandNextElem(element) {
   $(element).css({"display": "none"});
   $(element).next().css({"max-height": ""});
 }
+
+/**
+* Removes email spam fix after document is ready
+*/
+function email_at_replace() {
+  $(function() {
+    $('.email_at').text('@');
+  });
+}

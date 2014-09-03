@@ -9,3 +9,5 @@
 </footer>
 
 <?php wp_footer(); ?>
+
+<script>email_at_replace();</script>

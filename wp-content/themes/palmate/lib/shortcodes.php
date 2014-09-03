@@ -237,3 +237,15 @@ function palmate_search_shortcode() {
   return $searchform;
 }
 add_shortcode( 'Search', 'palmate_search_shortcode' );
+
+/**
+ * Hash an email
+ */
+function palmate_email_shortcode( $atts ) {
+  extract( shortcode_atts( array(
+    'address' => ''
+  ), $atts ) );
+
+  return palmate_email_hash( $address );
+}
+add_shortcode( 'Email', 'palmate_email_shortcode' );

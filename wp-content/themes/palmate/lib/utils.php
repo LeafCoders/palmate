@@ -63,3 +63,13 @@ function add_filters($tags, $function) {
     add_filter($tag, $function);
   }
 }
+
+function palmate_email_hash($email) {
+  // Add unvisible text in email address to trick the boots
+  if ( strpos( $email, EMAIL_DOMAIN ) != false ) {
+    $email = str_replace( EMAIL_DOMAIN, '<i style="display: none;">.felaktig</i><span class="email_at">-snabel-a-</span>' . EMAIL_DOMAIN, $email );
+    $email = str_replace( '@', '', $email );
+  }
+  return $email;
+}
+

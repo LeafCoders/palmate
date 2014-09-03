@@ -148,12 +148,8 @@ function palmate_get_personnel_text() {
   if ( empty( $imgUrl ) ) {
     $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
   }
+  $email = palmate_email_hash( get_field( 'email' ) );
 
-  // Add unvisible text in email address to trick the boots
-  $email = get_field( 'email' );
-  if ( strpos( $email, EMAIL_DOMAIN ) != false ) {
-    $email = str_replace( EMAIL_DOMAIN, '<i style="display: none;">.felaktig</i>' . EMAIL_DOMAIN, get_field( 'email' ) );
-  }
   $text .= '<div class="row-fluid marginBottom">';
   $text .= '  <div class="span3">';
   $text .= '    <img style="max-width: 100px;" class="img-polaroid imgCenter" alt="Bild på person" src="' . $imgUrl . '" >';
@@ -482,10 +478,8 @@ function palmate_get_boardleader_text() {
   if ( empty( $imgUrl ) ) {
     $imgUrl = get_template_directory_uri() . '/assets/img/person_unknown.png';
   }
-  $email = get_field( 'email' );
-  if ( strpos( $email, EMAIL_DOMAIN ) != false ) {
-    $email = str_replace( EMAIL_DOMAIN, '<i style="display: none;">.felaktig</i>' . EMAIL_DOMAIN, get_field( 'email' ) );
-  }
+
+  $email = palmate_email_hash( get_field( 'email' ) );
 
   $text .= '<div class="row-fluid marginBottom">';
   $text .= '  <div class="span3">';
