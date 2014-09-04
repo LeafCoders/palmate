@@ -79,6 +79,8 @@ function expandNextElem(element) {
 */
 function email_at_replace() {
   $(function() {
-    $('.email_at').text('@');
+    setTimeout(function() {
+      $("i.email-at").replaceWith("@");
+    }, 2000);
   });
 }

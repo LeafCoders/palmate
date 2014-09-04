@@ -272,6 +272,11 @@ h4 {
   text-decoration: none;
 }
 
+.estyle {
+  color: #361;
+  padding: 0 4px;
+}
+
 @media (max-width: 767px) {
   h1 {
     font-size: 22px;

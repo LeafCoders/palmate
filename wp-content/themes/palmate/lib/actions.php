@@ -51,3 +51,36 @@ function palmate_detect_member_status() {
 
 add_action('init', 'palmate_detect_member_status');
 
+
+/**
+ * 
+ */
+function palmate_pre_save_post( $content ) {
+  // Replace all <a href="mailto:...">...</a> with [Email address="..."]
+  $pos = strpos( $content, 'mailto:' );
+  while ( $pos ) {
+    $start = strrpos( substr( $content, 0, $pos ), '<a' );
+    $end = strpos( $content, '</a>', $pos ) + 4;
+    $email = substr( $content, $pos + 7, strpos( $content, '"', $pos ) - $pos - 7 );
+    if ( $pos > 0 ) {
+      $content = substr_replace( $content, '[Email address="' . $email . '"]', $start, $end - $start );
+    }
+    $pos = strpos( 'mailto:', $content );
+  }
+
+  // Replace all a@b.c [Email address="a@b.c"]
+  $pos = strpos( $content, '@' );
+  while ( $pos ) {
+    $start = strrpos( substr( $content, 0, $pos ), ' ' ) + 1;
+    $end = strpos( $content, ' ', $pos );
+    $email = substr( $content, $start, $end - $start );
+    if ( $pos > 0 && strpos( $email, '=' ) === FALSE ) {
+      $content = substr_replace( $content, '[Email address="' . $email . '"]', $start, $end - $start );
+    }
+    $pos = strpos( '@', $content );
+  }
+
+  return $content;
+}
+
+add_filter ( 'content_save_pre', 'palmate_pre_save_post' );
