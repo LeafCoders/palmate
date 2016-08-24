@@ -9,10 +9,9 @@ the_post();
 <div class="span12 paddingBoth">
   <div id="kalender" class="contentBox">
     <div class="paddingBoth">
-      <h1>Kalender</h1>
-      <p>Denna kalender visar veckor för ca 3 månader framåt. På framsidan visas bara fyra veckor.</p>
+      <h1>Månadskalender</h1>
     </div>
-    <?php echo do_shortcode('[Calendar width="offset2 span8" pages="16"]'); ?>
+    <?php echo do_shortcode('[Calendar rangeMode="month" width="offset2 span8"]'); ?>
   </div>
 </div>
 </div>

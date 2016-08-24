@@ -65,19 +65,7 @@ function palmate_pre_save_post( $content ) {
     if ( $pos > 0 ) {
       $content = substr_replace( $content, '[Email address="' . $email . '"]', $start, $end - $start );
     }
-    $pos = strpos( 'mailto:', $content );
-  }
-
-  // Replace all a@b.c [Email address="a@b.c"]
-  $pos = strpos( $content, '@' );
-  while ( $pos ) {
-    $start = strrpos( substr( $content, 0, $pos ), ' ' ) + 1;
-    $end = strpos( $content, ' ', $pos );
-    $email = substr( $content, $start, $end - $start );
-    if ( $pos > 0 && strpos( $email, '=' ) === FALSE ) {
-      $content = substr_replace( $content, '[Email address="' . $email . '"]', $start, $end - $start );
-    }
-    $pos = strpos( '@', $content );
+    $pos = strpos( $content, 'mailto:', $pos + 16 );
   }
 
   return $content;

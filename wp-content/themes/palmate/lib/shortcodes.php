@@ -1,107 +1,35 @@
 <?php
 
-class WeekStepper
-{
-  protected $date = null;
-  function __construct( $year, $week ) {
-    $this->date = new DateTime("1970-01-01 00:00:00");
-    $this->date->setISODate( $year, $week );
-    $this->date->modify("+3 days");
-  }
-  function prevWeek() { $this->date->modify("-7 days");	}
-  function nextWeek() { $this->date->modify("+7 days");	}
-  function year() { return (int)$this->date->format("Y"); }
-  function week() { return (int)$this->date->format("W"); }
-}
-
 /**
- * Calendar [Calendar width="span12"]
+ * Calendar [Calendar rangemode="week" width="span12"]
  */
-function generate_palmate_calendar( $cal, $year, $week, $width, $pages ) {
-  $output  = '<div id="calendar" class="row-fluid">';
+function generate_palmate_calendar( $rangeMode, $width, $requestUrl ) {
+  $output  = '<div id="palmateCalendar" class="row-fluid">';
   $output .= '  <div class="' . $width . ' cal-container">';
-  $output .= '    <button id="calPrevWeekBtn" onclick="window.myCalSwipe.prev(); updatePalmateCalButtons(window.myCalSwipe.getPos(), ' . $pages . ');" class="btn cal-week-prev"><i class="icon-arrow-left"></i></button>';
-  $output .= '    <button id="calNextWeekBtn" onclick="window.myCalSwipe.next(); updatePalmateCalButtons(window.myCalSwipe.getPos(), ' . $pages . ');" class="btn cal-week-next"><i class="icon-arrow-right"></i></button>';
-  $output .= $cal->outputHeader();
-  $output .= '    <div id="myCalSwipe" style="margin:0 auto" class="swipe">';
-  $output .= '      <div class="swipe-wrap">';
-
-  $ws = new WeekStepper( $year, $week );
-  $ws->prevWeek();
-  for ($i = 0; $i < $pages; $i++) {
-    if ($i == 1) {
-      $output .= '<div>' . $cal->outputFull( $ws->year(), $ws->week() ) . '</div>';
-    } else {
-      $output .= '<div>' . $cal->outputEmpty( $ws->year(), $ws->week() ) . '</div>';
-    }
-    $ws->nextWeek();
-  }
-
-  $output .= '      </div>';
+  $output .= '    <button onclick="palmateCalendar.showPrev();" class="btn cal-btn-prev"><i class="icon-arrow-left"></i></button>';
+  $output .= '    <button onclick="palmateCalendar.showNext();" class="btn cal-btn-next"><i class="icon-arrow-right"></i></button>';
+  $output .= '    <div class="cal-header">&nbsp;<small>&nbsp;</small></div>';
+  $output .= '    <div class="cal-content">';
+  $output .= '      <div style="min-height: 650px;"></div>';
   $output .= '    </div>';
   $output .= '  </div>';
   $output .= '</div>';
 
-  $output .= '<script>var elem = document.getElementById("myCalSwipe"); window.myCalSwipe = new Swipe(elem, {startSlide: 0, continuous: false, callback: swipeCalendarCallback});window.myCalSwipe.slide(1);</script>';
+  $output .= '<script>var palmateCalendar = PalmateCalendar("' . $rangeMode . '", "#palmateCalendar", "' . $requestUrl . '"); palmateCalendar.init();</script>';
 
   return $output;
 }
 
-function generate_palmate_calendar_request( $year, $week ) {
-  $cal = new CalendarRosette();
-
-  $fromOldCalendar = true;
-  if ( $fromOldCalendar ) {
-    if (empty($week)) {
-      $cal->request( rosette_api_url('palmate.php') );
-    } else {
-      $cal->request( rosette_api_url('palmate.php') . '?year=' . $year . '&week=' . $week );
-    }
-  }
-  else {
-    if (empty($week)) {
-      $cal->request( rosette_api_url( 'eventweek' ) );
-    } else if (strlen($week) < 2) {
-      $cal->request( rosette_api_url( 'eventweek/' . $year . '-W0' . $week ) );
-    } else {
-      $cal->request( rosette_api_url( 'eventweek/' . $year . '-W' . $week ) );
-    }
-  }
-  return $cal;
-}
-
 function palmate_calendar_shortcode( $atts ) {
   extract( shortcode_atts( array(
-    'year' => date("Y"),
-    'week' => date("W"),
+    'rangemode' => 'week',
     'width' => 'span12',
-    'pages' => '5'
+    'requesturl' => rosette_api_url( 'public/calendar' )
   ), $atts ) );
 
-  $cal = generate_palmate_calendar_request( $year, $week );
-  return generate_palmate_calendar( $cal, $year, $week, $width, $pages );
+  return generate_palmate_calendar( $rangemode, $width, $requesturl );
 }
 add_shortcode( 'Calendar', 'palmate_calendar_shortcode' );
-
-function palmate_ajax_loadCalendar() {
-  $year = $_POST['year'];
-  $week = $_POST['week'];
-  $cal = generate_palmate_calendar_request( $year, $week );
-  echo generate_palmate_calendar( $cal, $year, $week, 'span12' );
-  die(); // this is required to return a proper result
-}
-add_action('wp_ajax_loadCalendar', 'palmate_ajax_loadCalendar');
-add_action('wp_ajax_nopriv_loadCalendar', 'palmate_ajax_loadCalendar');
-
-function palmate_ajax_loadCalendarWeek() {
-  $year = $_POST['year'];
-  $week = $_POST['week'];
-  $cal = generate_palmate_calendar_request( $year, $week );
-  echo $cal->output();
-  die(); // this is required to return a proper result
-}
-add_action('wp_ajax_loadCalendarWeek', 'palmate_ajax_loadCalendarWeek');
-add_action('wp_ajax_nopriv_loadCalendarWeek', 'palmate_ajax_loadCalendarWeek');
 
 
 /**

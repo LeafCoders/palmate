@@ -426,6 +426,10 @@ figure {
   }
 }
 
+.imgWidth180 {
+  max-width: 180px;
+}
+
 /* === Calendar ============================================================= */
 
 .swipe {
@@ -463,7 +467,7 @@ figure {
   vertical-align: top;
 }
 
-.cal-week {
+.cal-header {
   font-size: 18px;
   line-height: 18px;
   text-align: center;
@@ -473,17 +477,17 @@ figure {
   background-color: rgba(255,255,255,0.5);
 }
 
-.cal-week > small {
+.cal-header > small {
   display: block;
   font-size: 12px;
 }
 
-.cal-week-prev {
+.cal-btn-prev {
   float: left;
   margin: 6px;
 }
 
-.cal-week-next {
+.cal-btn-next {
   float: right;
   margin: 6px;
 }
@@ -540,7 +544,7 @@ figure {
   margin: 0px;
 }
 
-.cal-sunday > div {
+.cal-sunday > div > p {
   color: #a00;
 }
 
