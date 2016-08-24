@@ -196,6 +196,51 @@ function palmate_fileDownload_shortcode( $atts ) {
 }
 add_shortcode( 'FileDownload', 'palmate_fileDownload_shortcode' );
 
+/**
+ * [FileList order="ASC" mimetype="application/pdf"]
+ */
+function palmate_fileList_shortcode( $attr ) {
+	$post = get_post();
+
+	$atts = shortcode_atts( array(
+		'order'      => 'ASC',
+		'orderby'    => 'post_date ID',
+		'mimetype'   => 'application/pdf',
+		'id'         => $post ? $post->ID : 0
+	), $attr, 'palmate_filelist' );
+
+	$id = intval( $atts['id'] );
+
+	$attachments = get_children( array(
+		'post_parent' => $id,
+		'post_status' => 'inherit',
+		'post_type' => 'attachment',
+		'post_mime_type' => $atts['mimetype'],
+		'order' => $atts['order'],
+    'orderby' => $atts['orderby']
+	) );
+
+	if ( empty( $attachments ) ) {
+		return '';
+	}
+
+  $output .= "<div>";
+
+	foreach ( $attachments as $id => $attachment ) {
+		$attachment_url = wp_get_attachment_url( $id );
+
+		$output .= "<a class='fileDownload' style='width: 100%;' href='" . $attachment_url . "' target='_blank'>";
+    $output .= "<h5>" . $attachment->post_title . "</h5>";
+		$output .= "<div class='paddingLeft'>" . $attachment->post_excerpt . "</div>";
+		$output .= "<div class='paddingLeft'>" . $attachment->post_content . "</div>";
+    $output .= "</a><br>";
+	}
+
+  $output .= "</div>";
+  return $output;
+}
+add_shortcode( 'FileList', 'palmate_fileList_shortcode' );
+
 
 /**
  * Generate a list with rows of <dl></dl> [List][/List]
