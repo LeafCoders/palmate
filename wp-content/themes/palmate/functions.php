@@ -20,6 +20,7 @@ require_once locate_template('/lib/person.php');                 // Person custo
 require_once locate_template('/lib/news.php');                   // News custom post type
 require_once locate_template('/lib/shortcodes.php');             // Some shortcodes
 require_once locate_template('/lib/teaching.php');               // Themes, sermon and education posts
+require_once locate_template('/lib/openinghours.php');           // Opening hours custom post types
 
 require_once locate_template('/admin/palmate-admin-option.php'); // Options for Palmate Admin
 if (is_user_logged_in) {
