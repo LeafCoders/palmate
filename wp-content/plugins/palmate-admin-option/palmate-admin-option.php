@@ -6,14 +6,13 @@ Description: Option page for Palmate
 Version: 0.1
 */
 
-class PalmateAdminOption
-{
-	function __construct() {
+class PalmateAdminOption {
+
+  function __construct() {
     add_action( 'admin_init', array( $this, 'action_register_settings') );
-		add_action( 'admin_menu', array( $this, 'action_add_option_menu' ) );
-	}
-	
-	
+    add_action( 'admin_menu', array( $this, 'action_add_option_menu' ) );
+  }
+
   function action_register_settings() {
     register_setting(
       'palmate_option_group',
@@ -51,7 +50,7 @@ class PalmateAdminOption
       load_plugin_textdomain('palmate', false, basename( dirname( __FILE__ ) ) . "/langs" );
 
       // Add option menu and page
-		  global $palmate_option_page;
+      global $palmate_option_page;
       $palmate_option_page = add_options_page(__('Palmate Settings','palmate'), __('Palmate','palmate'), 'manage_options', 'palmate_admin_option', array( $this, 'option_page' ) );
       add_action( 'load-' . $palmate_option_page, array( $this, 'help_tabs' ) );
     }
@@ -111,17 +110,18 @@ class PalmateAdminOption
     return $rosette_option;
   }
 
-	function help_tabs() {
+  function help_tabs() {
     global $palmate_option_page, $current_screen;
-    if ( $current_screen->id != $palmate_option_page )
-        return;
+    if ($current_screen->id != $palmate_option_page) {
+      return;
+    }
 
     $current_screen->add_help_tab( array(
       'id'      => 'palmate_admin_option_help',
       'title'   => __('Instructions', 'palmate'),
       'content' => '<p>' . __('Contact the LeafCoders team at ', 'palmate') . '<a href="http://github.com/LeafCoders">http://github.com/LeafCoders</a>.</p>'
     ) );
-	}
+  }
 }
 
 $option = new PalmateAdminOption();
